@@ -1,23 +1,16 @@
 package dong.java;
 
 
+import dong.java.lessons.Lesson01;
+import dong.java.utilities.ConsoleOutput;
+
 public class Main {
 
 
   public static void main(String[] args) {
-    StandardOutputStream.println("hello world");
+    ConsoleOutput.println("Java App Started.");
 
+    Lesson01.printFullName();
 
-//    printFullName();
-
-  }
-
-  private static void printFullName() {
-    StandardOutputStream.println("please enter your lastName: ");
-    String lastName = StandardInput.readLine();
-    StandardOutputStream.println("please enter your firstName: ");
-    String firstName = StandardInput.readLine();
-
-    StandardOutputStream.println("Your name is : " + firstName + " " + lastName);
   }
 }
