@@ -6,7 +6,6 @@
     </Console>
 
     <File name="File" fileName="./tmp/log4j2.log" append="true">
-<!--      <PatternLayout pattern="%d{HH:mm:ss} [%t] %c{35}:%L - %m%n"/>-->
       <PatternLayout pattern="%d{HH:mm:ss} %-5level - %msg%n"/>
     </File>
     <Syslog name="Syslog" host="logsene-syslog-receiver.sematext.com"
