@@ -1,10 +1,23 @@
 package xyz.dongguo.lesson;
 
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 import xyz.dongguo.utility.ConsoleOutput;
 
 class Day02Test {
+
+  @Test
+  void alwaysPass() {
+    assertTrue(true);
+    assertFalse(false);
+    assertNull(null);
+  }
+
 
   @Test
   void calculateArea() {
@@ -13,7 +26,7 @@ class Day02Test {
 
     double result = Day02.calculateAreaOfCircle(input);
 
-    Assertions.assertEquals(expected, result);
+    assertEquals(expected, result);
 
     ConsoleOutput.println(String.format("area of a "
             + "circle(radius: %f): %f", input, result));
@@ -25,7 +38,7 @@ class Day02Test {
     double result = Day02.convertCelToFah(input);
     double expected = input * 9 / 5 + 32;
 
-    Assertions.assertEquals(expected, result);
+    assertEquals(expected, result);
     ConsoleOutput.println(String.format("%5.2f cel = %5.2f "
         + "fal", input, result));
   }
@@ -36,8 +49,44 @@ class Day02Test {
     String result = Day02.timeSecondsToString(input);
     String expected = "1 : 10";
 
-    Assertions.assertEquals(expected, result);
+    assertEquals(expected, result);
     ConsoleOutput.println(String.format("%d seconds is  "
         + "%s", input, result));
+  }
+
+  @Test
+  void getMontrealTime() {
+    ConsoleOutput.println(Day02.getMontrealTime());
+    assertTrue(true);
+  }
+
+  @Test
+  void calculatePaymentMonthly() {
+    double initialLoan = 100.0;
+    double interestRateMonthly = 0.01;
+    int numberOfYear = 1;
+
+    double paymentMonthly = Day02.calculatePaymentMonthly(initialLoan, interestRateMonthly, numberOfYear);
+
+    double calculatedInitialLoan = getCalculatedInitialLoan(
+        interestRateMonthly, numberOfYear,
+        paymentMonthly);
+
+    ConsoleOutput.println(String.format("monthlyPayment: "
+        + "%4.2f", paymentMonthly));
+    ConsoleOutput.println(String.format("total payment "
+        + "in  %d months: %4.2f",
+        numberOfYear * 12,
+        paymentMonthly * numberOfYear * 12));
+
+    assertEquals(calculatedInitialLoan, initialLoan);
+  }
+
+  private double getCalculatedInitialLoan(
+      double interestRateMonthly, int numberOfYear,
+      double paymentMonthly) {
+    return paymentMonthly
+        * (1 - (1 / Math.pow((1 + interestRateMonthly),
+        (numberOfYear * 12)))) / interestRateMonthly;
   }
 }
