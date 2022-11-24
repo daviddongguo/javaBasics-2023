@@ -8,10 +8,10 @@ public class ConsoleOutput {
 
   private static final Logger LOGGER = LogManager.getLogger(ConsoleOutput.class);
 
-  public static void println(String message) {
-    LOGGER.debug(message);
+  private ConsoleOutput() {
   }
 
-  private ConsoleOutput() {
+  public static void println(String message) {
+    LOGGER.debug(message);
   }
 }

@@ -1,8 +1,8 @@
 package com.dongguo;
 
 
-import com.dongguo.utility.ConsoleOutput;
 import com.dongguo.lesson.Day01;
+import com.dongguo.utility.ConsoleOutput;
 
 public class Main {
 

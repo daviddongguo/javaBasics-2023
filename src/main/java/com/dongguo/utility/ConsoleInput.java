@@ -6,10 +6,10 @@ public class ConsoleInput {
 
   public static final Scanner scanner = new Scanner(System.in);
 
-  public static String readLine() {
-    return scanner.nextLine();
+  private ConsoleInput() {
   }
 
-  private ConsoleInput() {
+  public static String readLine() {
+    return scanner.nextLine();
   }
 }
