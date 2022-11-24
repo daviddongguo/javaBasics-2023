@@ -8,3 +8,9 @@
 /dataSources.local.xml
 
 *.class
+.DS_Store
+/temp
+/.idea/sonarlint
+out
+target
+lib
