@@ -5,8 +5,8 @@ import org.apache.logging.log4j.Logger;
 
 public class ConsoleOutput {
 
-
-  private static final Logger LOGGER = LogManager.getLogger(ConsoleOutput.class);
+  private static final Logger LOGGER = LogManager.getLogger(
+      ConsoleOutput.class);
 
   private ConsoleOutput() {
   }
