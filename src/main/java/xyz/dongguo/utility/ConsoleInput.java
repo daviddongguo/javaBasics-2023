@@ -1,4 +1,4 @@
-package com.dongguo.utility;
+package xyz.dongguo.utility;
 
 import java.util.Scanner;
 

@@ -1,4 +1,4 @@
-package com.dongguo.utility;
+package xyz.dongguo.utility;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
