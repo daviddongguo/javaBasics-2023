@@ -3,7 +3,7 @@
 /tmp/
 out
 target
-build
+build/
 lib/
 /.idea/sonarlint
 
