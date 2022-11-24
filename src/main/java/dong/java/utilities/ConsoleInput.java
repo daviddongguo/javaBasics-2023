@@ -2,7 +2,7 @@ package dong.java.utilities;
 
 import java.util.Scanner;
 
-public class StandardInput {
+public class ConsoleInput {
 
   public static final Scanner scanner = new Scanner(System.in);
 
@@ -10,6 +10,6 @@ public class StandardInput {
     return scanner.nextLine();
   }
 
-  private StandardInput() {
+  private ConsoleInput() {
   }
 }
