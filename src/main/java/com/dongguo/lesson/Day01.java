@@ -1,7 +1,7 @@
-package dong.java.lessons;
+package com.dongguo.lesson;
 
-import dong.java.utilities.ConsoleOutput;
-import dong.java.utilities.ConsoleInput;
+import com.dongguo.utility.ConsoleInput;
+import com.dongguo.utility.ConsoleOutput;
 
 public class Day01 {
 

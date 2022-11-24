@@ -1,8 +1,8 @@
-package dong.java;
+package com.dongguo;
 
 
-import dong.java.lessons.Day01;
-import dong.java.utilities.ConsoleOutput;
+import com.dongguo.utility.ConsoleOutput;
+import com.dongguo.lesson.Day01;
 
 public class Main {
 
