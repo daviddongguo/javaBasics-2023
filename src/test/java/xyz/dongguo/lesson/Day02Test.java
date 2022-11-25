@@ -1,12 +1,14 @@
 package xyz.dongguo.lesson;
 
+import static java.lang.System.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import xyz.dongguo.lesson.Day02;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 import xyz.dongguo.utility.ConsoleOutput;
 
 class Day02Test {
@@ -56,7 +58,7 @@ class Day02Test {
 
   @Test
   void getMontrealTime() {
-    ConsoleOutput.println(Day02.getMontrealTime());
+    ConsoleOutput.println(Day02.calculateMontrealTime((int) (currentTimeMillis() / 1000), -5));
     assertTrue(true);
   }
 
@@ -88,5 +90,29 @@ class Day02Test {
     return paymentMonthly
         * (1 - (1 / Math.pow((1 + interestRateMonthly),
         (numberOfYear * 12)))) / interestRateMonthly;
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = { 1600, 2000, 1996, 2004, 2400})
+  void isLeapYearReturnTrueTest(int year) {
+    boolean expected = true;
+    boolean result = Day02.isLeapYear(year);
+
+    assertEquals(expected, result);
+  }
+
+  @ParameterizedTest
+  @ValueSource(ints = { 1900, 1999, 2001, 2002, 2003, 2005, 2100 })
+  void isLeapYearReturnFalseTest(int year) {
+    boolean expected = false;
+    boolean result = Day02.isLeapYear(year);
+
+    assertEquals(expected, result);
+  }
+
+  @Test
+  void getMonth() {
+    ConsoleOutput.println("" + Day02.getMonth(32, 2022));
+    assertTrue(true);
   }
 }
