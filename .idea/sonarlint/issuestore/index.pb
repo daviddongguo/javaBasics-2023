@@ -17,7 +17,5 @@ c
 3src/main/java/xyz/dongguo/utility/ConsoleInput.java,9/1/91efcab629411713771cb6858e4ff5895bce5497
 [
 +src/main/java/xyz/dongguo/lesson/Day01.java,2/c/2c5089017287d8b009adcc889d9a1eb54bce9eef
-S
-#src/main/java/xyz/dongguo/Main.java,a/e/ae3fa569c84d5ad04b47d7d2d0baacdd8d6257cd
 d
 4src/main/java/xyz/dongguo/utility/ConsoleOutput.java,a/b/ab27a6a8b095d7fdac4f8f87300bb4cff8358e27

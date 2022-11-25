@@ -8,7 +8,8 @@
     <File append="true" fileName="./tmp/log4j2.log"
       name="File">
       <PatternLayout
-        pattern="%d{HH:mm:ss} %-5level - %msg%n"/>
+        pattern="%d{HH:mm:ss} %-5level $  %msg%n"
+      />
     </File>
     <Syslog appName="a64a6519-62a0-4309-8a43-b6240e86d4a3"
       facility="LOCAL0"
