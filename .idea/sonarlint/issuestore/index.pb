@@ -9,8 +9,6 @@ d
 +src/main/java/xyz/dongguo/lesson/Day01.java,2/c/2c5089017287d8b009adcc889d9a1eb54bce9eef
 >
 tmp/log4j2.log,7/e/7e72e492eda6a71b94344e4f7ff4de349b931a11
-S
-#src/main/java/xyz/dongguo/Main.java,a/e/ae3fa569c84d5ad04b47d7d2d0baacdd8d6257cd
 _
 /src/test/java/xyz/dongguo/lesson/Day01Test.java,f/7/f73a7912a9999a402305a8ca4136b78685500357
 7
@@ -24,9 +22,3 @@ X
 :
 
 .gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
-_
-/src/test/java/xyz/dongguo/lesson/Day02Test.java,a/3/a34389c950685bcc38ad736ef6175eba690adebe
-?
-settings.gradle,0/5/05efc8b1657769a27696d478ded1e95f38737233
-<
-build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
