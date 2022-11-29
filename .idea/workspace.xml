@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba8e1585-d585-4cb2-af41-863ee3a3fc37" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/MidEvaluation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/MonthsEnum.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/xyz/dongguo/lesson/MonthsEnumTest.java" afterDir="false" />
+    <list default="true" id="ba8e1585-d585-4cb2-af41-863ee3a3fc37" name="Changes" comment="update git ignore">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
@@ -15,18 +12,8 @@
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/dongguo/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/Day01.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/Day01.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/Day02.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/Day02.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/Day03.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/Day03.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/dongguo/utility/ConsoleOutput.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/utility/ConsoleOutput.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/xyz/dongguo/lesson/Day02Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/xyz/dongguo/lesson/Day02Test.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,15 +79,15 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "last_opened_file_path": "C:/javaprojects/java-elementary"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/javaprojects/java-elementary&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/.idea" />
@@ -118,7 +105,20 @@
       <recent name="xyz.dongguo" />
     </key>
   </component>
-  <component name="RunManager" selected="Gradle.Day02Test.isLeapYearReturnFalseTest">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="xyz.dongguo.Main" />
+      <module name="java-elementary.main" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="xyz.dongguo.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Day02Test" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -211,36 +211,13 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
-    <configuration name="MonthsEnumTest.values" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" value="" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value=":test" />
-            <option value="--tests" />
-            <option value="&quot;xyz.dongguo.lesson.MonthsEnumTest.values&quot;" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Gradle.Day02Test.isLeapYearReturnFalseTest" />
         <item itemvalue="Gradle.Day02Test.isLeapYearReturnTrueTest" />
         <item itemvalue="Gradle.Day02Test" />
         <item itemvalue="Gradle.MonthsEnumTest" />
-        <item itemvalue="Gradle.MonthsEnumTest.values" />
       </list>
     </recent_temporary>
   </component>
@@ -257,7 +234,8 @@
       <workItem from="1669384575947" duration="3387000" />
       <workItem from="1669388113818" duration="13046000" />
       <workItem from="1669692548078" duration="39000" />
-      <workItem from="1669692800141" duration="4542000" />
+      <workItem from="1669692800141" duration="4859000" />
+      <workItem from="1669697691638" duration="310000" />
     </task>
     <task id="LOCAL-00001" summary="update git ignore">
       <created>1669323977212</created>
@@ -301,7 +279,21 @@
       <option name="project" value="LOCAL" />
       <updated>1669395525637</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="update git ignore">
+      <created>1669697613977</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1669697613977</updated>
+    </task>
+    <task id="LOCAL-00008" summary="update git ignore">
+      <created>1669697623817</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1669697623817</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -320,11 +312,11 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="use gradle" />
-    <MESSAGE value="update git ignore" />
     <MESSAGE value="update get current  time day and year" />
     <MESSAGE value="after class" />
     <MESSAGE value="update" />
-    <option name="LAST_COMMIT_MESSAGE" value="update" />
+    <MESSAGE value="update git ignore" />
+    <option name="LAST_COMMIT_MESSAGE" value="update git ignore" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
