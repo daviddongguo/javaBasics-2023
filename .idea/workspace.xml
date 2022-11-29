@@ -4,21 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ba8e1585-d585-4cb2-af41-863ee3a3fc37" name="Changes" comment="what ever">
+    <list default="true" id="ba8e1585-d585-4cb2-af41-863ee3a3fc37" name="Changes" comment="after class">
       <change afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/Day04.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/executionHistory/executionHistory.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/7.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/7.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/checksums.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/md5-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/checksums/sha1-checksums.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/sonarlint/issuestore/index.pb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/xyz/dongguo/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/MidEvaluation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/MidEvaluation.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -242,7 +230,7 @@
       <workItem from="1669730357334" duration="14000" />
       <workItem from="1669730399975" duration="476000" />
       <workItem from="1669730884779" duration="6684000" />
-      <workItem from="1669739596063" duration="6569000" />
+      <workItem from="1669739596063" duration="6648000" />
     </task>
     <task id="LOCAL-00001" summary="update git ignore">
       <created>1669323977212</created>
@@ -307,7 +295,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669734153971</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="what ever">
+      <created>1669746369455</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1669746369455</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -328,11 +323,11 @@
     <MESSAGE value="use gradle" />
     <MESSAGE value="update" />
     <MESSAGE value="update get current  time day and year" />
-    <MESSAGE value="after class" />
     <MESSAGE value="before class" />
     <MESSAGE value="update git ignore" />
     <MESSAGE value="what ever" />
-    <option name="LAST_COMMIT_MESSAGE" value="what ever" />
+    <MESSAGE value="after class" />
+    <option name="LAST_COMMIT_MESSAGE" value="after class" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
