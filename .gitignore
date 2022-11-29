@@ -33,7 +33,7 @@ out/
 
 # ---- Sonar
 .sonar
-/.idea/sonarlint
+.idea/sonarlint/
 
 
 # ---- Eclipse
