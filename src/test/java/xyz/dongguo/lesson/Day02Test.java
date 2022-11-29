@@ -30,7 +30,7 @@ class Day02Test {
 
     assertEquals(expected, result);
 
-    ConsoleOutput.println(String.format("area of a "
+    ConsoleOutput.log(String.format("area of a "
             + "circle(radius: %f): %f", input, result));
   }
 
@@ -41,7 +41,7 @@ class Day02Test {
     double expected = input * 9 / 5 + 32;
 
     assertEquals(expected, result);
-    ConsoleOutput.println(String.format("%5.2f cel = %5.2f "
+    ConsoleOutput.log(String.format("%5.2f cel = %5.2f "
         + "fal", input, result));
   }
 
@@ -52,13 +52,13 @@ class Day02Test {
     String expected = "1 : 10";
 
     assertEquals(expected, result);
-    ConsoleOutput.println(String.format("%d seconds is  "
+    ConsoleOutput.log(String.format("%d seconds is  "
         + "%s", input, result));
   }
 
   @Test
   void getMontrealTime() {
-    ConsoleOutput.println(Day02.calculateMontrealTime((int) (currentTimeMillis() / 1000), -5));
+    ConsoleOutput.log(Day02.calculateMontrealTime((int) (currentTimeMillis() / 1000), -5));
     assertTrue(true);
   }
 
@@ -74,9 +74,9 @@ class Day02Test {
         interestRateMonthly, numberOfYear,
         paymentMonthly);
 
-    ConsoleOutput.println(String.format("monthlyPayment: "
+    ConsoleOutput.log(String.format("monthlyPayment: "
         + "%4.2f", paymentMonthly));
-    ConsoleOutput.println(String.format("total payment "
+    ConsoleOutput.log(String.format("total payment "
         + "in  %d months: %4.2f",
         numberOfYear * 12,
         paymentMonthly * numberOfYear * 12));
@@ -112,7 +112,7 @@ class Day02Test {
 
   @Test
   void getMonth() {
-    ConsoleOutput.println("" + Day02.getMonth(32, 2022));
+    ConsoleOutput.log("" + Day02.getMonth(32, 2022));
     assertTrue(true);
   }
 }

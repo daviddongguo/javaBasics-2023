@@ -1,11 +1,7 @@
 *.class
-.DS_Store
 /tmp/
-out
-target
 build/
 lib/
-/.idea/sonarlint
 
 # Default ignored files
 /shelf/
@@ -18,3 +14,55 @@ lib/
 
 .gradle/7.1/executionHistory/
 .gradle/7.1/fileHashes/
+
+src/main/resources/plugins/*.jar
+out
+
+### IntelliJ IDEA ###
+.idea/modules.xml
+.idea/jarRepositories.xml
+.idea/compiler.xml
+.idea/libraries/
+*.iws
+*.iml
+*.ipr
+out/
+!**/src/main/**/out/
+!**/src/main/**/out
+!**/src/test/**/out/
+
+# ---- Sonar
+.sonar
+.idea/sonarlint/
+
+
+# ---- Eclipse
+.classpath
+.project
+.settings
+
+# ---- Maven
+target
+
+#Gradle
+.gradle/
+
+# ---- Mac OS X
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+.Spotlight-V100
+.Trashes
+
+# ---- Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Gradle
+.gradle
+classes
+build

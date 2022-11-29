@@ -1,40 +1,5 @@
 package xyz.dongguo.lesson;
 
-import static java.lang.System.currentTimeMillis;
-
-enum Month {
-  JANUARY(1),
-  FEBRUARY(2),
-  MARCH(3),
-  APRIL(4),
-  MAY(5),
-  JUNE(6),
-  JULY(7),
-  AUGUST(8),
-  SEPTEMBER(9),
-  OCTOBER(10),
-  NOVEMBER(11),
-  DECEMBER(12);
-
-  private final int value;
-
-  Month(final int newValue) {
-    value = newValue;
-  }
-
-  public int getValue() {
-    return value;
-  }
-  public static Month getMonth(int index) {
-    for (Month m : Month.values()) {
-      if (m.getValue() == index) {
-        return m;
-      }
-    }
-    return null;
-  }
-}
-
 public class Day02 {
 
   private Day02() {
@@ -64,7 +29,7 @@ public class Day02 {
 
     int year = (int) (timeSeconds / (365.25 * 24 * 3600) + 1970);
     int days = (int) (timeSeconds % (365.25 * 24 * 3600) / (24 * 3600));
-    Month month = getMonth(days, year);
+    MonthsEnum month = getMonth(days, year);
     int dayOfMonth = getDayOfMonth(days, year);
 
     return String.format("Montreal time: %d-%s-%d  %d:%d:%d",
@@ -76,7 +41,7 @@ public class Day02 {
        second);
   }
 
-  public static Month getMonth(int days, int year) {
+  public static MonthsEnum getMonth(int days, int year) {
     int[] daysOfMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
     if(isLeapYear(year)){
       daysOfMonths[1] =  29;
@@ -86,12 +51,12 @@ public class Day02 {
     int amountOfDays = daysOfMonths[0];
     while (indexOfMonth < 11) {
       if (days <= amountOfDays) {
-        return Month.getMonth(indexOfMonth + 1);
+        return MonthsEnum.getMonth(indexOfMonth + 1);
       }
       indexOfMonth++;
       amountOfDays += daysOfMonths[indexOfMonth];
     }
-    return Month.DECEMBER;
+    return MonthsEnum.DECEMBER;
   }
 
   public static int getDayOfMonth(int days, int year) {
@@ -113,13 +78,7 @@ public class Day02 {
   }
 
   public static boolean isLeapYear(int year) {
-    if (year % 4 != 0) {     // 1999, 2001, 2002, 2003, 2005
-      return false;
-    }
-    if (year % 100 == 0 && year % 400 != 0) {  // 1900,  2100
-      return false;
-    }
-    return true;   // 2000, 2004, 2400
+    return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
   }
 
   public static double calculatePaymentMonthly(double initialLoan, double interestRateMonthly,
