@@ -35,7 +35,7 @@ public class Day03 {
     }
   }
 
-  private static int calculate(int numberA, int numberB, Operator operator) {
+  public static int calculate(int numberA, int numberB, Operator operator) {
     switch (operator) {
       case ADD:
         return numberA + numberB;
@@ -60,7 +60,7 @@ public class Day03 {
     ConsoleOutput.log(String.format("%d is %s", randomNumber, message));
   }
 
-  public static int calculateTwoNumbers() {
+  public static void calculateTwoNumbers() {
 
     int numberA = random.nextInt(10);
     int numberB = random.nextInt(10);
@@ -68,7 +68,6 @@ public class Day03 {
     Operator operator = getOperator(indexOfOperator);
 
     ConsoleOutput.log(getProblem(numberA, numberB, operator));
-    return calculate(numberA, numberB, operator);
   }
 
   private static Operator getOperator(int indexOfOperator) {

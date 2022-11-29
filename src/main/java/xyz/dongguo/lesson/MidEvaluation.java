@@ -1,10 +1,12 @@
 package xyz.dongguo.lesson;
 
-import static java.lang.System.*;
+import static java.lang.System.in;
+import static java.lang.System.out;
 
 import java.util.Scanner;
 
 public class MidEvaluation {
+
   private static final int CONSOLE_WIDTH = 50;
   private static final Scanner scanner = new Scanner(in);
 
@@ -23,7 +25,6 @@ public class MidEvaluation {
     question4();
     println("*".repeat(CONSOLE_WIDTH));
   }
-
 
   private static void question1() {
     int exchangeRate;
@@ -57,7 +58,7 @@ public class MidEvaluation {
     }
   }
 
-  private static boolean requestCovertDirection(String infoMessage) {
+  public static boolean requestCovertDirection(String infoMessage) {
     while (true) {
       print(infoMessage);
       String inputStr = scanner.nextLine();
@@ -84,7 +85,7 @@ public class MidEvaluation {
     }
   }
 
-  private static int requestThreeDigitIntegerNumber(String infoMessage) {
+  public static int requestThreeDigitIntegerNumber(String infoMessage) {
     while (true) {
       int inputNumber = requestIntegerNumberInput(infoMessage);
       if (inputNumber >= 100 && inputNumber <= 999) {
@@ -99,7 +100,7 @@ public class MidEvaluation {
     println(String.valueOf(convertHexNumber(hexNumber)));
   }
 
-  private static char requestHexDigitCharInput(String infoMessage) {
+  public static char requestHexDigitCharInput(String infoMessage) {
     while (true) {
       String inputStr = requestStringInput(infoMessage);
       char inputChar = inputStr.trim().toUpperCase().charAt(0);
@@ -134,7 +135,7 @@ public class MidEvaluation {
     println(String.format("%s %d has %d days", months[indexOfMonth], year, daysOfMonths[indexOfMonth]));
   }
 
-  private static int requestMonthInput(String[] months, String infoMessage) {
+  public static int requestMonthInput(String[] months, String infoMessage) {
     while (true) {
       print(infoMessage);
       String inputMonthStr = requestStringInput(infoMessage);

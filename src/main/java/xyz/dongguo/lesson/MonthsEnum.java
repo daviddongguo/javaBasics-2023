@@ -1,9 +1,9 @@
 package xyz.dongguo.lesson;
 
 public enum MonthsEnum {
-  JANUARY(1){
+  JANUARY(1) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 31;
     }
   },
@@ -13,63 +13,63 @@ public enum MonthsEnum {
       return 28;
     }
   },
-  MARCH(3){
+  MARCH(3) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 31;
     }
   },
-  APRIL(4){
+  APRIL(4) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 30;
     }
   },
-  MAY(5){
+  MAY(5) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 31;
     }
   },
-  JUNE(6){
+  JUNE(6) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 30;
     }
   },
-  JULY(7){
+  JULY(7) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 31;
     }
   },
-  AUGUST(8){
+  AUGUST(8) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 31;
     }
   },
-  SEPTEMBER(9){
+  SEPTEMBER(9) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 30;
     }
   },
-  OCTOBER(10){
+  OCTOBER(10) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 31;
     }
   },
-  NOVEMBER(11){
+  NOVEMBER(11) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 30;
     }
   },
-  DECEMBER(12){
+  DECEMBER(12) {
     @Override
-       public int getDays() {
+    public int getDays() {
       return 31;
     }
   };
@@ -79,6 +79,7 @@ public enum MonthsEnum {
   MonthsEnum(int order) {
     this.order = order;
   }
+
   public int getOrder() {
     return order;
   }
