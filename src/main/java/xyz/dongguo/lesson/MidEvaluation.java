@@ -112,10 +112,10 @@ public class MidEvaluation {
   }
 
   private static int convertHexNumber(char hexNumber) {
-    if (hexNumber >= 48 && hexNumber <= 57) {
+    if (hexNumber >= '0' && hexNumber <= '9') {
       return hexNumber - 48;
     }
-    return hexNumber - 65 + 10;
+    return hexNumber - 'A' + 10;
   }
 
   private static void question4() {
@@ -149,10 +149,10 @@ public class MidEvaluation {
   }
 
   private static boolean isLeapYear(int year) {
-    // False: 1999, 2001, 2002, 2003, 2005
     // False: 1900, 2100, 2200
-    // True: 2000, 2004, 2400
-    return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+    // True: 2000, 2400
+    // + 4; - 100; + 400
+    return (year % 4 == 0 && year % 100 != 0) || year % 400 == 0;
   }
 
   // ****************************** Share Methods ******************************
