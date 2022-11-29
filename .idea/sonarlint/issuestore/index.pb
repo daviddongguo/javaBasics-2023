@@ -18,12 +18,3 @@ c
 [
 +src/main/java/xyz/dongguo/lesson/Day01.java,2\c\2c5089017287d8b009adcc889d9a1eb54bce9eef
 d
-4src/main/java/xyz/dongguo/utility/ConsoleOutput.java,a\b\ab27a6a8b095d7fdac4f8f87300bb4cff8358e27
-T
-$.idea/codeStyles/codeStyleConfig.xml,d\d\dd7b3350c29c49497756c7f32c69a3bed18b1cba
-Œ
-\.idea/shelf/Uncommitted_changes_before_Update_at_11_27_2022_12_00_PM_[Changes]/shelved.patch,3\2\320268a0eda58e5c9fc12eeca9d501f029992fad
-‚
-R.idea/shelf/Uncommitted_changes_before_Update_at_11_27_2022_12_00_PM__Changes_.xml,1\9\19c042a8e0568f2b32fe19a9c03fa33d06c71f48
-C
-bin/main/log4j2.xml,e\0\e05ebf378b64776d8593021d29575f26668940af
