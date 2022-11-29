@@ -58,6 +58,7 @@ public class Day04 {
       System.out.print("Please enter a new  number: ");
       inputNumber = scanner.nextInt();
     }
+    scanner.close();
   }
 
   public static void printTable() {
