@@ -235,7 +235,7 @@
       <workItem from="1669388113818" duration="13046000" />
       <workItem from="1669692548078" duration="39000" />
       <workItem from="1669692800141" duration="4859000" />
-      <workItem from="1669697691638" duration="310000" />
+      <workItem from="1669697691638" duration="628000" />
     </task>
     <task id="LOCAL-00001" summary="update git ignore">
       <created>1669323977212</created>
@@ -293,7 +293,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669697623817</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="auto generate files">
+      <created>1669698219641</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1669698219641</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -316,7 +323,8 @@
     <MESSAGE value="after class" />
     <MESSAGE value="update" />
     <MESSAGE value="update git ignore" />
-    <option name="LAST_COMMIT_MESSAGE" value="update git ignore" />
+    <MESSAGE value="auto generate files" />
+    <option name="LAST_COMMIT_MESSAGE" value="auto generate files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
