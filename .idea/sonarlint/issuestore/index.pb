@@ -19,3 +19,14 @@ c
 +src/main/java/xyz/dongguo/lesson/Day01.java,2/c/2c5089017287d8b009adcc889d9a1eb54bce9eef
 d
 4src/main/java/xyz/dongguo/utility/ConsoleOutput.java,a/b/ab27a6a8b095d7fdac4f8f87300bb4cff8358e27
+_
+/src/test/java/xyz/dongguo/lesson/Day02Test.java,a/3/a34389c950685bcc38ad736ef6175eba690adebe
+:
+
+.gitignore,a/5/a5cc2925ca8258af241be7e5b0381edf30266302
+[
++src/main/java/xyz/dongguo/lesson/Day02.java,8/9/89efe78bd8fd9be9f47e40bd14d7071db24d82fc
+S
+#src/main/java/xyz/dongguo/Main.java,a/e/ae3fa569c84d5ad04b47d7d2d0baacdd8d6257cd
+[
++src/main/java/xyz/dongguo/lesson/Day03.java,6/c/6cd2af752e0477d1b65032581fb3d38b55fba849
