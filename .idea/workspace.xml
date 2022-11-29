@@ -5,8 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ba8e1585-d585-4cb2-af41-863ee3a3fc37" name="Changes" comment="after class">
-      <change afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/lesson/Day04.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/xyz/dongguo/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/xyz/dongguo/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -230,7 +229,7 @@
       <workItem from="1669730357334" duration="14000" />
       <workItem from="1669730399975" duration="476000" />
       <workItem from="1669730884779" duration="6684000" />
-      <workItem from="1669739596063" duration="6648000" />
+      <workItem from="1669739596063" duration="7985000" />
     </task>
     <task id="LOCAL-00001" summary="update git ignore">
       <created>1669323977212</created>
@@ -302,7 +301,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669746369455</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="after class">
+      <created>1669746507680</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1669746507680</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
