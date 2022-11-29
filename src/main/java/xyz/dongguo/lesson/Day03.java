@@ -18,7 +18,7 @@ public class Day03 {
     }
     int result = calculate(numberA, numberB, Operator.MINUS);
     String problem = getProblem(numberA, numberB, Operator.MINUS);
-    ConsoleOutput.println(String.format("%s is %s", problem, result));
+    ConsoleOutput.log(String.format("%s is %s", problem, result));
 
   }
 
@@ -58,7 +58,7 @@ public class Day03 {
       message = "HiEven";
     }
 
-    ConsoleOutput.println(String.format("%d is %s", randomNumber, message));
+    ConsoleOutput.log(String.format("%d is %s", randomNumber, message));
   }
 
   public static int operteTwoNumbers() {
@@ -68,7 +68,7 @@ public class Day03 {
     int indexOfOperator = random.nextInt(3);
     Operator operator = getOperator(indexOfOperator);
 
-    ConsoleOutput.println(getProblem(numberA, numberB, operator));
+    ConsoleOutput.log(getProblem(numberA, numberB, operator));
     return calculate(numberA, numberB, operator);
   }
 
@@ -88,16 +88,16 @@ public class Day03 {
   private static void printProblem(int numberA, int numberB, Operator operator) {
     switch (operator) {
       case ADD:
-        ConsoleOutput.println(String.format("%d +  %d", numberA, numberB));
+        ConsoleOutput.log(String.format("%d +  %d", numberA, numberB));
         return;
       case MINUS:
-        ConsoleOutput.println(String.format("%d -  %d", numberA, numberB));
+        ConsoleOutput.log(String.format("%d -  %d", numberA, numberB));
         return;
       case MULTIPLY:
-        ConsoleOutput.println(String.format("%d *  %d", numberA, numberB));
+        ConsoleOutput.log(String.format("%d *  %d", numberA, numberB));
         return;
       default:
-        ConsoleOutput.println(String.format("%d /  %d", numberA, numberB));
+        ConsoleOutput.log(String.format("%d /  %d", numberA, numberB));
     }
   }
 

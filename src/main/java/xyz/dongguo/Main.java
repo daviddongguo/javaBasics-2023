@@ -1,25 +1,17 @@
 package xyz.dongguo;
 
-import xyz.dongguo.lesson.Day03;
+import xyz.dongguo.lesson.MidEvaluation;
 import xyz.dongguo.utility.ConsoleOutput;
 
 public class Main {
 
   public static void main(String[] args) {
-    ConsoleOutput.println("Java App Started.");
+    ConsoleOutput.log("Java App Started.");
+
+    MidEvaluation.run();
 
 
-    int i = 20;
-    while (i >= 0) {
-      Day03.printSubtractions();
-      i--;
-    }
 
   }
-
-
-
-
-
 
 }

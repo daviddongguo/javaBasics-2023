@@ -12,10 +12,4 @@ X
 <
 build.gradle,f/0/f07866736216be0ee2aba49e392191aeae700a35
 _
-/src/test/java/xyz/dongguo/lesson/Day01Test.java,f/7/f73a7912a9999a402305a8ca4136b78685500357
-c
-3src/main/java/xyz/dongguo/utility/ConsoleInput.java,9/1/91efcab629411713771cb6858e4ff5895bce5497
-[
-+src/main/java/xyz/dongguo/lesson/Day01.java,2/c/2c5089017287d8b009adcc889d9a1eb54bce9eef
-d
-4src/main/java/xyz/dongguo/utility/ConsoleOutput.java,a/b/ab27a6a8b095d7fdac4f8f87300bb4cff8358e27
+/src/test/java/xyz/dongguo/lesson/Day01Test.java,f\7\f73a7912a9999a402305a8ca4136b78685500357

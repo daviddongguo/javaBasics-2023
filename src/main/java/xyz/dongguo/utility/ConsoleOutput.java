@@ -11,7 +11,7 @@ public class ConsoleOutput {
   private ConsoleOutput() {
   }
 
-  public static void println(String message) {
+  public static void log(String message) {
     LOGGER.debug(message);
   }
 }

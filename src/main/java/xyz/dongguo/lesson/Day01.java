@@ -12,10 +12,10 @@ public class Day01 {
     String lastName = "WU";
     String firstName = "dongguo";
 
-    ConsoleOutput.println("please enter your lastName: ");
-    ConsoleOutput.println("please enter your firstName: ");
+    ConsoleOutput.log("please enter your lastName: ");
+    ConsoleOutput.log("please enter your firstName: ");
 
-    ConsoleOutput.println(
+    ConsoleOutput.log(
         "Your name is : " + firstName + " " + lastName);
   }
 
