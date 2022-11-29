@@ -25,7 +25,7 @@ public class Day02 {
 
     int second = (int) timeSeconds % 60;
     int minute = (int) timeSeconds % 3600 / 60;
-    int hour = (int) (timeSeconds % (24 * 3600) / 3600 +  offSetByTimeZone);
+    int hour = (int) (timeSeconds % (24 * 3600) / 3600 + offSetByTimeZone);
 
     int year = (int) (timeSeconds / (365.25 * 24 * 3600) + 1970);
     int days = (int) (timeSeconds % (365.25 * 24 * 3600) / (24 * 3600));
@@ -43,8 +43,8 @@ public class Day02 {
 
   public static MonthsEnum getMonth(int days, int year) {
     int[] daysOfMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if(isLeapYear(year)){
-      daysOfMonths[1] =  29;
+    if (isLeapYear(year)) {
+      daysOfMonths[1] = 29;
     }
 
     int indexOfMonth = 0;
@@ -62,8 +62,8 @@ public class Day02 {
   public static int getDayOfMonth(int days, int year) {
     int dayOfMonth = days;
     int[] daysOfMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if(isLeapYear(year)){
-      daysOfMonths[1] =  29;
+    if (isLeapYear(year)) {
+      daysOfMonths[1] = 29;
     }
 
     int indexOfMonth = 0;

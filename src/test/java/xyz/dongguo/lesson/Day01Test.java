@@ -11,10 +11,10 @@ class Day01Test {
   @Test
   void printFullName() {
     assertAll("true",
-        () -> {
-          Day01.printFullName();
-          assertTrue(true);
-        });
+       () -> {
+         Day01.printFullName();
+         assertTrue(true);
+       });
   }
 
   @Test

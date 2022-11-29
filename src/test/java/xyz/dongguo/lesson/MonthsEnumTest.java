@@ -6,7 +6,8 @@ import org.junit.jupiter.api.Test;
 
 class MonthsEnumTest {
 
-  final String[] MonthsArray = { "JANUARY","FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER" };
+  final String[] MonthsArray = {"JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE", "JULY", "AUGUST", "SEPTEMBER",
+     "OCTOBER", "NOVEMBER", "DECEMBER"};
   final MonthsEnum feb = MonthsEnum.FEBRUARY;
 
   @Test
@@ -29,7 +30,7 @@ class MonthsEnumTest {
   @Test
   void values() {
     int i = 0;
-    for(MonthsEnum month: MonthsEnum.values()){
+    for (MonthsEnum month : MonthsEnum.values()) {
       assertEquals(MonthsArray[i], month.toString());
       i++;
     }
@@ -40,4 +41,4 @@ class MonthsEnumTest {
     MonthsEnum jan = Enum.valueOf(MonthsEnum.class, MonthsArray[0]);
     assertEquals(MonthsEnum.JANUARY, jan);
   }
- }
+}

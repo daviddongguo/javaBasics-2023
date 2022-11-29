@@ -16,7 +16,7 @@ public class Day01 {
     ConsoleOutput.log("please enter your firstName: ");
 
     ConsoleOutput.log(
-        "Your name is : " + firstName + " " + lastName);
+       "Your name is : " + firstName + " " + lastName);
   }
 
   public static int operate(int x, int y) {

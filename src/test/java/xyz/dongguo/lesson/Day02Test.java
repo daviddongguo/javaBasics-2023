@@ -20,7 +20,6 @@ class Day02Test {
     assertNull(null);
   }
 
-
   @Test
   void calculateArea() {
     double input = 1.0;
@@ -31,7 +30,7 @@ class Day02Test {
     assertEquals(expected, result);
 
     ConsoleOutput.log(String.format("area of a "
-            + "circle(radius: %f): %f", input, result));
+       + "circle(radius: %f): %f", input, result));
   }
 
   @Test
@@ -42,7 +41,7 @@ class Day02Test {
 
     assertEquals(expected, result);
     ConsoleOutput.log(String.format("%5.2f cel = %5.2f "
-        + "fal", input, result));
+       + "fal", input, result));
   }
 
   @Test
@@ -53,7 +52,7 @@ class Day02Test {
 
     assertEquals(expected, result);
     ConsoleOutput.log(String.format("%d seconds is  "
-        + "%s", input, result));
+       + "%s", input, result));
   }
 
   @Test
@@ -71,29 +70,29 @@ class Day02Test {
     double paymentMonthly = Day02.calculatePaymentMonthly(initialLoan, interestRateMonthly, numberOfYear);
 
     double calculatedInitialLoan = getCalculatedInitialLoan(
-        interestRateMonthly, numberOfYear,
-        paymentMonthly);
+       interestRateMonthly, numberOfYear,
+       paymentMonthly);
 
     ConsoleOutput.log(String.format("monthlyPayment: "
-        + "%4.2f", paymentMonthly));
+       + "%4.2f", paymentMonthly));
     ConsoleOutput.log(String.format("total payment "
-        + "in  %d months: %4.2f",
-        numberOfYear * 12,
-        paymentMonthly * numberOfYear * 12));
+          + "in  %d months: %4.2f",
+       numberOfYear * 12,
+       paymentMonthly * numberOfYear * 12));
 
     assertEquals(calculatedInitialLoan, initialLoan);
   }
 
   private double getCalculatedInitialLoan(
-      double interestRateMonthly, int numberOfYear,
-      double paymentMonthly) {
+     double interestRateMonthly, int numberOfYear,
+     double paymentMonthly) {
     return paymentMonthly
-        * (1 - (1 / Math.pow((1 + interestRateMonthly),
-        (numberOfYear * 12)))) / interestRateMonthly;
+       * (1 - (1 / Math.pow((1 + interestRateMonthly),
+       (numberOfYear * 12)))) / interestRateMonthly;
   }
 
   @ParameterizedTest
-  @ValueSource(ints = { 1600, 2000, 1996, 2004, 2400})
+  @ValueSource(ints = {1600, 2000, 1996, 2004, 2400})
   void isLeapYearReturnTrueTest(int year) {
     boolean expected = true;
     boolean result = Day02.isLeapYear(year);
@@ -102,7 +101,7 @@ class Day02Test {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = { 1900, 1999, 2001, 2002, 2003, 2005, 2100 })
+  @ValueSource(ints = {1900, 1999, 2001, 2002, 2003, 2005, 2100})
   void isLeapYearReturnFalseTest(int year) {
     boolean expected = false;
     boolean result = Day02.isLeapYear(year);
