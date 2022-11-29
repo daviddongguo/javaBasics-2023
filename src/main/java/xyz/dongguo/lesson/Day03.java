@@ -22,7 +22,6 @@ public class Day03 {
 
   }
 
-
   private static String getProblem(int numberA, int numberB, Operator operator) {
     switch (operator) {
       case ADD:
@@ -61,7 +60,7 @@ public class Day03 {
     ConsoleOutput.log(String.format("%d is %s", randomNumber, message));
   }
 
-  public static int operteTwoNumbers() {
+  public static int calculateTwoNumbers() {
 
     int numberA = random.nextInt(10);
     int numberB = random.nextInt(10);
@@ -83,22 +82,6 @@ public class Day03 {
       return Operator.MULTIPLY;
     }
     return Operator.DIVIDE;
-  }
-
-  private static void printProblem(int numberA, int numberB, Operator operator) {
-    switch (operator) {
-      case ADD:
-        ConsoleOutput.log(String.format("%d +  %d", numberA, numberB));
-        return;
-      case MINUS:
-        ConsoleOutput.log(String.format("%d -  %d", numberA, numberB));
-        return;
-      case MULTIPLY:
-        ConsoleOutput.log(String.format("%d *  %d", numberA, numberB));
-        return;
-      default:
-        ConsoleOutput.log(String.format("%d /  %d", numberA, numberB));
-    }
   }
 
   enum Operator {

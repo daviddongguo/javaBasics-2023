@@ -7,9 +7,9 @@ public class Day04 {
 
   private static final Random random = new Random();
   private static final int TABLE_WIDTH = 60;
+  private static final Scanner scanner = new Scanner(System.in);
 
   public static void calculateNumberUntilZeo() {
-    Scanner scanner = new Scanner(System.in);
     int inputNumber = 0;
     int sum = 0;
     // 1st: False || True
@@ -40,7 +40,6 @@ public class Day04 {
   }
 
   public static void guessNumber() {
-    Scanner scanner = new Scanner(System.in);
     int rndNumber =  random.nextInt(101);
     System.out.printf("rand number is %d%n", rndNumber);
     int inputNumber;
