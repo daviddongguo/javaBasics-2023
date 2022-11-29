@@ -1,10 +1,14 @@
 package xyz.dongguo.lesson;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Day04 {
 
-  public static void caculateNumberUntilZeo() {
+  private static final Random random = new Random();
+  private static final int TABLE_WIDTH = 60;
+
+  public static void calculateNumberUntilZeo() {
     Scanner scanner = new Scanner(System.in);
     int inputNumber = 0;
     int sum = 0;
@@ -19,11 +23,27 @@ public class Day04 {
     System.out.printf("The sum is %d%n", sum);
   }
 
+  public static void testNextIntBound(){
+    for (int i = 0; i < 500; i++) {
+      int n = random.nextInt(101);
+      System.out.printf("%4d ", n);
+      if(i % 20 == 0){
+        System.out.printf("%n");
+      }
+      if(n == 0){
+        System.out.printf("%n");
+      }
+      if(n == 100){
+        System.out.printf("%n");
+      }
+    }
+  }
+
   public static void guessNumber() {
     Scanner scanner = new Scanner(System.in);
-    int rndNumber = (int) (Math.random() * 101);
+    int rndNumber =  random.nextInt(101);
     System.out.printf("rand number is %d%n", rndNumber);
-    int inputNumber = -1;
+    int inputNumber;
     System.out.print("Please enter a number between 0 and 100: ");
     inputNumber = scanner.nextInt();
     while (true) {
@@ -42,17 +62,20 @@ public class Day04 {
   }
 
   public static void printTable() {
-    final int TABLE_WIDTH = 60;
-    System.out.printf("_".repeat(TABLE_WIDTH));
+    printWholeRow("_");
     System.out.printf("%n");
     printRowCenter("Name", "VIP", "Balance");
-    System.out.printf("-".repeat(TABLE_WIDTH));
+    printWholeRow("-");
     System.out.printf("%n");
     printRowCenterContent("Dongguo", true, 1234.56D);
     printRowCenterContent("Anonymous", false, 998855663.21D);
     printRowCenterContent("Rich", false, -88995566.99D);
-    System.out.printf("-".repeat(TABLE_WIDTH));
+    printWholeRow("_");
     System.out.printf("%n");
+  }
+
+  private static void printWholeRow(String str) {
+    System.out.print(str.repeat(Day04.TABLE_WIDTH));
   }
 
   private static void printRowCenterContent(String name, boolean isVIP, double amount) {
