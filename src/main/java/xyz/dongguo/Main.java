@@ -15,12 +15,12 @@ public class Main {
     double initialTuition = 1.0D;
     double increaseRate = 0.07D;
     double currentTuition = initialTuition;
+
     while(currentTuition < 2 * initialTuition){
       yearsOfDoubleInitial++;
       currentTuition *= (1 + increaseRate);
     }
     System.out.printf("%n\t\t\tAfter %d years, the tuition will double.%n", yearsOfDoubleInitial);
-
 
   }
 
