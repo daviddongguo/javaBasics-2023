@@ -157,7 +157,7 @@ public class MidEvaluation {
   }
 
   // ****************************** Share Methods ******************************
-  private static int requestIntegerNumberInput(String infoMessage) {
+  public static int requestIntegerNumberInput(String infoMessage) {
     while (true) {
       try {
         return Integer.parseInt(requestStringInput(infoMessage));
