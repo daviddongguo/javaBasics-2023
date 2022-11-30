@@ -1,7 +1,5 @@
 package xyz.dongguo;
 
-import static java.lang.System.out;
-
 import java.util.Scanner;
 
 public class Main {
@@ -13,7 +11,28 @@ public class Main {
     //    additionQuiz();
     //    calculateYearsOfDoubleTuition();
     //    subtractionQuiz();
-    printMultiplicationTable();
+    //    printMultiplicationTable();
+    //    subtractionQuiz();
+    printSumOfSeries();
+
+  }
+
+  private static void printSumOfSeries() {
+    float sum = 0.0F;
+    for (int i = 1; i <= 100; i++) {
+      float subSum = 0.01F * i;
+
+//      for (int indexInner = 0; indexInner <= indexOuter; indexInner++) {
+//        subSum += 0.01;
+//      }
+      sum += subSum;
+
+      System.out.printf("%4.2f\t", subSum);
+      if(i % 20 == 0){
+        System.out.printf("%n");
+      }
+    }
+    System.out.printf("%n\t\t\t0.01 + 0.02 + ... + 1.00 = %4.2f%n%n", sum);
   }
 
   private static void printMultiplicationTable() {
@@ -24,10 +43,10 @@ public class Main {
     System.out.printf("%n");
     printRowHeader(NUMBER_COLUMN);
 
-    for (int i = 0; i < NUMBER_ROW; i++) {
-      System.out.printf("%2d | ", i + 1);
-      for (int j = 0; j < NUMBER_COLUMN; j++) {
-        System.out.printf("%5d", (i + 1) * (j + 1));
+    for (int indexOfRow = 0; indexOfRow < NUMBER_ROW; indexOfRow++) {
+      System.out.printf("%2d | ", indexOfRow + 1);
+      for (int indexOfColumn = 0; indexOfColumn < NUMBER_COLUMN; indexOfColumn++) {
+        System.out.printf("%5d", (indexOfRow + 1) * (indexOfColumn + 1));
       }
       System.out.printf("%n");
     }
@@ -58,7 +77,7 @@ public class Main {
       String questionString = String.format("%d)  %d - %d = ", i + 1, numberA, numberB);
       //      System.out.print(questionString);
       //      int userInput = scanner.nextInt();
-      int userInput = requestIntegerNumberInput(questionString);
+      int userInput = xyz.dongguo.lesson.MidEvaluation.requestIntegerNumberInput(questionString);
 
       // log user answer in report string
       if (subtractionOfTwoNumber == userInput) {
@@ -73,45 +92,6 @@ public class Main {
     System.out.printf("You  have %d correct answers.%n", amountOfCorrect);
     System.out.println(report.toString());
     scanner.close();
-  }
-
-  private static int requestIntegerNumberInput(String infoMessage) {
-    while (true) {
-      try {
-        return Integer.parseInt(requestStringInput(infoMessage));
-      } catch (NumberFormatException ex) {
-        printError("input must be an integer number.");
-      }
-    }
-  }
-
-  private static String requestStringInput(String infoMessage) {
-    while (true) {
-      print(infoMessage);
-      String inputString = scanner.nextLine().trim();
-      if (inputString.length() >= 1) {
-        return inputString;
-      }
-      printError("input can not be empty.");
-    }
-  }
-
-  private static void printError(String errorMessage) {
-    int leftPad = CONSOLE_WIDTH - errorMessage.length();
-    printlnWithPad(errorMessage, leftPad);
-  }
-
-  private static void printlnWithPad(String string, int leftPad) {
-    final String EMPTY_CHAR = " ";
-    println(EMPTY_CHAR.repeat(Math.max(-1, leftPad)) + string);
-  }
-
-  private static void println(String string) {
-    out.println(string);
-  }
-
-  private static void print(String string) {
-    out.print(string);
   }
 
   private static void calculateYearsOfDoubleTuition() {
