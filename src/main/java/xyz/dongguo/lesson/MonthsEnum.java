@@ -10,7 +10,7 @@ public enum MonthsEnum {
   FEBRUARY(2) {
     @Override
     public int getDays() {
-      return 28;
+      return this.isLeap ? 29: 28;
     }
   },
   MARCH(3) {
@@ -75,6 +75,10 @@ public enum MonthsEnum {
   };
 
   private final int order;
+  protected boolean isLeap = false;
+  protected void setLeap(boolean isLeap){
+    this.isLeap = isLeap;
+  }
 
   MonthsEnum(int order) {
     this.order = order;

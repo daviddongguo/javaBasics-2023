@@ -18,6 +18,11 @@ class MonthsEnumTest {
   @Test
   void getDays() {
     assertEquals(28, feb.getDays());
+    MonthsEnum febInLeapYear = MonthsEnum.FEBRUARY;
+    febInLeapYear.setLeap(true);
+    assertEquals(29, febInLeapYear.getDays());
+    febInLeapYear.setLeap(false);
+    assertEquals(28, febInLeapYear.getDays());
   }
 
   @Test
@@ -41,4 +46,5 @@ class MonthsEnumTest {
     MonthsEnum jan = Enum.valueOf(MonthsEnum.class, MonthsArray[0]);
     assertEquals(MonthsEnum.JANUARY, jan);
   }
+
 }
