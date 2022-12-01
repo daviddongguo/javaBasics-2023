@@ -3,7 +3,9 @@ package xyz.dongguo.lesson;
 import java.util.Random;
 
 public class Day05 {
+
   private static final Random random = new Random();
+
   public static void run() {
     printYearsOfDoubleTuition();
     printMultiplicationTable();
@@ -117,7 +119,7 @@ public class Day05 {
   }
 
   private static int getRandomNumber(int a, int b) {
-//    a + (int) (Math.random() * (b - a + 1));
+    //    a + (int) (Math.random() * (b - a + 1));
     return Day05.random.nextInt(a + b) - a;
   }
 
