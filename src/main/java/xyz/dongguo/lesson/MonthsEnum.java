@@ -1,84 +1,25 @@
 package xyz.dongguo.lesson;
 
 public enum MonthsEnum {
-  JANUARY(1) {
-    @Override
-    public int getDays() {
-      return 31;
-    }
-  },
-  FEBRUARY(2) {
-    @Override
-    public int getDays() {
-      return this.isLeap ? 29 : 28;
-    }
-  },
-  MARCH(3) {
-    @Override
-    public int getDays() {
-      return 31;
-    }
-  },
-  APRIL(4) {
-    @Override
-    public int getDays() {
-      return 30;
-    }
-  },
-  MAY(5) {
-    @Override
-    public int getDays() {
-      return 31;
-    }
-  },
-  JUNE(6) {
-    @Override
-    public int getDays() {
-      return 30;
-    }
-  },
-  JULY(7) {
-    @Override
-    public int getDays() {
-      return 31;
-    }
-  },
-  AUGUST(8) {
-    @Override
-    public int getDays() {
-      return 31;
-    }
-  },
-  SEPTEMBER(9) {
-    @Override
-    public int getDays() {
-      return 30;
-    }
-  },
-  OCTOBER(10) {
-    @Override
-    public int getDays() {
-      return 31;
-    }
-  },
-  NOVEMBER(11) {
-    @Override
-    public int getDays() {
-      return 30;
-    }
-  },
-  DECEMBER(12) {
-    @Override
-    public int getDays() {
-      return 31;
-    }
-  };
+  JANUARY(1, 31),
+  FEBRUARY(2, 28),
+  MARCH(3, 31),
+  APRIL(4, 30),
+  MAY(5, 31),
+  JUNE(6, 30),
+  JULY(7, 31),
+  AUGUST(8, 31),
+  SEPTEMBER(9, 30),
+  OCTOBER(10, 31),
+  NOVEMBER(11, 30),
+  DECEMBER(12, 31);
 
   private final int order;
-  protected boolean isLeap = false;
+  private final int days;
 
-  MonthsEnum(int order) {
+  MonthsEnum(int order, int days) {
     this.order = order;
+    this.days = days;
   }
 
   public static MonthsEnum getMonth(int order) {
@@ -94,9 +35,18 @@ public enum MonthsEnum {
     return order;
   }
 
-  protected void setLeap(boolean isLeap) {
-    this.isLeap = isLeap;
+  public int getDays(boolean leapYear) {
+    if (leapYear && this == FEBRUARY) {
+      return 29;
+    }
+    return this.getDays();
   }
 
-  public abstract int getDays();
+  public int getDays() {
+    return this.days;
+  }
+
+  public static boolean isLeap(int year){
+    return (year % 400 == 0) || (year % 4 == 0 && year % 100 !=0);
+  }
 }
