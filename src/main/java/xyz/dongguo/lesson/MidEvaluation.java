@@ -10,6 +10,9 @@ public class MidEvaluation {
   private static final int CONSOLE_WIDTH = 50;
   private static final Scanner scanner = new Scanner(in);
 
+  private MidEvaluation() {
+  }
+
   public static void run() {
     println("*".repeat(CONSOLE_WIDTH));
     printlnCenter("Question 1 Current Convert");
@@ -157,7 +160,7 @@ public class MidEvaluation {
   }
 
   // ****************************** Share Methods ******************************
-  private static int requestIntegerNumberInput(String infoMessage) {
+  public static int requestIntegerNumberInput(String infoMessage) {
     while (true) {
       try {
         return Integer.parseInt(requestStringInput(infoMessage));
@@ -204,8 +207,5 @@ public class MidEvaluation {
   public static void pressEnterKeyToContinue() {
     println("Press Enter key to continue...");
     scanner.nextLine();
-  }
-
-  private MidEvaluation() {
   }
 }

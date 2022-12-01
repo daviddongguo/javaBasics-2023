@@ -26,6 +26,7 @@ class Day04Test {
 
   @Test
   void guessNumber() {
+    Day04.guessNumber();
     assertTrue(true);
   }
 }

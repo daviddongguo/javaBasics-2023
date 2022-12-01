@@ -59,6 +59,10 @@ public class Day02 {
     return MonthsEnum.DECEMBER;
   }
 
+  public static boolean isLeapYear(int year) {
+    return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
+  }
+
   public static int getDayOfMonth(int days, int year) {
     int dayOfMonth = days;
     int[] daysOfMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
@@ -75,10 +79,6 @@ public class Day02 {
       dayOfMonth -= daysOfMonths[indexOfMonth];
     }
     return dayOfMonth;
-  }
-
-  public static boolean isLeapYear(int year) {
-    return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
   }
 
   public static double calculatePaymentMonthly(double initialLoan, double interestRateMonthly,
