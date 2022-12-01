@@ -1,5 +1,7 @@
 package xyz.dongguo.lesson;
 
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -42,26 +44,31 @@ public class Day04 {
     }
   }
 
-  public static void guessNumber() {
+  public static void guessRandomNumber() {
     int rndNumber = random.nextInt(101);
-    System.out.printf("rand number is %d%n", rndNumber);
+    guessNumber(rndNumber, System.in, System.out);
+  }
+
+  public static void guessNumber(int  expectedNumber, InputStream in, PrintStream out) {
+    out.printf("rand number is %d%n", expectedNumber);
     int inputNumber;
-    System.out.print("Please enter a number between 0 and 100: ");
-    inputNumber = scanner.nextInt();
+    out.print("Please enter a number between 0 and 100: ");
+    Scanner keyboard = new Scanner(in);
+    inputNumber = keyboard.nextInt();
     while (true) {
-      if (rndNumber == inputNumber) {
-        System.out.printf("You get it: %d", rndNumber);
+      if (expectedNumber == inputNumber) {
+        out.printf("You get it: %d", expectedNumber);
         break;
       }
-      if (rndNumber < inputNumber) {
-        System.out.println("too high");
+      if (expectedNumber < inputNumber) {
+        out.println("too high");
       } else {
-        System.out.println("too low");
+        out.println("too low");
       }
-      System.out.print("Please enter a new  number: ");
-      inputNumber = scanner.nextInt();
+      out.print("Please enter a new  number: ");
+      inputNumber = keyboard.nextInt();
     }
-    scanner.close();
+    keyboard.close();
   }
 
   public static void printTable() {
