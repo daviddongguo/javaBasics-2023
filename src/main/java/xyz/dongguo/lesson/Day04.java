@@ -9,6 +9,9 @@ public class Day04 {
   private static final int TABLE_WIDTH = 60;
   private static final Scanner scanner = new Scanner(System.in);
 
+  private Day04() {
+  }
+
   public static void calculateNumberUntilZeo() {
     int inputNumber = 0;
     int sum = 0;
@@ -99,8 +102,5 @@ public class Day04 {
        pad2Left, column2, pad2Right,
        pad3Left, column3, pad3Right
     );
-  }
-
-  private Day04() {
   }
 }

@@ -6,6 +6,9 @@ public class Day05 {
 
   private static final Random random = new Random();
 
+  private Day05() {
+  }
+
   public static void run() {
     printYearsOfDoubleTuition();
     printMultiplicationTable();
@@ -27,29 +30,30 @@ public class Day05 {
   }
 
   private static void printMultiplicationTable() {
-    final int NUMBER_COLUMN = 9;
-    final int NUMBER_ROW = 9;
+    final int NUMBER_OF_COLUMN = 9;
+    final int NUMBER_OF_ROW = 9;
     System.out.printf("%n");
     System.out.printf("%35s%n", "MULTIPLICATION TABLE");
     System.out.printf("%n");
-    printRowHeader(NUMBER_COLUMN);
+    printRowHeader();
 
-    for (int indexOfRow = 0; indexOfRow < NUMBER_ROW; indexOfRow++) {
+    for (int indexOfRow = 0; indexOfRow < NUMBER_OF_ROW; indexOfRow++) {
       System.out.printf("%2d | ", indexOfRow + 1);
-      for (int indexOfColumn = 0; indexOfColumn < NUMBER_COLUMN; indexOfColumn++) {
+      for (int indexOfColumn = 0; indexOfColumn < NUMBER_OF_COLUMN; indexOfColumn++) {
         System.out.printf("%5d", (indexOfRow + 1) * (indexOfColumn + 1));
       }
       System.out.printf("%n");
     }
   }
 
-  private static void printRowHeader(int numberOfColumn) {
+  private static void printRowHeader() {
+    final int NUMBER_OF_COLUMN = 9;
     System.out.printf("%2s | ", " ");
-    for (int j = 0; j < numberOfColumn; j++) {
+    for (int j = 0; j < NUMBER_OF_COLUMN; j++) {
       System.out.printf("%5d", j + 1);
     }
     System.out.printf("%n");
-    System.out.println("-".repeat(5 + numberOfColumn * 5));
+    System.out.println("-".repeat(5 + NUMBER_OF_COLUMN * 5));
   }
 
   private static void printYearsOfDoubleTuition() {
@@ -96,6 +100,11 @@ public class Day05 {
     System.out.println(report);
   }
 
+  private static int getRandomNumberBetween0And9() {
+    //    a + (int) (Math.random() * (b - a + 1));
+    return Day05.random.nextInt(9 + 1);
+  }
+
   private static void additionQuiz() {
 
     int numberA = getRandomNumberBetween0And9();
@@ -114,15 +123,4 @@ public class Day05 {
     System.out.printf("            Yes, %d + %d = %d %n", numberA, numberB, userInput);
   }
 
-  private static int getRandomNumberBetween0And9() {
-    return getRandomNumber(0, 9);
-  }
-
-  private static int getRandomNumber(int a, int b) {
-    //    a + (int) (Math.random() * (b - a + 1));
-    return Day05.random.nextInt(a + b) - a;
-  }
-
-  private Day05() {
-  }
 }

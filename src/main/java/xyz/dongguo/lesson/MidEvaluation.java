@@ -10,6 +10,9 @@ public class MidEvaluation {
   private static final int CONSOLE_WIDTH = 50;
   private static final Scanner scanner = new Scanner(in);
 
+  private MidEvaluation() {
+  }
+
   public static void run() {
     println("*".repeat(CONSOLE_WIDTH));
     printlnCenter("Question 1 Current Convert");
@@ -204,8 +207,5 @@ public class MidEvaluation {
   public static void pressEnterKeyToContinue() {
     println("Press Enter key to continue...");
     scanner.nextLine();
-  }
-
-  private MidEvaluation() {
   }
 }
