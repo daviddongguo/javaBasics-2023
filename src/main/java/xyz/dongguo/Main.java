@@ -2,8 +2,7 @@ package xyz.dongguo;
 
 import java.io.InputStream;
 import java.io.PrintStream;
-import xyz.dongguo.lesson.Day05;
-import xyz.dongguo.lesson.Day06;
+import xyz.dongguo.lesson.Day07;
 
 public class Main {
 
@@ -12,8 +11,7 @@ public class Main {
     InputStream in = System.in;
     PrintStream out = System.out;
 
-//    (new Day06(in, out)).run();
-    Day05.run();
+    (new Day07(in, out)).run();
   }
 
 }
