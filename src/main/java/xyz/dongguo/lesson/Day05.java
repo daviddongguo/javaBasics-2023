@@ -11,10 +11,10 @@ public class Day05 {
 
   public static void run() {
     printYearsOfDoubleTuition();
-//    printMultiplicationTable();
-//    printSumOfSeries();
-//    subtractionQuiz();
-//    additionQuiz();
+    //    printMultiplicationTable();
+    //    printSumOfSeries();
+    //    subtractionQuiz();
+    //    additionQuiz();
   }
 
   private static void printSumOfSeries() {
@@ -29,9 +29,9 @@ public class Day05 {
     System.out.printf("%n\t\t\t0.01 + 0.02 + ... + 1.00 = %.4f%n", sum);
   }
 
-  private static void printMultiplicationTable() {
-    final int NUMBER_OF_COLUMN = 9;
-    final int NUMBER_OF_ROW = 9;
+  public static void printMultiplicationTable() {
+    final int NUMBER_OF_COLUMN = 19;
+    final int NUMBER_OF_ROW = 19;
     System.out.printf("%n");
     System.out.printf("%35s%n", "MULTIPLICATION TABLE");
     System.out.printf("%n");
@@ -47,7 +47,7 @@ public class Day05 {
   }
 
   private static void printRowHeader() {
-    final int NUMBER_OF_COLUMN = 9;
+    final int NUMBER_OF_COLUMN = 19;
     System.out.printf("%2s | ", " ");
     for (int j = 0; j < NUMBER_OF_COLUMN; j++) {
       System.out.printf("%5d", j + 1);
@@ -73,7 +73,6 @@ public class Day05 {
   public static double calculateCompoundInterest(double interest, int numberOfPeriods) {
     return Math.pow((1 + interest), numberOfPeriods);
   }
-
 
   private static void subtractionQuiz() {
     final int NUMBER_OF_QUESTIONS = 1;
