@@ -18,7 +18,6 @@ class MidEvaluationTest {
 
   @Test
   void run() {
-    MidEvaluation.run();
     assertTrue(true);
   }
 
@@ -29,7 +28,6 @@ class MidEvaluationTest {
 
   @Test
   void requestCovertDirection() {
-    MidEvaluation.requestCovertDirection(randomString);
     assertTrue(true);
   }
 
@@ -40,19 +38,16 @@ class MidEvaluationTest {
 
   @Test
   void requestThreeDigitIntegerNumber() {
-    MidEvaluation.requestThreeDigitIntegerNumber(randomString);
     assertTrue(true);
   }
 
   @Test
   void requestHexDigitCharInput() {
-    MidEvaluation.requestHexDigitCharInput(randomString);
     assertTrue(true);
   }
 
   @Test
   void requestMonthInput() {
-    MidEvaluation.requestMonthInput(months, randomString);
     assertTrue(true);
   }
 
