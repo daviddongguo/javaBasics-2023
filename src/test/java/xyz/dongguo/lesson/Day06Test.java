@@ -5,17 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+
 class Day06Test {
 
-  Day06 solutions = new Day06(System.in, System.out);
 
-  @Test
-  void run() {
-    assertTrue(true);
-  }
+
+
+  Day06 solutions = new Day06(System.in, System.out);
 
   @Test
   void printInput() {
@@ -64,16 +64,15 @@ class Day06Test {
   @Test
   void countOccurrenceOfLetter() {
     int[] results = solutions.countOccurrenceOfLetter("");
-    for(int i: results){
+    for (int i : results) {
       assertEquals(0, i);
     }
   }
 
-
   @Test
   void countOccurrenceOfLetterWhenEmptyString() {
     int[] results = solutions.countOccurrenceOfLetter("");
-    for(int i: results){
+    for (int i : results) {
       assertEquals(0, i);
     }
   }

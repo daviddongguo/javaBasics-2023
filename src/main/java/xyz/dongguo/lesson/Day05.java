@@ -11,10 +11,10 @@ public class Day05 {
 
   public static void run() {
     printYearsOfDoubleTuition();
-    printMultiplicationTable();
-    printSumOfSeries();
-    subtractionQuiz();
-    additionQuiz();
+//    printMultiplicationTable();
+//    printSumOfSeries();
+//    subtractionQuiz();
+//    additionQuiz();
   }
 
   private static void printSumOfSeries() {
@@ -64,10 +64,16 @@ public class Day05 {
 
     while (currentTuition < 2 * initialTuition) {
       yearsOfDoubleInitial++;
-      currentTuition *= (1 + increaseRate);
+      currentTuition = initialTuition * calculateCompoundInterest(increaseRate, yearsOfDoubleInitial);
     }
-    System.out.printf("%n\t\t\tAfter %d years, the tuition will double.%n", yearsOfDoubleInitial);
+    System.out.printf("%n\t\t\tAfter %d years, the tuition will double.", yearsOfDoubleInitial);
+    System.out.printf("%n\t\t\tThe Tuition will be %.4f%n", currentTuition);
   }
+
+  public static double calculateCompoundInterest(double interest, int numberOfPeriods) {
+    return Math.pow((1 + interest), numberOfPeriods);
+  }
+
 
   private static void subtractionQuiz() {
     final int NUMBER_OF_QUESTIONS = 1;
@@ -100,7 +106,7 @@ public class Day05 {
     System.out.println(report);
   }
 
-  private static int getRandomNumberBetween0And9() {
+  public static int getRandomNumberBetween0And9() {
     //    a + (int) (Math.random() * (b - a + 1));
     return Day05.random.nextInt(9 + 1);
   }

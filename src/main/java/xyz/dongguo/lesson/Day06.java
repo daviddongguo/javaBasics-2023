@@ -16,11 +16,11 @@ public class Day06 {
 
   public void run() {
     //    printInput();
-        printFirst50PrimeNumbers();
+    //    printFirst50PrimeNumbers();
     //    printOccurrenceOfLetter("   A*&^123aABB    c   ");
     //    printOccurrenceOfLetter("PalindromeIgnoreNonAlphanumeric");
     //    printPalindromes();
-//    isPrime(23);
+    //    isPrime(23);
   }
 
   private void printPalindromes() {
