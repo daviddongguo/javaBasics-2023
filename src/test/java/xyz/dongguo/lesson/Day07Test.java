@@ -32,7 +32,6 @@ class Day07Test {
   })
   void add(int first, int second, int expectedResult) {
     assertEquals(expectedResult, solution.add(first, second),
-
        () -> first + " + " + second + " should equal " + expectedResult);
   }
 }
