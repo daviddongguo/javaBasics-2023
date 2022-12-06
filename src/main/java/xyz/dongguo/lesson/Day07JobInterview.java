@@ -11,29 +11,31 @@ public class Day07JobInterview {
   /**
    * Display five Problems.
    */
-  public  static void main() {
+  public static void main() {
+    String stringFormatter = "output: %s%n%n";
+
     System.out.println("problem 01 Two sum");
     int[] numbers = {1, 2, 3, 4, 5, 6, 7};
     int target = 8;
     System.out.printf("Input: nums = %s, target=%d%n", Arrays.toString(numbers), target);
     int[] output = twoSum(numbers, 6);
-    System.out.printf("output: %s%n%n", Arrays.toString(output));
+    System.out.printf(stringFormatter, Arrays.toString(output));
 
     System.out.println("problem 02 Exist Sum");
     int[] array = {1, 3, 4, 5, 6};
     int sum = 7;
     System.out.printf("Input:  arr[]  = %s,  sum =%d%n", Arrays.toString(array), sum);
-    System.out.printf("output: %s%n%n", isSumExisted(array, sum));
+    System.out.printf(stringFormatter, isSumExisted(array, sum));
 
     System.out.println("problem 03 House Robber");
     System.out.printf("Input: nums = %s%n", Arrays.toString(numbers));
-    System.out.printf("output: %d%n%n", robHouseUsingLoop(numbers));
+    System.out.printf(stringFormatter, robHouseUsingLoop(numbers));
 
     System.out.println("problem 04 Rotate Array");
     int steps = 3;
     System.out.printf("Input: nums = %s, step= %d%n", Arrays.toString(numbers), steps);
     rotate(numbers, steps);
-    System.out.printf("output: %s%n%n", Arrays.toString(numbers));
+    System.out.printf(stringFormatter, Arrays.toString(numbers));
 
     System.out.println("problem 05 Remove duplicates from Sorted Array");
     int[] nums = {0, 0, 1, 1, 1, 2, 2, 3, 3, 4};
@@ -195,10 +197,9 @@ public class Day07JobInterview {
       arrRotated[index] = arr[i];
     }
 
-    for (int i = 0; i < size; i++) {
-      arr[i] = arrRotated[i];
-    }
+    System.arraycopy(arrRotated, 0, arr, 0, size);
   }
+
 
   /**
    * Given an integer array nums sorted in non-decreasing order, remove the duplicates in-place such that each unique
@@ -230,6 +231,40 @@ public class Day07JobInterview {
     return left + 1;
   }
 
+  private Day07JobInterview() {
+  }
+
+  /**
+   *
+   * Does Java code really write once and run anywhere?
+   * <p>
+   * No. the same Java byte code can run on any Java Virtual Machine. But the JVM has to be rewritten to work on different operating systems.
+   * So “run anywhere” only works if the Java Virtual Machine exists for every machine. Our java code may write once but the JVM needs to be written anywhere.
+   * On other hand, based on the "Virtual Machine" or Container, almost any programming languages can write once, run anywhere, even some java program also be deployed on the container for better isolated from the host operating system.
+   * <p>
+   * Does the Java method have default parameters?
+   * <p>
+   * No, Java does not support assigning a default value to a method parameter.
+   *  But we can simulate default parameters with several ways. overloading is the cleanest and simple, easy way.  With method overloading, multiple methods can have the same name with different parameters. So we can create a same name method without parameters that call itself with the default value.
+   * I know another way is allowing null as method parameters.
+   * <p>
+   * Why not use Double or Float to represent Money?
+   * Because float and double is base 2 floating-point data types, and money needs the base 10 data type. the former can not exactly represent the latter.
+   * Actually, only like 0.25, 0.5, 0.75 these  numbers that are powers of 2 can be represented exactly. All the others are close to the real when converted to binary floating-point.
+   * For example, the decimal number 0.1 is a infinite sequence of binary. It can not be represented in any finite precision.
+   * Luckily, Java has the BigDecimal class to deal with money. For me, sometimes I prefer to use integers instead and count cents.
+   * <p>
+   * Where is a Java string stored?
+   * It depends. Depends on how the java string has been defined.
+   * A string literal by assigning a value (like any other primitive datatype) is in the string constant pool under heap memory.
+   * A String object we create by using the new keyword (like any other object) is in the heap memory. Of course, this parameter as a string literal is stored in the string constant pool.  There two references, one is point to the object, one is point the string literal, we should be careful when we compare two strings.
+   * Should the nested loops be avoided?
+   * <p>
+   * It depends. sometimes I prefer to nested loops for they are so highly readable that we will quickly understand what is doing.  readability is very important when writing code.
+   * On another hand, It is true that nested loops kill much time to run and especially that time grows up as the square of the number of things you run it on. That’s why it’s bad. It gets slow quickly.
+   * we should be careful with nested loops since they will consume much more compute power.
+   * and especially we should avoid to use other resources like I/0, Net , Database, memory and so on  in a nested loops even a loop.
+   */
   public static void askQuestions() {
     String question1 = "Does Java code really write once and run anywhere?";
     String question2 = "Does the Java method have default parameters?";

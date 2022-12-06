@@ -1,8 +1,12 @@
+
 package xyz.dongguo.lesson;
 
-public class Dongguo {
+/**
+ * @author dongg
+ */
+public class FinalPractical {
 
-  public static void main(String[] args) {
+  public static void main() {
     System.out.printf("%n%s%n", "Java Final Practical");
 
     // Question 1
@@ -25,7 +29,13 @@ public class Dongguo {
 
   }
 
-  // Question 1
+  /**
+   * Question 1
+   * <p>
+   * Write a method that counts the occurrences of each number in an array. Array only contains integers.
+   *
+   * @param numbers An integer number array.
+   */
   public static void printOccurrencesOfEachNumber(int[] numbers) {
     sort(numbers);
 
@@ -67,7 +77,14 @@ public class Dongguo {
     }
   }
 
-  // Question 2
+  /**
+   * Question 2
+   * <p>
+   * Write a method that returns the second-largest element in an array. (Do not sort the array)
+   *
+   * @param numberArray An integer number array
+   * @return The second-largest element
+   */
   public static int findSecondLargest(int[] numberArray) {
     int largest = findLargestExclude(numberArray, Integer.MIN_VALUE);
     return findLargestExclude(numberArray, largest);
@@ -88,7 +105,17 @@ public class Dongguo {
     return largest;
   }
 
-  // Question 3
+  /**
+   * Question 3
+   * <p>
+   * The arrays list1 and list2 are strictly identical if their corresponding elements are equal. Write a method that
+   * returns true if list1 and list2 are strictly identical, using the following header: public static boolean
+   * equals(int[] list1, int[] list2) (5 marks) Call this method from main and pass below array as list1 and list2
+   *
+   * @param list1 An integer number array
+   * @param list2 An integer number array
+   * @return true if the two list are equal, otherwise false
+   */
   public static boolean equals(int[] list1, int[] list2) {
     int size = list1.length;
     if (size > list2.length) {
@@ -103,13 +130,25 @@ public class Dongguo {
     return true;
   }
 
-  // Question 4
+  /**
+   * Question 4
+   * <p>
+   * Write a method that returns the sum of all the elements in a specified column in a matrix using the following
+   * header
+   *
+   * @param matrix A two-dimensional integer number array
+   * @param columnIndex An integer number representing the column index.
+   * @return The sum of that column
+   */
   public static double sumColumn(double[][] matrix, int columnIndex) {
     double sumOfColumn = 0;
     for (double[] element : matrix) {
       sumOfColumn += element[columnIndex];
     }
     return sumOfColumn;
+  }
+
+  private FinalPractical() {
   }
 
 }

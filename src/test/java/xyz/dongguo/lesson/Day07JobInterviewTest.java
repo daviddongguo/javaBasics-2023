@@ -6,16 +6,20 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class Day07JobInterviewTest {
-  DongguoJobInterviewQuestion solustion;
 
   @BeforeEach
   void init(){
-    solustion = new DongguoJobInterviewQuestion();
+  }
+
+  @Test
+  void display() {
+    Day07JobInterview.main();
+    assertTrue(true);
   }
 
   @Test
   void askQuestions() {
-    solustion.askQuestions();
+    Day07JobInterview.askQuestions();
     assertTrue(true);
 
   }
@@ -24,7 +28,7 @@ class Day07JobInterviewTest {
   void rob() {
     int[] inputs = {114,117,207,117,235,82,90,67,143,146,53,108,200,91,80,223,58,170,110,236,81,90,222,160,165,195,187,199,114,235,197,187,69,129,64,214,228,78,188,67,205,94,205,169,241,202,144,240};
     int expected = 4173;
-    int result = solustion.robHouseUsingLoop(inputs);
+    int result = Day07JobInterview.robHouseUsingLoop(inputs);
 
     assertEquals(expected, result);
   }
@@ -33,7 +37,7 @@ class Day07JobInterviewTest {
   void rob2() {
     int[] inputs = {114,117,207,117,235,82,90,67,143,146,53,108,200,91,80,223,58,170,110,236,81,90,222,160,165,195,187,199,114,235,197,187,69,129,64,214,228,78,188,67,205,94,205,169,241,202,144,240};
     int expected = 4173;
-    int result = solustion.robeHouseUsingRecursion(inputs);
+    int result = Day07JobInterview.robeHouseUsingRecursion(inputs);
 
     assertEquals(expected, result);
   }
