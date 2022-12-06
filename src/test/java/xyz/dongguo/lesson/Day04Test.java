@@ -17,11 +17,7 @@ class Day04Test {
     assertTrue(true);
   }
 
-  @Test
-  void printTable() {
-    Day04.printTable();
-    assertTrue(true);
-  }
+
 
   @Test
   void guessNumber() {

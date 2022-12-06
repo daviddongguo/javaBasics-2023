@@ -15,7 +15,7 @@ class Day06Test {
 
 
 
-  Day06 solutions = new Day06(System.in, System.out);
+  Day06 solutions = new Day06(System.out);
 
   @Test
   void printInput() {

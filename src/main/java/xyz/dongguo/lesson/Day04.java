@@ -14,7 +14,7 @@ public class Day04 {
   private Day04() {
   }
 
-  public static void calculateNumberUntilZeo() {
+  public static void calculateNumberUntilQuizzed() {
     int inputNumber = 0;
     int sum = 0;
     // 1st: False || True
@@ -71,43 +71,4 @@ public class Day04 {
     keyboard.close();
   }
 
-  public static void printTable() {
-    printWholeRow("_");
-    System.out.printf("%n");
-    printRowCenter("Name", "VIP", "Balance");
-    printWholeRow("-");
-    System.out.printf("%n");
-    printRowCenterContent("Dongguo", true, 1234.56D);
-    printRowCenterContent("Anonymous", false, 998855663.21D);
-    printRowCenterContent("Rich", false, -88995566.99D);
-    printWholeRow("_");
-    System.out.printf("%n");
-  }
-
-  private static void printWholeRow(String str) {
-    System.out.print(str.repeat(Day04.TABLE_WIDTH));
-  }
-
-  private static void printRowCenterContent(String name, boolean isVIP, double amount) {
-    printRowCenter(String.format("%.16s", name),
-       String.format("%-5b", isVIP),
-       String.format("%+,15.2f", amount));
-  }
-
-  private static void printRowCenter(String column1, String column2, String column3) {
-    int widthOfColumn1 = 16;
-    String pad1Left = " ".repeat((widthOfColumn1 - column1.length()) / 2);
-    String pad1Right = " ".repeat(widthOfColumn1 - column1.length() - pad1Left.length());
-    int widthOfColumn2 = 20;
-    String pad2Left = " ".repeat((widthOfColumn2 - column2.length()) / 2);
-    String pad2Right = " ".repeat(widthOfColumn2 - column2.length() - pad2Left.length());
-    int widthOfColumn3 = 20;
-    String pad3Left = " ".repeat((widthOfColumn3 - column3.length()) / 2);
-    String pad3Right = " ".repeat(widthOfColumn3 - column3.length() - pad3Left.length());
-    System.out.printf("|%s%s%s|%s%s%s|%s%s%s|%n",
-       pad1Left, column1, pad1Right,
-       pad2Left, column2, pad2Right,
-       pad3Left, column3, pad3Right
-    );
-  }
 }

@@ -1,33 +1,13 @@
 package xyz.dongguo.lesson;
 
-import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Scanner;
 
 public class Day06 {
 
-  private final Scanner scanner;
   private final PrintStream out;
 
-  public Day06(InputStream in, PrintStream out) {
-    scanner = new Scanner(in);
+  public Day06(PrintStream out) {
     this.out = out;
-  }
-
-  public void run() {
-    //    printInput();
-    //    printFirst50PrimeNumbers();
-    //    printOccurrenceOfLetter("   A*&^123aABB    c   ");
-    //    printOccurrenceOfLetter("PalindromeIgnoreNonAlphanumeric");
-    //    printPalindromes();
-    //    isPrime(23);
-  }
-
-  private void printPalindromes() {
-    String inputString = "M*adam";
-    out.printf("\"%s\" %s a palindrome%n", inputString, isPalindromes(inputString) ? "is" : "is not");
-    inputString = "lady";
-    out.printf("\"%s\" %s a palindrome%n", inputString, isPalindromes(inputString) ? "is" : "is not");
   }
 
   public boolean isPalindromes(String inputString) {
@@ -55,7 +35,7 @@ public class Day06 {
     return outString.toString();
   }
 
-  private void printOccurrenceOfLetter(String inputString) {
+  public void printOccurrenceOfLetter(String inputString) {
     out.printf("the number of occurrence of each letter in %s as below: %n", inputString);
     char c = 'A';
     for (int i : countOccurrenceOfLetter(inputString)) {
@@ -123,11 +103,6 @@ public class Day06 {
     }
 
     return 1;
-  }
-
-  public void printInput() {
-    out.printf("%nPlease enter any string: ");
-    out.println(scanner.nextLine());
   }
 
   public boolean isSumExisted(int[] array, int left, int right, int sum) {
