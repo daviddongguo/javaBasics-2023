@@ -1,4 +1,5 @@
 package xyz.dongguo.lesson;
+
 public class Dongguo {
 
   public static void main(String[] args) {
@@ -44,10 +45,10 @@ public class Dongguo {
 
     // the last one
     int lastItem = numbers[numbers.length - 1];
-    if(lastItem == preItem) {
+    if (lastItem == preItem) {
       occurrences++;
       System.out.printf(outputFormatter, preItem, occurrences);
-    }else{
+    } else {
       System.out.printf(outputFormatter, preItem, occurrences);
       System.out.printf(outputFormatter, lastItem, 1);
     }
@@ -72,11 +73,16 @@ public class Dongguo {
     return findLargestExclude(numberArray, largest);
   }
 
-  private static int findLargestExclude(int[] nums, int excludeValue) {
-    int largest = nums[0];
-    for (int i = 1; i < nums.length; i++) {
-      if (nums[i] > largest && nums[i] != excludeValue) {
-        largest = nums[i];
+  private static int findLargestExclude(int[] numbers, int excludeValue) {
+    int indexOfFirstNonExcludeValue = 0;
+    int largest = numbers[indexOfFirstNonExcludeValue];
+    while (largest == excludeValue) {
+      largest = numbers[indexOfFirstNonExcludeValue++];
+    }
+
+    for (int i = indexOfFirstNonExcludeValue; i < numbers.length; i++) {
+      if (numbers[i] > largest && numbers[i] != excludeValue) {
+        largest = numbers[i];
       }
     }
     return largest;
