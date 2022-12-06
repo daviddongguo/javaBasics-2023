@@ -6,11 +6,11 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class Day07JobInterviewTest {
-  Day07JobInterview solustion;
+  DongguoJobInterviewQuestion solustion;
 
   @BeforeEach
   void init(){
-    solustion = new Day07JobInterview();
+    solustion = new DongguoJobInterviewQuestion();
   }
 
   @Test
