@@ -1,38 +1,80 @@
 package xyz.dongguo.lesson;
 
+/**
+ * Months {@link #JANUARY} {@link #FEBRUARY} {@link #MARCH} {@link #APRIL} {@link #MARCH} {@link #JUNE} {@link #JULY}
+ * {@link #AUGUST} {@link #SEPTEMBER} {@link #OCTOBER} {@link #NOVEMBER} {@link #DECEMBER}
+ *
+ * @author dongguo
+ */
 public enum MonthsEnum {
-  JANUARY(1, 31),
-  FEBRUARY(2, 28),
-  MARCH(3, 31),
-  APRIL(4, 30),
-  MAY(5, 31),
-  JUNE(6, 30),
-  JULY(7, 31),
-  AUGUST(8, 31),
-  SEPTEMBER(9, 30),
-  OCTOBER(10, 31),
-  NOVEMBER(11, 30),
-  DECEMBER(12, 31);
+  /**
+   * January
+   */
+  JANUARY(0, 31),
+  /**
+   * February
+   */
+  FEBRUARY(1, 28),
+  /**
+   * March
+   */
+  MARCH(2, 31),
+  /**
+   * April
+   */
+  APRIL(3, 30),
+  /**
+   * May
+   */
+  MAY(4, 31),
+  /**
+   * June
+   */
+  JUNE(5, 30),
+  /**
+   * July
+   */
+  JULY(6, 31),
+  /**
+   * August
+   */
+  AUGUST(7, 31),
+  /**
+   * September
+   */
+  SEPTEMBER(8, 30),
+  /**
+   * October
+   */
+  OCTOBER(9, 31),
+  /**
+   * November
+   */
+  NOVEMBER(10, 30),
+  /**
+   * December
+   */
+  DECEMBER(11, 31);
 
-  private final int order;
+  private final int index;
   private final int days;
 
-  MonthsEnum(int order, int days) {
-    this.order = order;
+  MonthsEnum(int index, int days) {
+    this.index = index;
     this.days = days;
   }
 
   public static MonthsEnum getMonth(int order) {
     for (MonthsEnum month : MonthsEnum.values()) {
-      if (month.getOrder() == order) {
+      if (month.getIndex() == order) {
         return month;
       }
     }
     return null;
   }
 
-  public int getOrder() {
-    return order;
+  public int getIndex() {
+    return index;
   }
 
   public int getDays(boolean leapYear) {
@@ -46,7 +88,7 @@ public enum MonthsEnum {
     return this.days;
   }
 
-  public static boolean isLeap(int year){
-    return (year % 400 == 0) || (year % 4 == 0 && year % 100 !=0);
+  public static boolean isLeap(int year) {
+    return (year % 400 == 0) || (year % 4 == 0 && year % 100 != 0);
   }
 }
