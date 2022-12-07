@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson;
+package xyz.dongguo.lesson.basic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -7,6 +7,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import xyz.dongguo.lesson.basic.Day07;
 
 class Day07Test {
 

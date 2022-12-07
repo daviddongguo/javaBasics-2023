@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson;
+package xyz.dongguo.lesson.basic;
 
 import java.io.InputStream;
 import java.io.PrintStream;

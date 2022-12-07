@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson;
+package xyz.dongguo.lesson.basic;
 
 import static java.lang.System.in;
 import static java.lang.System.out;

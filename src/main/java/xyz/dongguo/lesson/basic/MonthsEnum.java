@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson;
+package xyz.dongguo.lesson.basic;
 
 /**
  * Months {@link #JANUARY} {@link #FEBRUARY} {@link #MARCH} {@link #APRIL} {@link #MARCH} {@link #JUNE} {@link #JULY}
