@@ -1,11 +1,18 @@
 package xyz.dongguo;
 
-import xyz.dongguo.lesson.Day05;
+import java.io.PrintStream;
 
+/**
+ * @author dongg
+ */
 public class Main {
 
   public static void main(String[] args) {
-    Day05.printMultiplicationTable();
+
+    PrintStream out = System.out;
+    out.printf("%n%40s%n", "Java Program started");
+
   }
 
 }
+

@@ -18,9 +18,9 @@ class MonthsEnumTest {
 
   @Test
   void getOrder() {
-    int order = 1;
+    int order = 0;
     for (MonthsEnum m : MonthsEnum.values()) {
-      assertEquals(order, m.getOrder());
+      assertEquals(order, m.getIndex());
       order++;
     }
   }
@@ -39,18 +39,15 @@ class MonthsEnumTest {
 
   @Test
   void getMonth() {
-    MonthsEnum jan = MonthsEnum.getMonth(1);
-    assert jan != null;
-    assertEquals(MonthsArray[0], jan.name());
-    for (int order = 1; order <= 12; order++) {
+    for (int order = 0; order <= 11; order++) {
       MonthsEnum m = MonthsEnum.getMonth(order);
       assert m != null;
-      assertEquals(MonthsArray[order - 1], m.name());
+      assertEquals(MonthsArray[order], m.name());
     }
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {-1, 0, 13})
+  @ValueSource(ints = {-1, 12, 13})
   void getMonthReturnNull(int order) {
     assertNull(MonthsEnum.getMonth(order));
   }
@@ -70,7 +67,7 @@ class MonthsEnumTest {
     assertEquals(MonthsEnum.JANUARY, jan);
     for (int i = 0; i < 12; i++) {
       MonthsEnum m = Enum.valueOf(MonthsEnum.class, MonthsArray[i]);
-      assertEquals(MonthsEnum.getMonth(i + 1), m);
+      assertEquals(MonthsEnum.getMonth(i), m);
     }
   }
 

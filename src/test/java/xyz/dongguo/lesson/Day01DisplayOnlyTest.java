@@ -1,5 +1,5 @@
 package xyz.dongguo.lesson;
 
-class Day03Test {
+class Day01DisplayOnlyTest {
 
 }

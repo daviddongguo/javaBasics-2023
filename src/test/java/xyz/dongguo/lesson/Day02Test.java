@@ -7,9 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.ValueSource;
-import xyz.dongguo.utility.ConsoleOutput;
 
 class Day02Test {
 
@@ -29,7 +26,7 @@ class Day02Test {
 
     assertEquals(expected, result);
 
-    ConsoleOutput.log(String.format("area of a "
+    System.out.printf(String.format("area of a "
        + "circle(radius: %f): %f", input, result));
   }
 
@@ -40,7 +37,7 @@ class Day02Test {
     double expected = input * 9 / 5 + 32;
 
     assertEquals(expected, result);
-    ConsoleOutput.log(String.format("%5.2f cel = %5.2f "
+    System.out.printf(String.format("%5.2f cel = %5.2f "
        + "fal", input, result));
   }
 
@@ -51,13 +48,13 @@ class Day02Test {
     String expected = "1 : 10";
 
     assertEquals(expected, result);
-    ConsoleOutput.log(String.format("%d seconds is  "
+    System.out.printf(String.format("%d seconds is  "
        + "%s", input, result));
   }
 
   @Test
   void getMontrealTime() {
-    ConsoleOutput.log(Day02.calculateMontrealTime((int) (currentTimeMillis() / 1000), -5));
+    System.out.printf(Day02.calculateMontrealTime((int) (currentTimeMillis() / 1000), -5));
     assertTrue(true);
   }
 
@@ -73,12 +70,12 @@ class Day02Test {
        interestRateMonthly, numberOfYear,
        paymentMonthly);
 
-    ConsoleOutput.log(String.format("monthlyPayment: "
+    System.out.printf(String.format("monthlyPayment: "
        + "%4.2f", paymentMonthly));
-    ConsoleOutput.log(String.format("total payment "
+    System.out.printf("total payment "
           + "in  %d months: %4.2f",
        numberOfYear * 12,
-       paymentMonthly * numberOfYear * 12));
+       paymentMonthly * numberOfYear * 12);
 
     assertEquals(calculatedInitialLoan, initialLoan);
   }
@@ -91,27 +88,9 @@ class Day02Test {
        (numberOfYear * 12)))) / interestRateMonthly;
   }
 
-  @ParameterizedTest
-  @ValueSource(ints = {1600, 2000, 1996, 2004, 2400})
-  void isLeapYearReturnTrueTest(int year) {
-    boolean expected = true;
-    boolean result = Day02.isLeapYear(year);
-
-    assertEquals(expected, result);
-  }
-
-  @ParameterizedTest
-  @ValueSource(ints = {1900, 1999, 2001, 2002, 2003, 2005, 2100})
-  void isLeapYearReturnFalseTest(int year) {
-    boolean expected = false;
-    boolean result = Day02.isLeapYear(year);
-
-    assertEquals(expected, result);
-  }
-
   @Test
   void getMonth() {
-    ConsoleOutput.log("" + Day02.getMonth(32, 2022));
+    System.out.printf("" + Day02.getMonth(32, 2022));
     assertTrue(true);
   }
 }
