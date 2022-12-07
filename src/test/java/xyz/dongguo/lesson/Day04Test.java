@@ -1,26 +1,25 @@
 package xyz.dongguo.lesson;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class Day04Test {
 
-  @Test
-  void calculateNumberUntilZeo() {
-    assertTrue(true);
+  private Day04 solution;
+
+  @BeforeEach
+  void init() {
+    solution = new Day04();
   }
 
   @Test
-  void testNextIntBound() {
-    Day04.testNextIntBound();
-    assertTrue(true);
-  }
+  void getClassName() {
+    String result = solution.getClassName();
+    String[] fullName = Day04.class.getName().split("\\.");
+    String expected = fullName[fullName.length - 1];
+    assertEquals(expected, result);
 
-
-
-  @Test
-  void guessNumber() {
-    assertTrue(true);
   }
 }

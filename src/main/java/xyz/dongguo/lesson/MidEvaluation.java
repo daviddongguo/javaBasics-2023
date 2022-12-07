@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class MidEvaluation {
 
   private static final int CONSOLE_WIDTH = 50;
-  private static final Scanner scanner = new Scanner(in);
+  private static final Scanner SCANNER = new Scanner(in);
 
   private MidEvaluation() {
   }
@@ -64,7 +64,7 @@ public class MidEvaluation {
   public static boolean requestCovertDirection(String infoMessage) {
     while (true) {
       print(infoMessage);
-      String inputStr = scanner.nextLine();
+      String inputStr = SCANNER.nextLine();
       if (inputStr.trim().charAt(0) == '1') {
         return true;
       } else if (inputStr.trim().charAt(0) == '0') {
@@ -173,7 +173,7 @@ public class MidEvaluation {
   private static String requestStringInput(String infoMessage) {
     while (true) {
       print(infoMessage);
-      String inputString = scanner.nextLine().trim();
+      String inputString = SCANNER.nextLine().trim();
       if (inputString.length() >= 1) {
         return inputString;
       }
@@ -200,12 +200,12 @@ public class MidEvaluation {
   }
 
   private static void printlnWithPad(String string, int leftPad) {
-    final String EMPTY_CHAR = " ";
-    println(EMPTY_CHAR.repeat(Math.max(-1, leftPad)) + string);
+    final String emptyChar = " ";
+    println(emptyChar.repeat(Math.max(-1, leftPad)) + string);
   }
 
   public static void pressEnterKeyToContinue() {
     println("Press Enter key to continue...");
-    scanner.nextLine();
+    SCANNER.nextLine();
   }
 }

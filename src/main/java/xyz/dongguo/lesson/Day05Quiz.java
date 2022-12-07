@@ -32,6 +32,46 @@ public class Day05Quiz {
     out.println(scanner.nextLine());
   }
 
+  public void calculateNumberUntilQuizzed() {
+    int inputNumber = 0;
+    int sum = 0;
+    // 1st: False || True
+    // 2st: True
+    // end: False || False
+    while (inputNumber != 0 || sum == 0) {
+      System.out.print("Enter an integer number to calculate(0 for quit) :");
+      inputNumber = scanner.nextInt();
+      sum += inputNumber;
+    }
+    System.out.printf("The sum is %d%n", sum);
+  }
+
+  public void guessRandomNumber() {
+    int rndNumber = random.nextInt(101);
+    guessNumber(rndNumber, System.in, System.out);
+  }
+
+  public void guessNumber(int expectedNumber, InputStream in, PrintStream out) {
+    out.printf("rand number is %d%n", expectedNumber);
+    int inputNumber;
+    out.print("Please enter a number between 0 and 100: ");
+    Scanner keyboard = new Scanner(in);
+    inputNumber = keyboard.nextInt();
+    while (true) {
+      if (expectedNumber == inputNumber) {
+        out.printf("You get it: %d", expectedNumber);
+        break;
+      }
+      if (expectedNumber < inputNumber) {
+        out.println("too high");
+      } else {
+        out.println("too low");
+      }
+      out.print("Please enter a new  number: ");
+      inputNumber = keyboard.nextInt();
+    }
+    keyboard.close();
+  }
 
   public void subtractionQuiz() {
     final int numberOfQuestions = 1;
@@ -48,7 +88,7 @@ public class Day05Quiz {
       int subtractionOfTwoNumber = numberA - numberB;
 
       String questionString = String.format("%d)  %d - %d = ", i + 1, numberA, numberB);
-      int userInput = xyz.dongguo.lesson.MidEvaluation.requestIntegerNumberInput(questionString);
+      int userInput = MidEvaluation.requestIntegerNumberInput(questionString);
 
       // log user answer in report string
       if (subtractionOfTwoNumber == userInput) {
@@ -80,7 +120,7 @@ public class Day05Quiz {
     int userInput = -1;
     while (additionOfTwoNumber != userInput) {
       String questionStr = String.format("%d + %d = ", numberA, numberB);
-      userInput = xyz.dongguo.lesson.MidEvaluation.requestIntegerNumberInput(questionStr);
+      userInput = MidEvaluation.requestIntegerNumberInput(questionStr);
       if (additionOfTwoNumber != userInput) {
         out.printf("%d + %d != %d, try again. %n", numberA, numberB, userInput);
       }
