@@ -2,6 +2,9 @@ package xyz.dongguo.lesson;
 
 import java.io.PrintStream;
 
+/**
+ * @author dongg
+ */
 public class Day06 {
 
   private final PrintStream out;
@@ -59,9 +62,10 @@ public class Day06 {
   }
 
   public void printFirst50PrimeNumbers() {
+    final int first50 = 50;
     int number = 1;
     int count = 1;
-    while (count <= 50) {
+    while (count <= first50) {
       if (isPrime(number)) {
         out.printf("%5d", number);
         if (count % 10 == 0) {
@@ -74,7 +78,9 @@ public class Day06 {
   }
 
   public boolean isPrime(int number) {
-    if (number == 1 || number == 2) {
+    int basePrime1 = 1;
+    int basePrime2 = 2;
+    if (number == basePrime1 || number == basePrime2) {
       return true;
     }
     int divisor = 2;

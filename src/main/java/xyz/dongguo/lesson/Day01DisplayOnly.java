@@ -70,6 +70,19 @@ public class Day01DisplayOnly {
     );
   }
 
+  public void printRandomHiFive() {
+    int randomNumber = random.nextInt(99);
+    String message = "";
+    final int divisorFive = 5;
+    final int divisorEven = 2;
+    if (randomNumber % divisorFive == 0) {
+      message = "HiFive";
+    } else if (randomNumber % divisorEven == 0) {
+      message = "HiEven";
+    }
+    out.printf("%d is %s%n", randomNumber, message);
+  }
+
   public void displayRandomBound() {
     final int timeOfTest = 500;
     for (int i = 0; i < timeOfTest; i++) {

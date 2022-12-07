@@ -1,5 +1,10 @@
 package xyz.dongguo.lesson;
 
+import java.util.Objects;
+
+/**
+ * @author dongg
+ */
 public class Day02 {
 
   private Day02() {
@@ -42,41 +47,33 @@ public class Day02 {
   }
 
   public static MonthsEnum getMonth(int days, int year) {
-    int[] daysOfMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (isLeapYear(year)) {
-      daysOfMonths[1] = 29;
-    }
+    boolean isLeap = MonthsEnum.isLeap(year);
 
     int indexOfMonth = 0;
-    int amountOfDays = daysOfMonths[0];
-    while (indexOfMonth < 11) {
+    int amountOfDays = Objects.requireNonNull(MonthsEnum.getMonth(0)).getDays();
+    final int lastIndexOfMonth = 11;
+    while (indexOfMonth < lastIndexOfMonth) {
       if (days <= amountOfDays) {
-        return MonthsEnum.getMonth(indexOfMonth + 1);
+        return MonthsEnum.getMonth(indexOfMonth);
       }
       indexOfMonth++;
-      amountOfDays += daysOfMonths[indexOfMonth];
+      amountOfDays += Objects.requireNonNull(MonthsEnum.getMonth(indexOfMonth)).getDays(isLeap);
     }
     return MonthsEnum.DECEMBER;
   }
 
-  public static boolean isLeapYear(int year) {
-    return year % 4 == 0 && year % 100 != 0 || year % 400 == 0;
-  }
-
   public static int getDayOfMonth(int days, int year) {
     int dayOfMonth = days;
-    int[] daysOfMonths = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    if (isLeapYear(year)) {
-      daysOfMonths[1] = 29;
-    }
+    boolean isLeap = MonthsEnum.isLeap(year);
 
     int indexOfMonth = 0;
-    while (indexOfMonth < 11) {
-      if (dayOfMonth <= daysOfMonths[indexOfMonth]) {
+    final int lastIndexOfMonth = 11;
+    while (indexOfMonth < lastIndexOfMonth) {
+      if (dayOfMonth <= Objects.requireNonNull(MonthsEnum.getMonth(indexOfMonth)).getDays(isLeap)) {
         return dayOfMonth;
       }
       indexOfMonth++;
-      dayOfMonth -= daysOfMonths[indexOfMonth];
+      dayOfMonth -= Objects.requireNonNull(MonthsEnum.getMonth(indexOfMonth)).getDays(isLeap);
     }
     return dayOfMonth;
   }
