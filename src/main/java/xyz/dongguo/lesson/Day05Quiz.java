@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Demo class
@@ -15,12 +16,12 @@ public class Day05Quiz {
 
   private final PrintStream out;
   private final Scanner scanner;
-  private final Random random;
+  private final ThreadLocalRandom random;
 
   public Day05Quiz(PrintStream out, InputStream in) {
     this.out = out;
     this.scanner = new Scanner(in);
-    this.random = new Random();
+    this.random = ThreadLocalRandom.current();
   }
 
   public Random getRandom() {
