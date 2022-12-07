@@ -14,8 +14,8 @@ public class Day01DisplayOnly {
 
   private final PrintStream out;
   private final ThreadLocalRandom random;
-  static final String FLOAT_NUMBER_FORMATTER = "%20.14f";
-  static final String SUM_OF_SERIES = "%n\t\t\t0.01 + 0.02 + ... + 1.00 = ";
+  private static final String FLOAT_NUMBER_FORMATTER = "%20.14f";
+  private static final String SUM_OF_SERIES = "%n\t\t\t0.01 + 0.02 + ... + 1.00 = ";
 
   public Day01DisplayOnly(PrintStream out) {
     this.out = out;
@@ -25,30 +25,31 @@ public class Day01DisplayOnly {
   public Random getRandom() {
     return this.random;
   }
-  public void printTable(){
+
+  public void printTable() {
     printTable(60);
   }
 
   public void printTable(int width) {
     printWholeRow("_", width);
-    System.out.printf("%n");
+    out.printf("%n");
     printRowCenter("Name", "VIP", "Balance");
     printWholeRow("-", width);
-    System.out.printf("%n");
+    out.printf("%n");
     printRowCenterContent("Dongguo", true, 1234.56D);
     printRowCenterContent("Anonymous", false, 998855663.21D);
     printRowCenterContent("Rich", false, -88995566.99D);
     printWholeRow("_", width);
-    System.out.printf("%n");
+    out.printf("%n");
   }
 
   private void printWholeRow(String str, int width) {
-    System.out.print(str.repeat(width));
+    out.print(str.repeat(width));
   }
 
-  private void printRowCenterContent(String name, boolean isVIP, double amount) {
+  private void printRowCenterContent(String name, boolean isVip, double amount) {
     printRowCenter(String.format("%.16s", name),
-       String.format("%-5b", isVIP),
+       String.format("%-5b", isVip),
        String.format("%+,15.2f", amount));
   }
 
@@ -62,11 +63,28 @@ public class Day01DisplayOnly {
     int widthOfColumn3 = 20;
     String pad3Left = " ".repeat((widthOfColumn3 - column3.length()) / 2);
     String pad3Right = " ".repeat(widthOfColumn3 - column3.length() - pad3Left.length());
-    System.out.printf("|%s%s%s|%s%s%s|%s%s%s|%n",
+    out.printf("|%s%s%s|%s%s%s|%s%s%s|%n",
        pad1Left, column1, pad1Right,
        pad2Left, column2, pad2Right,
        pad3Left, column3, pad3Right
     );
+  }
+
+  public void displayRandomBound() {
+    final int timeOfTest = 500;
+    for (int i = 0; i < timeOfTest; i++) {
+      int n = random.nextInt(101);
+      out.printf("%4d ", n);
+      if (i % 20 == 0) {
+        out.printf("%n");
+      }
+      if (n == 0) {
+        out.printf("%n");
+      }
+      if (n == 100) {
+        out.printf("%n");
+      }
+    }
   }
 
   public void printSumOfNumberSeries() {
@@ -82,36 +100,6 @@ public class Day01DisplayOnly {
     out.printf(SUM_OF_SERIES);
     out.printf(FLOAT_NUMBER_FORMATTER, (float) sum);
     out.printf("%n");
-  }
-
-  public void printSumOfDoubleNumberSeries() {
-    double sum = 0.0D;
-    double initialValue = 0.01D;
-    double step = 0.01D;
-    double finalValue = 1.0D;
-    for (double i = initialValue; i <= finalValue; i += step) {
-      sum += i;
-      out.printf(FLOAT_NUMBER_FORMATTER, sum);
-      if ((int) (i * 100 + 0.5) % 10 == 0) {
-        out.printf("%n");
-      }
-    }
-    out.printf(SUM_OF_SERIES);
-    out.printf(FLOAT_NUMBER_FORMATTER, sum);
-    out.printf("%n");
-
-    sum = 0.0F;
-    int sumOfInteger = 0;
-    int j = 1;
-    for (double i = initialValue; i <= finalValue; i += step) {
-      sum += i;
-      sumOfInteger += j;
-      out.printf(FLOAT_NUMBER_FORMATTER, (sum - Float.parseFloat(String.valueOf(sumOfInteger)) / 100) * 1000000);
-      if ((int) (i * 100 + 0.5) % 10 == 0) {
-        out.printf("%n");
-      }
-      j++;
-    }
   }
 
   public void printSumOfFloatNumberSeries() {
