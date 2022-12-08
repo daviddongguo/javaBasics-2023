@@ -1,5 +1,6 @@
 package xyz.dongguo.lesson.objectoriented;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
@@ -9,14 +10,14 @@ import java.time.format.DateTimeFormatter;
  */
 public class Student {
 
-  public final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
   private String id;
   private String name;
   private boolean canSpeakFrench = false;
   private int age;
   private boolean isRealAge = false;
-  private LocalDate birthday;
+  private LocalDate birthDate;
 
   private Student() {
   }
@@ -35,12 +36,15 @@ public class Student {
     System.out.println(student2);
     System.out.println(student3);
 
-    student1.setBirthday("2001-02-28");
+    student1.setAge(100);
+    student1.setBirthDate("2001-02-28");
     student1.setCanSpeakFrench(true);
     student1.setCanSpeakFrench(false);
     student1.setAge(100);
 
-    student2.setAge(20);
+    student2.setAge(50);
+    student2.setAge(155);
+    student2.setBirthDate("2001-02-29");
 
     System.out.println(student1);
     System.out.println(student2);
@@ -59,24 +63,15 @@ public class Student {
     }
   }
 
-  public String getBirthday() {
+  public String getBirthDate() {
     if (this.isRealAge) {
-      return this.birthday.format(dateTimeFormatter);
+      return this.birthDate.format(DATE_TIME_FORMATTER);
     }
     return "";
   }
 
-  public void setBirthday(String birthdayString) {
-    setBirthday(birthdayString, true);
-  }
-
-  private void setBirthday(String birthdayString, boolean isRealBirthday) {
-    this.birthday = LocalDate.parse(birthdayString);
-    LocalDate currentDate = LocalDate.now();
-
-    this.age = Period.between(birthday, currentDate).getYears();
-
-    this.isRealAge = isRealBirthday;
+  public void setBirthDate(String birthdateStr) {
+    setBirthDate(birthdateStr, true);
   }
 
   public boolean getCanSpeakFrench() {
@@ -101,10 +96,24 @@ public class Student {
     if (this.isRealAge) {
       return;
     }
-    int currenYear = LocalDate.now().getYear();
-    int birthYear = currenYear - age;
-    String fakeBirthdate = birthYear + "-01-01";
-    setBirthday(fakeBirthdate, false);
+    boolean isValidAge = age >= 0 && age <= 150;
+    if (isValidAge) {
+      int currenYear = LocalDate.now().getYear();
+      int birthYear = currenYear - age;
+      String fakeBirthdate = birthYear + "-01-01";
+      setBirthDate(fakeBirthdate, false);
+    }
+  }
+
+  private void setBirthDate(String birthDateStr, boolean isRealBirthdate) {
+    try {
+      this.birthDate = LocalDate.parse(birthDateStr);
+      LocalDate currentDate = LocalDate.now();
+      this.age = Period.between(birthDate, currentDate).getYears();
+      this.isRealAge = isRealBirthdate;
+    } catch (DateTimeException ex) {
+      System.err.println(ex.getMessage());
+    }
   }
 
   public String getId() {
@@ -129,7 +138,13 @@ public class Student {
 
   @Override
   public String toString() {
-    return "Student{" + ", id='" + id + '\'' + ", name='" + name + '\'' + ", canSpeakFrench=" + canSpeakFrench
-       + ", age=" + age + ", isRealAge=" + isRealAge + ", birthday=" + birthday + '}';
+    return "Student{" +
+       "id='" + id + '\'' +
+       ", name='" + name + '\'' +
+       ", canSpeakFrench=" + canSpeakFrench +
+       ", age=" + age +
+       ", isRealAge=" + isRealAge +
+       ", birthDate=" + birthDate +
+       '}';
   }
 }
