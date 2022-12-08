@@ -1,10 +1,12 @@
 package xyz.dongguo.lesson.exception;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * @author map
+ */
+
 @Getter
-@AllArgsConstructor
 public enum ResponseEnum implements BusinessExceptionAssert {
 
   /**
@@ -14,28 +16,29 @@ public enum ResponseEnum implements BusinessExceptionAssert {
   /**
    * Licence not found
    */
-  LICENCE_NOT_FOUND(7002, "Licence not found.")
-  ;
+  LICENCE_NOT_FOUND(7002, "Licence not found.");
 
   /**
+   *
    */
-  private int code;
+  private final int code;
   /**
+   *
    */
-  private String message;
+  private final String message;
 
-  ResponseEnum(int code, String message){
+  ResponseEnum(int code, String message) {
     this.code = code;
     this.message = message;
   }
 
   @Override
-  public int getCode(){
+  public int getCode() {
     return this.code;
   }
 
   @Override
-  public String getMessage(){
+  public String getMessage() {
     return this.message;
   }
 }
