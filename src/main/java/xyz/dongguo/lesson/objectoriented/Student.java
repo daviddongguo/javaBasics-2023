@@ -63,6 +63,18 @@ public class Student {
     }
   }
 
+  public String getName() {
+    return this.name;
+  }
+
+  public void setName(String name) {
+    if (name != null && !name.trim().isEmpty()) {
+      this.name = name;
+      return;
+    }
+    throw new IllegalArgumentException("Invalid name");
+  }
+
   public String getBirthDate() {
     if (this.isRealAge) {
       return this.birthDate.format(DATE_TIME_FORMATTER);
@@ -122,18 +134,6 @@ public class Student {
 
   public void setId(String id) {
     this.id = id;
-  }
-
-  public String getName() {
-    return this.name;
-  }
-
-  public void setName(String name) {
-    if (name != null && !name.trim().isEmpty()) {
-      this.name = name;
-      return;
-    }
-    throw new IllegalArgumentException("Invalid name");
   }
 
   @Override
