@@ -33,18 +33,22 @@ public class Person implements Jsonable {
     Phone phone1 = new Phone("5145131234");
     Phone phone2 = new Phone("5145131212");
 
-    Person person1 = new Person("Alice", phone1, address);
-    Person kid1 = new Person("Bob", null, address);
-    Person kid2 = new Person("Tom", phone2, address);
-    person1.setAge(45);
-    kid1.setAge(22);
-    kid2.setAge(1);
+    Person personAlice = new Person("Alice", phone1, address);
+    Person kidBob = new Person("Bob", null, address);
+    Person kidTom = new Person("Tom", phone2, address);
+    personAlice.setAge(-5);
+    personAlice.setBirthDate("1980-07-21");
+    kidBob.setAge(22);
+    kidTom.setAge(1);
+    kidTom.setBirthDate("2001-02-29");
 
-    person1.addKid(kid1);
-    person1.addKid(kid2);
+    personAlice.addKid(kidBob);
+    personAlice.addKid(kidTom);
 
-    printAllJson(person1);
-    printPrettyJson(person1);
+    printAllJson(personAlice);
+    printPrettyJson(personAlice);
+    System.out.printf("%s birthdate is %s, age is %d%n", personAlice.name, personAlice.getBirthDate(),
+       personAlice.getAge());
 
   }
 
@@ -74,12 +78,6 @@ public class Person implements Jsonable {
     } catch (DateTimeException ex) {
       System.err.println(ex.getMessage());
     }
-  }
-
-  @Override
-  public String toString() {
-    return "Person{" + "name='" + name + '\'' + ", phone=" + phone + ", address=" + address + ", kids=" + kids
-       + ", birthDate=" + birthDate + '}';
   }
 
   @Override
@@ -140,6 +138,8 @@ public class Person implements Jsonable {
       int birthYear = currenYear - age;
       String fakeBirthdate = birthYear + "-01-01";
       setBirthDate(fakeBirthdate);
+      return;
     }
+    System.err.printf("age(%d) must be larger than 0 and small than 150%n", age);
   }
 }
