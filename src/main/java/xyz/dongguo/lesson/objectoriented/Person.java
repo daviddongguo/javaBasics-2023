@@ -1,5 +1,6 @@
 package xyz.dongguo.lesson.objectoriented;
 
+import com.google.gson.Gson;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
@@ -37,16 +38,24 @@ public class Person implements Jsonable {
     Person kid2 = new Person("Tom", phone2, address);
     person1.setAge(45);
     kid1.setAge(22);
-    kid2.setAge(4);
+    kid2.setAge(1);
 
     person1.addKid(kid1);
     person1.addKid(kid2);
 
-    printJson(person1);
+    printAllJson(person1);
+    printPrettyJson(person1);
 
   }
 
-  private static void printJson(Jsonable obj) {
+  private static void printAllJson(Person person1) {
+    Gson googleJson = new Gson();
+    JSONObject json = new JSONObject(googleJson.toJson(person1));
+    System.out.println(json.toString(2));
+
+  }
+
+  private static void printPrettyJson(Jsonable obj) {
     JSONObject json = new JSONObject(obj.toJsonString());
     System.out.println(json.toString(2));
   }
@@ -59,8 +68,12 @@ public class Person implements Jsonable {
     return this.birthDate.format(DATE_TIME_FORMATTER);
   }
 
-  public void setBirthDate(String birthdateStr) {
-    setBirthDate(birthdateStr, true);
+  private void setBirthDate(String birthDateStr) {
+    try {
+      this.birthDate = LocalDate.parse(birthDateStr);
+    } catch (DateTimeException ex) {
+      System.err.println(ex.getMessage());
+    }
   }
 
   @Override
@@ -84,7 +97,8 @@ public class Person implements Jsonable {
       phoneStr = subJsonBody(phone.toJsonString()) + " ,";
     }
     String jsonBody =
-       String.format("\"name\" :  \"%s\" ,", name) + String.format("%s", addressStr) + String.format("%s", phoneStr)
+       String.format("\"name\" :  \"%s\" ,", name) + String.format("\"age\" :  %d ,", getAge()) + String.format("%s",
+          addressStr) + String.format("%s", phoneStr)
           + String.format("%s", kidsStr);
     return String.format("{%s}", jsonBody);
   }
@@ -125,15 +139,7 @@ public class Person implements Jsonable {
       int currenYear = LocalDate.now().getYear();
       int birthYear = currenYear - age;
       String fakeBirthdate = birthYear + "-01-01";
-      setBirthDate(fakeBirthdate, false);
-    }
-  }
-
-  private void setBirthDate(String birthDateStr, boolean isRealBirthdate) {
-    try {
-      this.birthDate = LocalDate.parse(birthDateStr);
-    } catch (DateTimeException ex) {
-      System.err.println(ex.getMessage());
+      setBirthDate(fakeBirthdate);
     }
   }
 }
