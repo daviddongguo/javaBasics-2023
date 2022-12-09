@@ -7,6 +7,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import org.json.JSONObject;
 
 /**
@@ -15,9 +16,13 @@ import org.json.JSONObject;
 public class Person implements Jsonable {
 
   public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-  private final String name;
+  public static final String ALPHABET_NUMBER = "abcdefghijklmnopqrstuvwxyz0123456789";
+  public static final int LENGTH_ID = 50;
+
+  private final String id = generateRandomString(new Random(), LENGTH_ID);
   Address address;
   List<Person> kids = new ArrayList<>();
+  private String name;
   private SexEnum gender;
   private Phone phone;
   private LocalDate birthDate;
@@ -34,13 +39,17 @@ public class Person implements Jsonable {
   }
 
   public Person(String name) {
-    this.name = name;
+    if (isValidName(name)) {
+      this.setName(name);
+    }
+  }
+
+  private boolean isValidName(String name) {
+    return name != null && !name.isEmpty();
   }
 
   /**
    * for debugging
-   *
-   * @param args no args
    */
   public static void main(String[] args) {
     List<Person> roster = Person.createRoster();
@@ -97,22 +106,38 @@ public class Person implements Jsonable {
     return roster;
   }
 
+  public static String generateRandomString(Random random, int length) {
+    StringBuilder string = new StringBuilder();
+    for (int i = 0; i < length; i++) {
+      int randomIndex = random.nextInt(ALPHABET_NUMBER.length());
+      string.append(ALPHABET_NUMBER.charAt(randomIndex));
+    }
+    return string.toString();
+  }
+
+  public String getId() {
+    return id;
+  }
+
   public void addKid(Person kid) {
     kids.add(kid);
   }
 
   public String getBirthDate() {
+    if (this.birthDate == null) {
+      return null;
+    }
     return this.birthDate.format(DATE_TIME_FORMATTER);
   }
 
-  public void setBirthDate(LocalDate birthDate) {
+  private void setBirthDate(LocalDate birthDate) {
     if (LocalDate.now().isBefore(birthDate)) {
       return;
     }
     this.birthDate = birthDate;
   }
 
-  private void setBirthDate(String birthDateStr) {
+  public void setBirthDate(String birthDateStr) {
     try {
       setBirthDate(LocalDate.parse(birthDateStr));
     } catch (DateTimeException ex) {
@@ -131,6 +156,10 @@ public class Person implements Jsonable {
     return this.name;
   }
 
+  private void setName(String name) {
+    this.name = name;
+  }
+
   public Address getAddress() {
     return address;
   }
@@ -143,10 +172,6 @@ public class Person implements Jsonable {
     return kids;
   }
 
-  public void setKids(List<Person> kids) {
-    this.kids = kids;
-  }
-
   public SexEnum getGender() {
     return gender;
   }
@@ -155,12 +180,26 @@ public class Person implements Jsonable {
     this.gender = gender;
   }
 
-  public Phone getPhone() {
-    return phone;
+  public String getPhone() {
+    if (this.phone == null) {
+      return "";
+    }
+    return this.phone.number;
   }
 
-  public void setPhone(Phone phone) {
-    this.phone = phone;
+  public void setPhone(String phoneNumber) {
+    String standardPhoneNumber = phoneNumber.trim();
+    boolean isValidPhoneNumber = true;
+    //TODO: valid phone number
+    char firstNumber = standardPhoneNumber.charAt(0);
+    char startNumber = '0';
+    char endOfNumber = '9';
+    if (firstNumber < startNumber || firstNumber > endOfNumber) {
+      isValidPhoneNumber = false;
+    }
+    if (isValidPhoneNumber) {
+      this.phone = new Phone(standardPhoneNumber);
+    }
   }
 
   @Override
@@ -185,6 +224,9 @@ public class Person implements Jsonable {
   }
 
   public int getAge() {
+    if (this.birthDate == null) {
+      return -1;
+    }
     LocalDate currentDate = LocalDate.now();
     return Period.between(birthDate, currentDate).getYears();
   }
