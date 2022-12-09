@@ -32,7 +32,7 @@ public class Address implements Jsonable {
        .stream()
        .filter(address -> address.street.equals(sainteAnne))
        .collect(Collectors.toList());
-    newList.forEach(Person::printPrettyJson);
+    newList.forEach(Utility::printPrettyJson);
     long count = addressList
        .stream()
        .filter(address -> address.street.equals(sainteAnne))

@@ -1,5 +1,7 @@
 package xyz.dongguo.lesson.objectoriented;
 
+import static xyz.dongguo.lesson.objectoriented.Utility.printPrettyJson;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,7 +23,7 @@ public class Phone implements Jsonable {
     String startWith514 = "514";
     for (Phone phone : list) {
       if (phone.number.startsWith(startWith514)) {
-        Person.printPrettyJson(phone);
+        printPrettyJson(phone);
       }
     }
   }

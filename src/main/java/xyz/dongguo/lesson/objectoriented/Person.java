@@ -1,6 +1,8 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import com.google.gson.Gson;
+import static xyz.dongguo.lesson.objectoriented.Utility.printAllJson;
+import static xyz.dongguo.lesson.objectoriented.Utility.printPrettyJson;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.Period;
@@ -9,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Random;
-import org.json.JSONObject;
 
 /**
  * @author dongguo
@@ -83,17 +84,6 @@ public class Person implements Jsonable {
     System.out.printf("%s %s order than %s%n", kidTom.getName(), kidTom.isOrderThan(kidBob) ? "is" : "is not",
        kidBob.getName());
 
-  }
-
-  public static void printAllJson(Object object) {
-    Gson googleJson = new Gson();
-    JSONObject json = new JSONObject(googleJson.toJson(object));
-    System.out.println(json.toString(2));
-  }
-
-  public static void printPrettyJson(Jsonable obj) {
-    JSONObject json = new JSONObject(obj.toJsonString());
-    System.out.println(json.toString(2));
   }
 
   /**
