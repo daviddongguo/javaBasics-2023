@@ -186,4 +186,20 @@ class PersonTest {
     person.setAge(age);
     assertEquals(age, person.getAge());
   }
+
+  @Test
+  void testEquals() {
+    Person duplicatedPerson = roster.get(0);
+    duplicatedPerson.setBirthDate("2022-10-01");
+    Person kid1 = roster.get(1);
+    assertTrue(person.equals(duplicatedPerson));
+    assertFalse(person.equals(kid1));
+  }
+
+  @Test
+  void testHashCode() {
+    int hasCode = person.hashCode();
+    assertTrue(true);
+  }
+
 }

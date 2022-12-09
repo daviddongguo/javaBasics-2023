@@ -7,6 +7,7 @@ import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import org.json.JSONObject;
 
@@ -39,11 +40,18 @@ public class Person implements Jsonable {
   }
 
   public Person(String name) {
+    //TODO: repeated code
     if (isValidName(name)) {
       this.setName(name);
     }
   }
 
+  /**
+   * Simple check if the name is null or empty
+   *
+   * @param name a string
+   * @return true if the string is valid, otherwise false
+   */
   private boolean isValidName(String name) {
     return name != null && !name.isEmpty();
   }
@@ -156,8 +164,15 @@ public class Person implements Jsonable {
     return this.name;
   }
 
+  /**
+   * Firstly check the name, if it is valid, change name
+   *
+   * @param name A String represent person name
+   */
   private void setName(String name) {
-    this.name = name;
+    if (isValidName(name)) {
+      this.name = name;
+    }
   }
 
   public Address getAddress() {
@@ -268,4 +283,19 @@ public class Person implements Jsonable {
     return jsonStr.substring(1, size - 1);
   }
 
+  @Override
+  public boolean equals(Object personToEqual) {
+    if (this == personToEqual) {
+      return true;
+    }
+    if (personToEqual == null || getClass() != personToEqual.getClass()) {
+      return false;
+    }
+    return id.equals(((Person) personToEqual).id);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
 }
