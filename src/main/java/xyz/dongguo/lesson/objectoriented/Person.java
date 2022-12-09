@@ -85,13 +85,13 @@ public class Person implements Jsonable {
 
   }
 
-  private static void printAllJson(Person person) {
+  public static void printAllJson(Object object) {
     Gson googleJson = new Gson();
-    JSONObject json = new JSONObject(googleJson.toJson(person));
+    JSONObject json = new JSONObject(googleJson.toJson(object));
     System.out.println(json.toString(2));
   }
 
-  private static void printPrettyJson(Jsonable obj) {
+  public static void printPrettyJson(Jsonable obj) {
     JSONObject json = new JSONObject(obj.toJsonString());
     System.out.println(json.toString(2));
   }
@@ -204,17 +204,20 @@ public class Person implements Jsonable {
 
   public void setPhone(String phoneNumber) {
     String standardPhoneNumber = phoneNumber.trim();
-    boolean isValidPhoneNumber = true;
-    //TODO: valid phone number
-    char firstNumber = standardPhoneNumber.charAt(0);
-    char startNumber = '0';
-    char endOfNumber = '9';
-    if (firstNumber < startNumber || firstNumber > endOfNumber) {
-      isValidPhoneNumber = false;
-    }
-    if (isValidPhoneNumber) {
+    if (isValidPhoneNumber(standardPhoneNumber)) {
       this.phone = new Phone(standardPhoneNumber);
     }
+  }
+
+  public boolean isValidPhoneNumber(String phoneNumber) {
+    char startNumber = '0';
+    char endOfNumber = '9';
+    for (char c : phoneNumber.toCharArray()) {
+      if (c < startNumber || c > endOfNumber) {
+        return false;
+      }
+    }
+    return true;
   }
 
   @Override

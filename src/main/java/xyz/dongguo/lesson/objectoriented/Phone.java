@@ -1,5 +1,7 @@
 package xyz.dongguo.lesson.objectoriented;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -14,13 +16,23 @@ public class Phone {
     this.number = number;
   }
 
+  public static List<Phone> createPhoneList() {
+    return new ArrayList<>(List.of(
+       new Phone("514813001"),
+       new Phone("514813022"),
+       new Phone("514813033"),
+       new Phone("514814043"),
+       new Phone("514813055"),
+       new Phone("5148867788")));
+  }
+
   public String toJsonString() {
     return String.format("{\"phoneNumber\" :  \"%s\"}", number);
   }
 
   @Override
-  public String toString() {
-    return toJsonString();
+  public int hashCode() {
+    return Objects.hash(number, isActive);
   }
 
   @Override
@@ -36,7 +48,10 @@ public class Phone {
   }
 
   @Override
-  public int hashCode() {
-    return Objects.hash(number, isActive);
+  public String toString() {
+    return "Phone{" +
+       "number='" + number + '\'' +
+       ", isActive=" + isActive +
+       '}';
   }
 }
