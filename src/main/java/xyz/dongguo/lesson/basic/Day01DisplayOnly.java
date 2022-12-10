@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson;
+package xyz.dongguo.lesson.basic;
 
 import java.io.PrintStream;
 import java.util.Random;

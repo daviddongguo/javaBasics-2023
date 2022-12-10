@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson;
+package xyz.dongguo.lesson.basic;
 
 import static java.lang.System.currentTimeMillis;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import xyz.dongguo.lesson.basic.Day02;
 
 class Day02Test {
 

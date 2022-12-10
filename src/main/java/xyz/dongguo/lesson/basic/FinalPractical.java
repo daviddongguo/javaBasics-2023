@@ -1,5 +1,5 @@
 
-package xyz.dongguo.lesson;
+package xyz.dongguo.lesson.basic;
 
 /**
  * @author dongg

@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson;
+package xyz.dongguo.lesson.basic;
 
 import java.util.Random;
 
@@ -89,7 +89,7 @@ public class Day05 {
       int subtractionOfTwoNumber = numberA - numberB;
 
       String questionString = String.format("%d)  %d - %d = ", i + 1, numberA, numberB);
-      int userInput = xyz.dongguo.lesson.MidEvaluation.requestIntegerNumberInput(questionString);
+      int userInput = MidEvaluation.requestIntegerNumberInput(questionString);
 
       // log user answer in report string
       if (subtractionOfTwoNumber == userInput) {
@@ -119,7 +119,7 @@ public class Day05 {
     int userInput = -1;
     while (additionOfTwoNumber != userInput) {
       String questionStr = String.format("%d + %d = ", numberA, numberB);
-      userInput = xyz.dongguo.lesson.MidEvaluation.requestIntegerNumberInput(questionStr);
+      userInput = MidEvaluation.requestIntegerNumberInput(questionStr);
       if (additionOfTwoNumber != userInput) {
         System.out.printf("%d + %d != %d, try again. %n", numberA, numberB, userInput);
       }
