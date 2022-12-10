@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson.exception;
+package xyz.dongguo.exception;
 
 import java.text.MessageFormat;
 
