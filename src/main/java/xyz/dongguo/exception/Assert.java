@@ -1,7 +1,7 @@
-package xyz.dongguo.lesson.exception;
+package xyz.dongguo.exception;
 
 /**
- * @author dongg
+ * @author dongguo
  */
 public interface Assert {
 
