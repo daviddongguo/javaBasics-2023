@@ -1,14 +1,19 @@
-package xyz.dongguo.lesson.objectoriented;
+package xyz.dongguo;
 
 import com.google.gson.Gson;
 import org.json.JSONObject;
+import xyz.dongguo.lesson.objectoriented.Jsonable;
 
 /**
+ * symotion-overwin-f2)
+ *
  * @author dongguo
  */
-public class Utility {
+public class Json {
 
-  private Utility() {
+  public static final String JSON_PATTERN_FORMATTER = "{\"%S\" : %S}";
+
+  private Json() {
   }
 
   /**
