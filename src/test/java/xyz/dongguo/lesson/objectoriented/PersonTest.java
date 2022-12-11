@@ -5,25 +5,26 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import java.util.Random;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class PersonTest {
 
-  private final Random random = new Random();
   private String randomString;
   private List<Person> roster;
   private Person person;
+  private String name;
 
   @BeforeEach
   void initEach() {
-    randomString = Person.generateRandomString(random, Person.LENGTH_ID);
-    roster = Person.createRoster();
+    randomString = "CapitalFirstName";
+    roster = Person.createPeopleList();
     person = roster.get(0);
+    name = person.getName();
   }
 
   //  @Disabled("just show the compile error")
@@ -43,9 +44,21 @@ class PersonTest {
   }
 
   @Test
-  void createPersonWithDefaultValue() {
-    Person personWithDefaultValue = new Person(randomString);
+  void createPersonWithInvalidName() {
+    String emptyString = "";
+    assertThrows(IllegalArgumentException.class, () -> new Person(emptyString));
 
+  }
+
+  @Test
+  void createPersonOnlyWithName() {
+    Person personWithDefaultValue = null;
+    try {
+      personWithDefaultValue = new Person(randomString);
+    } catch (IllegalArgumentException e) {
+      System.err.println(e.getMessage());
+    }
+    assertNotNull(personWithDefaultValue);
     assertNotNull(personWithDefaultValue.getId());
     assertNotNull(personWithDefaultValue.getName());
     assertNotNull(personWithDefaultValue.getKids());
@@ -81,7 +94,6 @@ class PersonTest {
 
   @Test
   void getBirthDate() {
-    Person person = new Person(randomString);
     assertNull(person.getBirthDate());
     person.setAge(50);
     assertNotNull(person.getBirthDate());
@@ -112,8 +124,7 @@ class PersonTest {
 
   @Test
   void getName() {
-    Person person = new Person(randomString);
-    assertEquals(randomString, person.getName());
+    assertEquals(name, person.getName());
   }
 
   @Test
@@ -156,7 +167,7 @@ class PersonTest {
 
   @Test
   void setPhone() {
-    String phoneString = "514813888";
+    String phoneString = "5148138888";
     assertNotNull(person.getPhone());
     person.setPhone(phoneString);
     assertEquals(phoneString, person.getPhone());
@@ -176,7 +187,6 @@ class PersonTest {
 
   @Test
   void getAge() {
-    int age = person.getAge();
     assertEquals(-1, person.getAge());
   }
 
@@ -192,8 +202,8 @@ class PersonTest {
     Person duplicatedPerson = roster.get(0);
     duplicatedPerson.setBirthDate("2022-10-01");
     Person kid1 = roster.get(1);
-    assertTrue(person.equals(duplicatedPerson));
-    assertFalse(person.equals(kid1));
+    assertEquals(person, duplicatedPerson);
+    assertNotEquals(person, kid1);
   }
 
   @Test

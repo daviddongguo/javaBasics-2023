@@ -1,7 +1,11 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import static xyz.dongguo.lesson.objectoriented.Utility.printAllJson;
-import static xyz.dongguo.lesson.objectoriented.Utility.printPrettyJson;
+
+
+import static xyz.dongguo.Json.generateRandomString;
+import static xyz.dongguo.Json.isNotNullAndNotEmpty;
+import static xyz.dongguo.Json.printAllJson;
+import static xyz.dongguo.Json.printPrettyJson;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -13,55 +17,49 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
+ * The Person class represents a person.
+ *
  * @author dongguo
+ * @version 1.2
  */
 public class Person implements Jsonable {
 
   public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-  public static final String ALPHABET_NUMBER = "abcdefghijklmnopqrstuvwxyz0123456789";
+  /**
+   * The start of the string matches any uppercase letter,
+   * no more than 20 characters
+   */
+  public static final String ONE_WORD_NAME_REGEX = "^[a-z]{1,19}$";
   public static final int LENGTH_ID = 50;
 
   private final String id = generateRandomString(new Random(), LENGTH_ID);
-  Address address;
-  List<Person> kids = new ArrayList<>();
+  private final List<Person> kids = new ArrayList<>();
+  private Address address;
   private String name;
   private SexEnum gender;
-  private Phone phone;
+  private PhoneNumber phoneNumber;
   private LocalDate birthDate;
 
-  public Person(String name, Phone phone, Address address, SexEnum gender) {
-    this(name, phone, address);
+  public Person(String name, PhoneNumber phoneNumber, Address address, SexEnum gender) throws IllegalArgumentException{
+    this(name, phoneNumber, address);
     this.setGender(gender);
   }
 
-  public Person(String name, Phone phone, Address address) {
+  public Person(String name, PhoneNumber phoneNumber, Address address) throws IllegalArgumentException {
     this(name);
-    this.phone = phone;
-    this.address = address;
+    setPhone(phoneNumber);
+    setAddress(address);
   }
 
-  public Person(String name) {
-    //TODO: repeated code
-    if (isValidName(name)) {
-      this.setName(name);
-    }
-  }
-
-  /**
-   * Simple check if the name is null or empty
-   *
-   * @param name a string
-   * @return true if the string is valid, otherwise false
-   */
-  private boolean isValidName(String name) {
-    return name != null && !name.isEmpty();
+  public Person(String name) throws IllegalArgumentException {
+    this.setName(name);
   }
 
   /**
    * for debugging
    */
   public static void main(String[] args) {
-    List<Person> roster = Person.createRoster();
+    List<Person> roster = Person.createPeopleList();
     Person personAlice = roster.get(0);
     Person kidBob = roster.get(1);
     Person kidTom = roster.get(2);
@@ -91,27 +89,24 @@ public class Person implements Jsonable {
    *
    * @return three people
    */
-  public static List<Person> createRoster() {
-    List<Person> roster = new ArrayList<>();
+  public static List<Person> createPeopleList() {
+    List<Person> peopleList = new ArrayList<>();
     Address address = new Address("123", "King Street", "Quebec City");
-    Phone phone1 = new Phone("5145131234");
-    Phone phone2 = new Phone("5145131212");
+    PhoneNumber phoneNumber1 = new PhoneNumber("5145131234");
+    PhoneNumber phoneNumber2 = new PhoneNumber("5145131212");
 
-    roster.add(new Person("Alice", phone1, address, SexEnum.FEMALE));
-    roster.add(new Person("Bob", null, address, SexEnum.MALE));
-    roster.add(new Person("Tom", phone2, address, SexEnum.MALE));
-
-    return roster;
-  }
-
-  public static String generateRandomString(Random random, int length) {
-    StringBuilder string = new StringBuilder();
-    for (int i = 0; i < length; i++) {
-      int randomIndex = random.nextInt(ALPHABET_NUMBER.length());
-      string.append(ALPHABET_NUMBER.charAt(randomIndex));
+    try {
+      peopleList.add(new Person("Alice", phoneNumber1, address, SexEnum.FEMALE));
+      peopleList.add(new Person("Bob", null, address, SexEnum.MALE));
+      peopleList.add(new Person("Tom", phoneNumber2, address, SexEnum.MALE));
+    } catch (IllegalArgumentException e) {
+      System.err.println(e.getMessage());
     }
-    return string.toString();
+
+    return peopleList;
   }
+
+
 
   public String getId() {
     return id;
@@ -159,10 +154,23 @@ public class Person implements Jsonable {
    *
    * @param name A String represent person name
    */
-  private void setName(String name) {
-    if (isValidName(name)) {
-      this.name = name;
+  private void setName(String name) throws IllegalArgumentException {
+    if (!isValidName(name)) {
+      throw new IllegalArgumentException("Name can not be empty");
     }
+    this.name = name;
+  }
+
+  /**
+   * Validates a name.
+   * Return false if the name is empty
+   * or does not match the ONE_WORD_NAME_REGEX
+   *
+   * @param name a string representing name to validate.
+   * @return true if the name is valid, otherwise false
+   */
+  private boolean isValidName(String name) {
+    return isNotNullAndNotEmpty(name) ;
   }
 
   public Address getAddress() {
@@ -186,16 +194,20 @@ public class Person implements Jsonable {
   }
 
   public String getPhone() {
-    if (this.phone == null) {
+    if (this.phoneNumber == null) {
       return "";
     }
-    return this.phone.number;
+    return this.phoneNumber.getNumber();
+  }
+
+  public void setPhone(PhoneNumber phoneNumber) {
+    this.phoneNumber = phoneNumber;
   }
 
   public void setPhone(String phoneNumber) {
     String standardPhoneNumber = phoneNumber.trim();
     if (isValidPhoneNumber(standardPhoneNumber)) {
-      this.phone = new Phone(standardPhoneNumber);
+      this.phoneNumber = new PhoneNumber(standardPhoneNumber);
     }
   }
 
@@ -221,13 +233,12 @@ public class Person implements Jsonable {
       addressStr = subJsonBody(address.toJsonString()) + " , ";
     }
     String phoneStr = "";
-    if (phone != null) {
-      phoneStr = subJsonBody(phone.toJsonString()) + " ,";
+    if (phoneNumber != null) {
+      phoneStr = subJsonBody(phoneNumber.toJsonString()) + " ,";
     }
     String jsonBody =
        String.format("\"name\" :  \"%s\" ,", name) + String.format("\"age\" :  %d ,", getAge()) + String.format("%s",
-          addressStr) + String.format("%s", phoneStr)
-          + String.format("%s", kidsStr);
+          addressStr) + String.format("%s", phoneStr) + String.format("%s", kidsStr);
     return String.format("{%s}", jsonBody);
   }
 
@@ -277,6 +288,11 @@ public class Person implements Jsonable {
   }
 
   @Override
+  public int hashCode() {
+    return Objects.hash(id);
+  }
+
+  @Override
   public boolean equals(Object personToEqual) {
     if (this == personToEqual) {
       return true;
@@ -285,10 +301,5 @@ public class Person implements Jsonable {
       return false;
     }
     return id.equals(((Person) personToEqual).id);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(id);
   }
 }
