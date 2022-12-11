@@ -1,6 +1,7 @@
 package xyz.dongguo;
 
 import com.google.gson.Gson;
+import java.util.Random;
 import org.json.JSONObject;
 import xyz.dongguo.lesson.objectoriented.Jsonable;
 
@@ -12,8 +13,21 @@ import xyz.dongguo.lesson.objectoriented.Jsonable;
 public class Json {
 
   public static final String JSON_PATTERN_FORMATTER = "{\"%S\" : %S}";
+  public static final String ALPHABET_NUMBER = "abcdefghijklmnopqrstuvwxyz0123456789";
 
   private Json() {
+  }
+  public static boolean isNotNullAndNotEmpty(String str) {
+    return str != null && !str.isEmpty();
+  }
+
+  public static String generateRandomString(Random random, int length) {
+    StringBuilder string = new StringBuilder();
+    for (int i = 0; i < length; i++) {
+      int randomIndex = random.nextInt(ALPHABET_NUMBER.length());
+      string.append(ALPHABET_NUMBER.charAt(randomIndex));
+    }
+    return string.toString();
   }
 
   /**

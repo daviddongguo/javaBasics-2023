@@ -1,23 +1,27 @@
 package xyz.dongguo.lesson.objectoriented;
 
+import static xyz.dongguo.Json.isNotNullAndNotEmpty;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import xyz.dongguo.Json;
 
 /**
- * @author map
+ * @author dongguo
+ * @version 1.2
  */
 public class Address implements Jsonable {
 
-  String number;
-  String street;
-  String city;
+  private String streetNumber;
+  private String streetName;
+  private String city;
 
-  public Address(String number, String street, String city) {
-    this.number = number;
-    this.street = street;
-    this.city = city;
+  public Address(String streetNumber, String streetName, String city) {
+    setStreetNumber(streetNumber);
+    setStreetName(streetName);
+    setCity(city);
   }
 
   /**
@@ -27,17 +31,17 @@ public class Address implements Jsonable {
    */
   public static void main(String[] args) {
     List<Address> addressList = createAddressList();
-    String sainteAnne = addressList.get(0).street;
+    String sainteAnne = addressList.get(0).streetName;
     List<Address> newList = addressList
        .stream()
-       .filter(address -> address.street.equals(sainteAnne))
+       .filter(address -> address.streetName.equals(sainteAnne))
        .collect(Collectors.toList());
-    newList.forEach(Utility::printPrettyJson);
+    newList.forEach(Json::printPrettyJson);
     long count = addressList
        .stream()
-       .filter(address -> address.street.equals(sainteAnne))
+       .filter(address -> address.streetName.equals(sainteAnne))
        .count();
-    System.out.printf("There are %d addresses whose sainteAnne is  %s", count, sainteAnne);
+    System.out.printf("There are %d addresses whose street name is  %s", count, sainteAnne);
   }
 
   /**
@@ -46,13 +50,52 @@ public class Address implements Jsonable {
    * @return A list including several mock addresses
    */
   public static List<Address> createAddressList() {
+    String city = "Sainte-Anne-de-Bellevue";
     return new ArrayList<>(
-       List.of(new Address("32b", "Sainte-Anne St", "Sainte-Anne-de-Bellevue"),
-          new Address("21275", "Lakeshore Dr", "Sainte-Anne-de-Bellevue"),
-          new Address("2", "Sainte-Anne St", "Sainte-Anne-de-Bellevue"),
-          new Address("21300", "Lakeshore Dr", "Sainte-Anne-de-Bellevue"),
-          new Address("1", "Maple St", "Sainte-Anne-de-Bellevue")
+       List.of(new Address("32b", "Sainte-Anne St", city),
+          new Address("21275", "Lakeshore Dr", city),
+          new Address("2", "Sainte-Anne St", city),
+          new Address("21300", "Lakeshore Dr", city),
+          new Address("1", "Maple St", city)
        ));
+  }
+
+  public String getStreetNumber() {
+    return streetNumber;
+  }
+
+  public void setStreetNumber(String streetNumber) {
+    validateInput(streetNumber);
+    this.streetNumber = streetNumber;
+  }
+
+  /**
+   * Throw IllegalArgumentException if input is null or empty.
+   *
+   * @param input a string
+   */
+  private void validateInput(String input) {
+    if (!isNotNullAndNotEmpty(input)) {
+      throw new IllegalArgumentException("Invalid input.");
+    }
+  }
+
+  public String getStreetName() {
+    return streetName;
+  }
+
+  public void setStreetName(String streetName) {
+    validateInput(streetName);
+    this.streetName = streetName;
+  }
+
+  public String getCity() {
+    return city;
+  }
+
+  public void setCity(String city) {
+    validateInput(city);
+    this.city = city;
   }
 
   /**
@@ -60,12 +103,12 @@ public class Address implements Jsonable {
    */
   @Override
   public String toJsonString() {
-    return String.format("{\"address\" :  \"%s, %s, %s\"}", number, street, city);
+    return String.format("{\"address\" :  \"%s %s, %s\"}", streetNumber, streetName, city);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(number, street, city);
+    return Objects.hash(streetNumber, streetName, city);
   }
 
   @Override
@@ -77,7 +120,8 @@ public class Address implements Jsonable {
       return false;
     }
     Address address = (Address) o;
-    return number.equals(address.number) && street.equals(address.street) && city.equals(address.city);
+    return streetNumber.equals(address.streetNumber) && streetName.equals(address.streetName) && city.equals(
+       address.city);
   }
 
   /**
@@ -86,8 +130,8 @@ public class Address implements Jsonable {
   @Override
   public String toString() {
     return "Address{" +
-       "number='" + number + '\'' +
-       ", street='" + street + '\'' +
+       "number='" + streetNumber + '\'' +
+       ", street='" + streetName + '\'' +
        ", city='" + city + '\'' +
        '}';
   }
