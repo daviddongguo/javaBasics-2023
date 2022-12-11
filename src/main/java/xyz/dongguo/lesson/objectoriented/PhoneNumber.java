@@ -5,6 +5,7 @@ import static xyz.dongguo.Json.printPrettyJson;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * The PhoneNumber class represents a phone number. It stores the phone number and provides methods for getting and
@@ -76,5 +77,22 @@ public class PhoneNumber implements Jsonable {
   public String getFormattedNumber() {
     return String.format(AMERICAN_PHONE_NUMBER_FORMATTER, number.substring(0, 3), number.substring(3, 6),
        number.substring(6));
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    PhoneNumber that = (PhoneNumber) o;
+    return number.equals(that.number);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(number);
   }
 }
