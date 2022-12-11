@@ -45,6 +45,7 @@ class PhoneNumberTest {
   void setNumberWhenInvalidInput_ThrowException() {
     assertThrows(IllegalArgumentException.class, () -> new PhoneNumber(null));
     assertThrows(IllegalArgumentException.class, () -> new PhoneNumber(""));
+    assertThrows(IllegalArgumentException.class, () -> new PhoneNumber("123456789X"));
     assertThrows(IllegalArgumentException.class, () -> new PhoneNumber("123459"));
   }
 

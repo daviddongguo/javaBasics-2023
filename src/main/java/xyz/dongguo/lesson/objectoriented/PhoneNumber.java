@@ -1,6 +1,5 @@
 package xyz.dongguo.lesson.objectoriented;
 
-
 import static xyz.dongguo.Json.JSON_PATTERN_FORMATTER;
 import static xyz.dongguo.Json.printPrettyJson;
 
@@ -45,19 +44,17 @@ public class PhoneNumber implements Jsonable {
   }
 
   public void setNumber(String number) {
-    if (!isValidPhoneNumber(number)) {
-      throw new IllegalArgumentException("Invalid phone number");
+    try {
+      Long.parseLong(number);
+    } catch (NumberFormatException e) {
+      throw new IllegalArgumentException("Phone number must be numeric types.");
+    }
+
+    boolean isValidPhoneNumber =  number.matches("^\\d{10}$");
+    if (!isValidPhoneNumber) {
+      throw new IllegalArgumentException("Phone number must have 10 digits.");
     }
     this.number = number;
-  }
-
-  /**
-   * Checks if the phone number stored in the object is valid. A valid phone number is 10 digits.
-   *
-   * @return true if the phone number is valid, false otherwise
-   */
-  private boolean isValidPhoneNumber(String number) {
-    return number != null && number.length() == 10 && number.matches("^\\d{10}$");
   }
 
   @Override
