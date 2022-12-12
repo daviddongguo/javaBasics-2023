@@ -1,18 +1,12 @@
 package xyz.dongguo.lesson.basic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
-import xyz.dongguo.lesson.basic.Day07JobInterview;
 
 class Day07JobInterviewTest {
-
-  @Test
-  void display() {
-    Day07JobInterview.main();
-    assertTrue(true);
-  }
 
   @Test
   void askQuestions() {
@@ -41,5 +35,79 @@ class Day07JobInterviewTest {
     int result = Day07JobInterview.robeHouseUsingRecursion(inputs);
 
     assertEquals(expected, result);
+  }
+
+  @Test
+  void main() {
+    Day07JobInterview.main();
+    assertTrue(true);
+  }
+
+  @Test
+  void twoSum() {
+    assertTrue(true);
+  }
+
+  @Test
+  void isSumExisted() {
+    int[] inputs = {3, 4, 5, 2, 1};
+    int sum = 8;
+    assertTrue(Day07JobInterview.isSumExisted(inputs, sum));
+    sum = 10;
+    assertTrue(Day07JobInterview.isSumExisted(inputs, sum));
+    sum = 16;
+    assertFalse(Day07JobInterview.isSumExisted(inputs, sum));
+  }
+
+  @Test
+  void testIsSumExisted() {
+    int[] inputs = {3, 4, 5, 2, 1};
+    int sum = 8;
+    assertEquals(2, Day07JobInterview.sumTwoByBruteForce(inputs, sum).length);
+    sum = 10;
+    assertEquals(0, Day07JobInterview.sumTwoByBruteForce(inputs, sum).length);
+    sum = 16;
+    assertEquals(0, Day07JobInterview.sumTwoByBruteForce(inputs, sum).length);
+  }
+
+  @Test
+  void testIsSumExisted_UsingHashing() {
+    int[] inputs = {3, 4, 5, 2, 1};
+    int sum = 8;
+    assertEquals(2, Day07JobInterview.isSumTwoExistedUsingHasing(inputs, sum).length);
+    sum = 10;
+    assertEquals(0, Day07JobInterview.isSumTwoExistedUsingHasing(inputs, sum).length);
+    sum = 16;
+    assertEquals(0, Day07JobInterview.isSumTwoExistedUsingHasing(inputs, sum).length);
+  }
+
+  @Test
+  void robHouseUsingLoop() {
+    assertTrue(true);
+  }
+
+  @Test
+  void robeHouseUsingRecursion() {
+    assertTrue(true);
+  }
+
+  @Test
+  void testRobeHouseUsingRecursion() {
+    assertTrue(true);
+  }
+
+  @Test
+  void rotate() {
+    assertTrue(true);
+  }
+
+  @Test
+  void removeDuplicates() {
+    assertTrue(true);
+  }
+
+  @Test
+  void testAskQuestions() {
+    assertTrue(true);
   }
 }
