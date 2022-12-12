@@ -9,7 +9,7 @@ import org.json.JSONObject;
  */
 public class JsonHelper {
 
-  public static final String JSON_PATTERN_FORMATTER = "{\"%S\" : %S}";
+  public static final String JSON_PATTERN_FORMATTER = "{\"%s\" : %s}";
   public static final String ALPHABET_NUMBER = "abcdefghijklmnopqrstuvwxyz0123456789";
 
   private JsonHelper() {
