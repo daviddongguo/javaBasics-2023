@@ -1,18 +1,18 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import static xyz.dongguo.Json.isNotNullAndNotEmpty;
+import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import xyz.dongguo.Json;
+import xyz.dongguo.JsonHelper;
 
 /**
  * @author dongguo
  * @version 1.2
  */
-public class Address implements Jsonable {
+public class Address {
 
   private String streetNumber;
   private String streetName;
@@ -36,7 +36,7 @@ public class Address implements Jsonable {
        .stream()
        .filter(address -> address.streetName.equals(sainteAnne))
        .collect(Collectors.toList());
-    newList.forEach(Json::printPrettyJson);
+    newList.forEach(JsonHelper::printAllJson);
     long count = addressList
        .stream()
        .filter(address -> address.streetName.equals(sainteAnne))
@@ -99,9 +99,8 @@ public class Address implements Jsonable {
   }
 
   /**
-   * @return A Json string
+   * @return A JsonHelper string
    */
-  @Override
   public String toJsonString() {
     return String.format("{\"address\" :  \"%s %s, %s\"}", streetNumber, streetName, city);
   }

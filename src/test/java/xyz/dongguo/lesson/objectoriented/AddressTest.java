@@ -3,7 +3,7 @@ package xyz.dongguo.lesson.objectoriented;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static xyz.dongguo.Json.generateRandomString;
+import static xyz.dongguo.JsonHelper.generateRandomString;
 
 import java.util.List;
 import java.util.Random;

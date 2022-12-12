@@ -1,8 +1,8 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import static xyz.dongguo.Json.generateRandomString;
-import static xyz.dongguo.Json.isNotNullAndNotEmpty;
-import static xyz.dongguo.Json.printAllJson;
+import static xyz.dongguo.JsonHelper.generateRandomString;
+import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
+import static xyz.dongguo.JsonHelper.printAllJson;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -19,7 +19,7 @@ import java.util.Random;
  * @author dongguo
  * @version 1.2
  */
-public class Person implements Jsonable {
+public class Person {
 
   public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   /**
@@ -254,7 +254,6 @@ public class Person implements Jsonable {
     return true;
   }
 
-  @Override
   public String toJsonString() {
     String kidsStr = "";
     if (!this.kids.isEmpty()) {
@@ -300,8 +299,8 @@ public class Person implements Jsonable {
     }
 
     StringBuilder stringBuilder = new StringBuilder("[ ");
-    for (Jsonable item : list) {
-      stringBuilder.append(item.toJsonString()).append(" ,");
+    for (Person currentPerson : list) {
+      stringBuilder.append(currentPerson.toJsonString()).append(" ,");
     }
     stringBuilder.append(" ]");
     return stringBuilder.toString();

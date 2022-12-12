@@ -1,7 +1,7 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import static xyz.dongguo.Json.JSON_PATTERN_FORMATTER;
-import static xyz.dongguo.Json.printPrettyJson;
+import static xyz.dongguo.JsonHelper.JSON_PATTERN_FORMATTER;
+import static xyz.dongguo.JsonHelper.printAllJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.Objects;
  * @author dongguo
  * @version 1.2
  */
-public class PhoneNumber implements Jsonable {
+public class PhoneNumber {
 
   public static final String AMERICAN_PHONE_NUMBER_FORMATTER = "+1 (%s) %s-%s";
 
@@ -29,7 +29,7 @@ public class PhoneNumber implements Jsonable {
     String startWith514 = "514";
     for (PhoneNumber phoneNumber : list) {
       if (phoneNumber.getNumber().startsWith(startWith514)) {
-        printPrettyJson(phoneNumber);
+        printAllJson(phoneNumber);
       }
     }
   }
@@ -51,7 +51,7 @@ public class PhoneNumber implements Jsonable {
       throw new IllegalArgumentException("Phone number must be numeric types.");
     }
 
-    boolean isValidPhoneNumber =  number.matches("^\\d{10}$");
+    boolean isValidPhoneNumber = number.matches("^\\d{10}$");
     if (!isValidPhoneNumber) {
       throw new IllegalArgumentException("Phone number must have 10 digits.");
     }
@@ -63,7 +63,6 @@ public class PhoneNumber implements Jsonable {
     return toJsonString();
   }
 
-  @Override
   public String toJsonString() {
     return String.format(JSON_PATTERN_FORMATTER, "phoneNumber", getFormattedNumber());
   }
