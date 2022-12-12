@@ -17,6 +17,7 @@ import java.util.Objects;
 public class PhoneNumber {
 
   public static final String AMERICAN_PHONE_NUMBER_FORMATTER = "+1 (%s) %s-%s";
+  public static final int PHONE_NUMBER_LENGTH = 10;
 
   private String number;
 
@@ -37,6 +38,12 @@ public class PhoneNumber {
     System.out.println(phone);
   }
 
+  /**
+   * create a phoneNumber instance by using static factory method
+   *
+   * @param json a json string representing a phoneNumber object
+   * @return a phoneNumber object
+   */
   public static PhoneNumber fromJson(String json) {
     char[] charArray = json.toCharArray();
     StringBuilder phoneNumberStr = new StringBuilder();
@@ -46,7 +53,7 @@ public class PhoneNumber {
       }
     }
 
-    return new PhoneNumber(phoneNumberStr.substring(1));
+    return new PhoneNumber(phoneNumberStr.substring(Math.max(phoneNumberStr.length() - PHONE_NUMBER_LENGTH, 0)));
   }
 
   public static List<PhoneNumber> createPhoneList() {
@@ -79,18 +86,21 @@ public class PhoneNumber {
     return false;
   }
 
+  /**
+   * @return A json string like this  {"phoneNumber" : +1 (513) 813-1234}
+   */
   @Override
   public String toString() {
     return toJsonString();
   }
 
   public String toJsonString() {
-    return String.format(JSON_PATTERN_FORMATTER, "phoneNumber", getFormattedNumber());
+    return String.format(JSON_PATTERN_FORMATTER, "phoneNumber", "\"" + getFormattedNumber() + "\"");
   }
 
   /**
-   * Returns the phone number stored in the object in a formatted string. The formatted string has a space after the
-   * third and seventh characters.
+   * Returns the formatted string representation of this phone number. The format is "XXX-YYY-ZZZ". Each of the capital
+   * letters represents a single decimal digit.
    *
    * @return the formatted phone number
    */
