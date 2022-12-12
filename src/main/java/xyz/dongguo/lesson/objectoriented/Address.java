@@ -37,10 +37,12 @@ public class Address {
        .filter(address -> address.streetName.equals(sainteAnne))
        .collect(Collectors.toList());
     newList.forEach(JsonHelper::printAllJson);
-    long count = addressList
-       .stream()
-       .filter(address -> address.streetName.equals(sainteAnne))
-       .count();
+    long count = 0;
+    for (Address currentAddress : addressList) {
+      if (sainteAnne.equals(currentAddress.getStreetName())) {
+        count++;
+      }
+    }
     System.out.printf("There are %d addresses whose street name is  %s", count, sainteAnne);
   }
 

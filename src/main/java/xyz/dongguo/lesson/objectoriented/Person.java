@@ -14,7 +14,7 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
- * The Person class represents a person.
+ * The Person class representing a person.
  *
  * @author dongguo
  * @version 1.2
@@ -62,8 +62,8 @@ public class Person {
 
     List<PhoneNumber> phoneNumberList = PhoneNumber.createPhoneList();
     PhoneNumber phoneNumber1 = phoneNumberList.get(0);
-    PhoneNumber phoneNumber2 = phoneNumberList.get(2);
-    PhoneNumber phoneNumber3 = phoneNumberList.get(3);
+    PhoneNumber phoneNumber2 = phoneNumberList.get(1);
+    PhoneNumber phoneNumber3 = phoneNumberList.get(2);
 
     personAlice.setPhone(phoneNumber1);
     kidBob.setPhone(phoneNumber2);
@@ -77,10 +77,10 @@ public class Person {
     personAlice.addKid(kidBob);
     personAlice.addKid(kidTom);
 
+    // Add item to a list
     printAllJson(personAlice);
     List<Person> list = new ArrayList<>(7);
     Person personToTest = new Person("PersonToTest");
-    // Add item to a list
     list.add(personAlice);
     list.add(kidBob);
     list.add(kidTom);
@@ -89,29 +89,31 @@ public class Person {
 
     // Delete item from list
     Person personToRemove = null;
-    for (Person p : list) {
-      if (p.getName().equals(personToTest.getName())) {
-        System.out.printf("Found %s%n", p.getName());
-        personToRemove = p;
+    for (Person currentPerson : list) {
+      if (currentPerson.getName().equals(personToTest.getName())) {
+        System.out.printf("Found %s%n", currentPerson.getName());
+        personToRemove = currentPerson;
       }
     }
     list.remove(personToRemove);
     System.out.printf("The list has %d people.%n", list.size());
 
-    // Find people  who live in ""
+    // Find people  who live in the same city
     String city = "Sainte-Anne-de-Bellevue";
     for (Person p : list) {
       if (p.getAddress().getCity().equals(city)) {
         System.out.printf("Found %s who lives in  %s%n", p.getName(), city);
       }
     }
+
     // Update Bob who move to Quebec City
     Person personBob = null;
     Address newAddress = new Address("123", "Queen Street", "Quebec City");
-    for (Person p : list) {
-      if ("Bob".equals(p.getName())) {
-        System.out.printf("%s who lives in  %s now%n", p.getName(), p.getAddress());
-        personBob = p;
+    for (Person currentPerson : list) {
+      if ("Bob".equals(currentPerson.getName())) {
+        System.out.printf("%s who lives in  %s now%n", currentPerson.getName(), currentPerson.getAddress());
+        personBob = currentPerson;
+        break;
       }
     }
     assert personBob != null;

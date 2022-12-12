@@ -1,6 +1,7 @@
 package xyz.dongguo.lesson.objectoriented;
 
 import static xyz.dongguo.JsonHelper.JSON_PATTERN_FORMATTER;
+import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
 import static xyz.dongguo.JsonHelper.printAllJson;
 
 import java.util.ArrayList;
@@ -44,18 +45,24 @@ public class PhoneNumber {
     return number;
   }
 
-  public void setNumber(String number) {
+  public void setNumber(String phoneNumber) {
     try {
-      Long.parseLong(number);
+      Long.parseLong(phoneNumber);
     } catch (NumberFormatException e) {
       throw new IllegalArgumentException("Phone number must be numeric types.");
     }
 
-    boolean isValidPhoneNumber = number.matches("^\\d{10}$");
-    if (!isValidPhoneNumber) {
+    if (!isValidPhoneNumber(phoneNumber)) {
       throw new IllegalArgumentException("Phone number must have 10 digits.");
     }
-    this.number = number;
+    this.number = phoneNumber;
+  }
+
+  public boolean isValidPhoneNumber(String phoneNumber) {
+    if (isNotNullAndNotEmpty(phoneNumber)) {
+      return phoneNumber.matches("^\\d{10}$");
+    }
+    return false;
   }
 
   @Override
