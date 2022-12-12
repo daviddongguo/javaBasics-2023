@@ -335,4 +335,17 @@ public class Person {
     }
     return id.equals(((Person) personToEqual).id);
   }
+
+  @Override
+  public String toString() {
+    return "{\"Person\":{"
+       + "                        \"id\":\"" + id + "\""
+       + ",                         \"kids\":" + kids
+       + ",                         \"address\":" + address
+       + ",                         \"name\":\"" + name + "\""
+       + ",                         \"gender\":\"" + gender + "\""
+       + ",                         \"phoneNumber\":" + phoneNumber
+       + ",                         \"birthDate\":" + birthDate
+       + "}}";
+  }
 }

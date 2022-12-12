@@ -1,40 +1,36 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
+import static xyz.dongguo.JsonHelper.printAllJson;
+import static xyz.dongguo.JsonHelper.printPrettyJson;
 
 /**
  * @author dongguo
  */
-public class Student {
+public class Student extends Person {
 
-  public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
-  private String id;
-  private String name;
   private boolean canSpeakFrench = false;
-  private int age;
-  private boolean isRealAge = false;
-  private LocalDate birthDate;
 
-  private Student() {
-  }
-
-  private Student(String id, String name) {
-    setId(id);
-    setName(name);
+  private Student(String name) {
+    super(name);
   }
 
   public static void main(String[] args) {
-    Student student1 = Student.createStudent("student01", "abc");
-    Student student2 = Student.createStudent("student02", "def");
-    Student student3 = Student.tryCreateStudent("student03", "");
+    Student student1 = null;
+    Student student2 = null;
+    Student student3 = null;
+    try {
+      student1 = new Student("Alice");
+      student2 = new Student("Maria");
+      student3 = new Student("");
+    } catch (IllegalArgumentException ex) {
+      System.err.println(ex.getMessage());
+    }
+    assert student1 != null;
+    assert student2 != null;
+    assert student3 != null;
 
-    System.out.println(student1);
-    System.out.println(student2);
-    System.out.println(student3);
+    printAllJson(student1);
+    printAllJson(student2);
 
     student1.setAge(100);
     student1.setBirthDate("2001-02-28");
@@ -46,44 +42,8 @@ public class Student {
     student2.setAge(155);
     student2.setBirthDate("2001-02-29");
 
-    System.out.println(student1);
-    System.out.println(student2);
-    System.out.println(student3);
-  }
-
-  public static Student createStudent(String id, String name) {
-    return new Student(id, name);
-  }
-
-  public static Student tryCreateStudent(String id, String name) {
-    try {
-      return new Student(id, name);
-    } catch (Exception e) {
-      return null;
-    }
-  }
-
-  public String getName() {
-    return this.name;
-  }
-
-  public void setName(String name) {
-    if (name != null && !name.trim().isEmpty()) {
-      this.name = name;
-      return;
-    }
-    throw new IllegalArgumentException("Invalid name");
-  }
-
-  public String getBirthDate() {
-    if (this.isRealAge) {
-      return this.birthDate.format(DATE_TIME_FORMATTER);
-    }
-    return "";
-  }
-
-  public void setBirthDate(String birthdateStr) {
-    setBirthDate(birthdateStr, true);
+    printPrettyJson(student1);
+    printPrettyJson(student2);
   }
 
   public boolean getCanSpeakFrench() {
@@ -97,54 +57,11 @@ public class Student {
     this.canSpeakFrench = value;
   }
 
-  public int getAge() {
-    if (isRealAge) {
-      return this.age;
-    }
-    return 0;
-  }
-
-  public void setAge(int age) {
-    if (this.isRealAge) {
-      return;
-    }
-    boolean isValidAge = age >= 0 && age <= 150;
-    if (isValidAge) {
-      int currenYear = LocalDate.now().getYear();
-      int birthYear = currenYear - age;
-      String fakeBirthdate = birthYear + "-01-01";
-      setBirthDate(fakeBirthdate, false);
-    }
-  }
-
-  private void setBirthDate(String birthDateStr, boolean isRealBirthdate) {
-    try {
-      this.birthDate = LocalDate.parse(birthDateStr);
-      LocalDate currentDate = LocalDate.now();
-      this.age = Period.between(birthDate, currentDate).getYears();
-      this.isRealAge = isRealBirthdate;
-    } catch (DateTimeException ex) {
-      System.err.println(ex.getMessage());
-    }
-  }
-
-  public String getId() {
-    return this.id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
   @Override
   public String toString() {
-    return "Student{" +
-       "id='" + id + '\'' +
-       ", name='" + name + '\'' +
-       ", canSpeakFrench=" + canSpeakFrench +
-       ", age=" + age +
-       ", isRealAge=" + isRealAge +
-       ", birthDate=" + birthDate +
-       '}';
+    return "{\"Student\":"
+       + super.toString()
+       + ",                         \"canSpeakFrench\":\"" + canSpeakFrench + "\""
+       + "}";
   }
 }
