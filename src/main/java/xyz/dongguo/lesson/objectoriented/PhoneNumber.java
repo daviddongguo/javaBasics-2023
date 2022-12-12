@@ -2,7 +2,6 @@ package xyz.dongguo.lesson.objectoriented;
 
 import static xyz.dongguo.JsonHelper.JSON_PATTERN_FORMATTER;
 import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
-import static xyz.dongguo.JsonHelper.printAllJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +29,24 @@ public class PhoneNumber {
     String startWith514 = "514";
     for (PhoneNumber phoneNumber : list) {
       if (phoneNumber.getNumber().startsWith(startWith514)) {
-        printAllJson(phoneNumber);
+        System.out.println(phoneNumber);
       }
     }
+
+    PhoneNumber phone = PhoneNumber.fromJson(list.get(0).toString());
+    System.out.println(phone);
+  }
+
+  public static PhoneNumber fromJson(String json) {
+    char[] charArray = json.toCharArray();
+    StringBuilder phoneNumberStr = new StringBuilder();
+    for (char c : charArray) {
+      if (Character.isDigit(c)) {
+        phoneNumberStr.append(c);
+      }
+    }
+
+    return new PhoneNumber(phoneNumberStr.substring(1));
   }
 
   public static List<PhoneNumber> createPhoneList() {
