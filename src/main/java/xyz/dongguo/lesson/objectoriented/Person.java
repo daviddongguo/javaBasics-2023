@@ -2,7 +2,7 @@ package xyz.dongguo.lesson.objectoriented;
 
 import static xyz.dongguo.JsonHelper.generateRandomString;
 import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
-import static xyz.dongguo.JsonHelper.printAllJson;
+import static xyz.dongguo.JsonHelper.printJson;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -78,7 +78,7 @@ public class Person {
     personAlice.addKid(kidTom);
 
     // Add item to a list
-    printAllJson(personAlice);
+    printJson(personAlice);
     List<Person> list = new ArrayList<>(7);
     Person personToTest = new Person("PersonToTest");
     list.add(personAlice);

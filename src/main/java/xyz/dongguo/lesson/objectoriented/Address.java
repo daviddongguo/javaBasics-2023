@@ -36,7 +36,7 @@ public class Address {
        .stream()
        .filter(address -> address.streetName.equals(sainteAnne))
        .collect(Collectors.toList());
-    newList.forEach(JsonHelper::printAllJson);
+    newList.forEach(JsonHelper::printJson);
     long count = 0;
     for (Address currentAddress : addressList) {
       if (sainteAnne.equals(currentAddress.getStreetName())) {

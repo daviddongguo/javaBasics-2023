@@ -33,7 +33,7 @@ public class JsonHelper {
    *
    * @param object any object
    */
-  public static void printAllJson(Object object) {
+  public static void printJson(Object object) {
     Gson googleJson = new Gson();
     JSONObject json = new JSONObject(googleJson.toJson(object));
     System.out.println(json.toString(2));

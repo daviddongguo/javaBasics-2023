@@ -1,7 +1,8 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import static xyz.dongguo.JsonHelper.printAllJson;
-import static xyz.dongguo.JsonHelper.printPrettyJson;
+import static xyz.dongguo.JsonHelper.printJson;
+
+import java.util.Objects;
 
 /**
  * @author dongguo
@@ -12,6 +13,26 @@ public class Student extends Person {
 
   private Student(String name) {
     super(name);
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    if (!super.equals(o)) {
+      return false;
+    }
+    Student student = (Student) o;
+    return getCanSpeakFrench() == student.getCanSpeakFrench();
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), getCanSpeakFrench());
   }
 
   public static void main(String[] args) {
@@ -29,8 +50,8 @@ public class Student extends Person {
     assert student2 != null;
     assert student3 != null;
 
-    printAllJson(student1);
-    printAllJson(student2);
+    printJson(student1);
+    printJson(student2);
 
     student1.setAge(100);
     student1.setBirthDate("2001-02-28");
@@ -42,8 +63,8 @@ public class Student extends Person {
     student2.setAge(155);
     student2.setBirthDate("2001-02-29");
 
-    printPrettyJson(student1);
-    printPrettyJson(student2);
+    printJson(student1);
+    printJson(student2);
   }
 
   public boolean getCanSpeakFrench() {
