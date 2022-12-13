@@ -24,21 +24,24 @@ public class Teacher extends Person {
     Course courseJava2 = new Course("Java objector oriented 2");
     teacherAlice.addCourse(new Course("Java basic 1"));
     teacherAlice.addCourse(courseJava2);
-    printCourseList(teacherAlice);
+    printList(teacherAlice.courseList);
+
+    System.out.println("-----Find Java Related Courses------");
+    printList(teacherAlice.findCoursesByName("java"));
 
     System.out.println("-----Update Course List------");
     courseJava2.setName("java basic 2");
     teacherAlice.updateCourse(courseJava2);
-    printCourseList(teacherAlice);
+    printList(teacherAlice.courseList);
 
     System.out.println("-----Remove Course From Course List------");
     teacherAlice.removeCourse(courseJava2);
-    printCourseList(teacherAlice);
+    printList(teacherAlice.courseList);
   }
 
-  private static void printCourseList(Teacher teacher) {
-    for (Course c : teacher.courseList) {
-      System.out.println(c.getName());
+  private static void printList(List<Course> list) {
+    for (Course item : list) {
+      System.out.println(item.getName());
     }
   }
 
@@ -74,10 +77,10 @@ public class Teacher extends Person {
     }
   }
 
-  public List<Course> queryByName(String queryStr) {
+  public List<Course> findCoursesByName(String queryStr) {
     List<Course> courses = new ArrayList<>(7);
     for (Course currentCourse : courseList) {
-      if (currentCourse.getName().contains(queryStr)) {
+      if (currentCourse.getName().toLowerCase().contains(queryStr.toLowerCase())) {
         courses.add(currentCourse);
       }
     }
