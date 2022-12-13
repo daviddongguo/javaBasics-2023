@@ -1,10 +1,12 @@
-
 package xyz.dongguo.lesson.basic;
 
 /**
  * @author dongg
  */
 public class FinalPractical {
+
+  private FinalPractical() {
+  }
 
   public static void main() {
     System.out.printf("%n%s%n", "Java Final Practical");
@@ -65,16 +67,26 @@ public class FinalPractical {
   }
 
   private static void sort(int[] nums) {
-    int size = nums.length;
-    for (int i = 0; i < size - 1; i++) {
-      for (int j = i + 1; j < size; j++) {
-        if (nums[i] > nums[j]) {
-          int temp = nums[i];
-          nums[i] = nums[j];
-          nums[j] = temp;
-        }
+    int lastIndex = nums.length - 1;
+    sortByQuickSort(nums, 0, lastIndex);
+  }
+
+  private static void sortByQuickSort(int[] nums, int left, int right) {
+    if (left >= right) {
+      return;
+    }
+    int pivot = nums[right];
+    for (int i = left; i < right; ) {
+      if (nums[i] > pivot) {
+        int temp = nums[right];
+        nums[right] = nums[i];
+        nums[i] = temp;
+        right--;
+      } else {
+        i++;
       }
     }
+
   }
 
   /**
@@ -136,7 +148,7 @@ public class FinalPractical {
    * Write a method that returns the sum of all the elements in a specified column in a matrix using the following
    * header
    *
-   * @param matrix A two-dimensional integer number array
+   * @param matrix      A two-dimensional integer number array
    * @param columnIndex An integer number representing the column index.
    * @return The sum of that column
    */
@@ -148,7 +160,17 @@ public class FinalPractical {
     return sumOfColumn;
   }
 
-  private FinalPractical() {
+  private static void sortUsingBabel(int[] nums) {
+    int size = nums.length;
+    for (int i = 0; i < size - 1; i++) {
+      for (int j = i + 1; j < size; j++) {
+        if (nums[i] > nums[j]) {
+          int temp = nums[i];
+          nums[i] = nums[j];
+          nums[j] = temp;
+        }
+      }
+    }
   }
 
 }
