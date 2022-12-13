@@ -1,7 +1,5 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import static xyz.dongguo.JsonHelper.printJson;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +9,7 @@ import java.util.Objects;
  */
 public class Teacher extends Person {
 
-  private List<Course> courses = new ArrayList<>();
+  private final List<Course> courseList = new ArrayList<>();
 
   public Teacher(String name) throws IllegalArgumentException {
     super(name);
@@ -19,44 +17,76 @@ public class Teacher extends Person {
 
   public static void main(String[] args) {
     Teacher teacherAlice = new Teacher("Alice");
+    List<Course> courses = new ArrayList<>(List.of(new Course("CS Basic 1"), new Course("CS Basic 2")));
+
+    System.out.println("-----Init Course List------");
+    teacherAlice.setCourseList(courses);
     Course courseJava2 = new Course("Java objector oriented 2");
     teacherAlice.addCourse(new Course("Java basic 1"));
     teacherAlice.addCourse(courseJava2);
-    printJson(teacherAlice);
+    printCourseList(teacherAlice);
 
+    System.out.println("-----Update Course List------");
     courseJava2.setName("java basic 2");
     teacherAlice.updateCourse(courseJava2);
-    printJson(teacherAlice);
+    printCourseList(teacherAlice);
 
+    System.out.println("-----Remove Course From Course List------");
     teacherAlice.removeCourse(courseJava2);
-    printJson(teacherAlice);
+    printCourseList(teacherAlice);
+  }
+
+  private static void printCourseList(Teacher teacher) {
+    for (Course c : teacher.courseList) {
+      System.out.println(c.getName());
+    }
   }
 
   public void addCourse(Course course) {
-    courses.add(course);
+    courseList.add(course);
   }
 
+  /**
+   * Remove the course whose id equals the id of the course in the course list.
+   *
+   * @param course The course will be removed.
+   */
   public void removeCourse(Course course) {
     Course courseToRemove = null;
-    for (Course currentCourse : courses) {
+    for (Course currentCourse : courseList) {
       if (course.getId().equals(currentCourse.getId())) {
         courseToRemove = currentCourse;
       }
     }
-    courses.remove(courseToRemove);
+    courseList.remove(courseToRemove);
   }
 
+  /**
+   * Update the course whose id equals the id of course in the course list.
+   *
+   * @param course The course will be updated.
+   */
   public void updateCourse(Course course) {
-    for (Course currentCourse : courses) {
+    for (Course currentCourse : courseList) {
       if (course.getId().equals(currentCourse.getId())) {
         currentCourse.setName(course.getName());
       }
     }
   }
 
+  public List<Course> queryByName(String queryStr) {
+    List<Course> courses = new ArrayList<>(7);
+    for (Course currentCourse : courseList) {
+      if (currentCourse.getName().contains(queryStr)) {
+        courses.add(currentCourse);
+      }
+    }
+    return courses;
+  }
+
   @Override
   public int hashCode() {
-    return Objects.hash(super.hashCode(), getCourses());
+    return Objects.hash(super.hashCode(), getCourseList());
   }
 
   @Override
@@ -71,22 +101,19 @@ public class Teacher extends Person {
       return false;
     }
     Teacher teacher = (Teacher) o;
-    return Objects.equals(getCourses(), teacher.getCourses());
+    return Objects.equals(getCourseList(), teacher.getCourseList());
   }
 
   @Override
   public String toString() {
-    return "{\"Teacher\":"
-       + super.toString()
-       + ",                         \"courses\":" + courses
-       + "}";
+    return "{\"Teacher\":" + super.toString() + ",                         \"courses\":" + courseList + "}";
   }
 
-  public List<Course> getCourses() {
-    return courses;
+  public List<Course> getCourseList() {
+    return courseList;
   }
 
-  public void setCourses(List<Course> courses) {
-    this.courses = courses;
+  public void setCourseList(List<Course> courseList) {
+    this.courseList.addAll(courseList);
   }
 }
