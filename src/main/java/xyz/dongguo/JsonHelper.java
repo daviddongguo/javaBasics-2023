@@ -3,20 +3,18 @@ package xyz.dongguo;
 import com.google.gson.Gson;
 import java.util.Random;
 import org.json.JSONObject;
-import xyz.dongguo.lesson.objectoriented.Jsonable;
 
 /**
- * symotion-overwin-f2)
- *
  * @author dongguo
  */
-public class Json {
+public class JsonHelper {
 
-  public static final String JSON_PATTERN_FORMATTER = "{\"%S\" : %S}";
+  public static final String JSON_PATTERN_FORMATTER = "{\"%s\" : %s}";
   public static final String ALPHABET_NUMBER = "abcdefghijklmnopqrstuvwxyz0123456789";
 
-  private Json() {
+  private JsonHelper() {
   }
+
   public static boolean isNotNullAndNotEmpty(String str) {
     return str != null && !str.isEmpty();
   }
@@ -35,7 +33,7 @@ public class Json {
    *
    * @param object any object
    */
-  public static void printAllJson(Object object) {
+  public static void printJson(Object object) {
     Gson googleJson = new Gson();
     JSONObject json = new JSONObject(googleJson.toJson(object));
     System.out.println(json.toString(2));
@@ -44,10 +42,10 @@ public class Json {
   /**
    * Print json string in a better style
    *
-   * @param obj a object implements Jsonable interface
+   * @param obj a object
    */
-  public static void printPrettyJson(Jsonable obj) {
-    JSONObject json = new JSONObject(obj.toJsonString());
+  public static void printPrettyJson(Object obj) {
+    JSONObject json = new JSONObject(obj.toString());
     System.out.println(json.toString(2));
   }
 

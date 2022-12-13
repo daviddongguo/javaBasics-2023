@@ -74,7 +74,9 @@ class Day07JobInterviewTest {
   void testIsSumExisted_UsingHashing() {
     int[] inputs = {3, 4, 5, 2, 1};
     int sum = 8;
-    assertEquals(2, Day07JobInterview.isSumTwoExistedUsingHasing(inputs, sum).length);
+    int[] array = Day07JobInterview.isSumTwoExistedUsingHasing(inputs, sum);
+    int result = array.length;
+    assertEquals(2, result);
     sum = 10;
     assertEquals(0, Day07JobInterview.isSumTwoExistedUsingHasing(inputs, sum).length);
     sum = 16;

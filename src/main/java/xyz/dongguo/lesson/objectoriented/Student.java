@@ -1,150 +1,83 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import java.time.DateTimeException;
-import java.time.LocalDate;
-import java.time.Period;
-import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * @author dongguo
  */
-public class Student {
+public class Student extends Person {
 
-  public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+  private List<StudentCourse> courseList = new ArrayList<>(7);
 
-  private String id;
-  private String name;
-  private boolean canSpeakFrench = false;
-  private int age;
-  private boolean isRealAge = false;
-  private LocalDate birthDate;
-
-  private Student() {
-  }
-
-  private Student(String id, String name) {
-    setId(id);
-    setName(name);
+  public Student(String name) {
+    super(name);
   }
 
   public static void main(String[] args) {
-    Student student1 = Student.createStudent("student01", "abc");
-    Student student2 = Student.createStudent("student02", "def");
-    Student student3 = Student.tryCreateStudent("student03", "");
+    Student studentAlice = new Student("Alice");
 
-    System.out.println(student1);
-    System.out.println(student2);
-    System.out.println(student3);
+    studentAlice.setCourseList(new ArrayList<>(
+       List.of(
+          new StudentCourse(studentAlice.getId(), Course.createCourseList().get(0).getId(), 90),
+          new StudentCourse(studentAlice.getId(), Course.createCourseList().get(1).getId(), 80),
+          new StudentCourse(studentAlice.getId(), Course.createCourseList().get(2).getId(), 90),
+          new StudentCourse(studentAlice.getId(), Course.createCourseList().get(3).getId(), 80)
+       )));
 
-    student1.setAge(100);
-    student1.setBirthDate("2001-02-28");
-    student1.setCanSpeakFrench(true);
-    student1.setCanSpeakFrench(false);
-    student1.setAge(100);
-
-    student2.setAge(50);
-    student2.setAge(155);
-    student2.setBirthDate("2001-02-29");
-
-    System.out.println(student1);
-    System.out.println(student2);
-    System.out.println(student3);
+    studentAlice.courseList.forEach(System.out::println);
+    System.out.println(studentAlice.getAverageGrade());
   }
 
-  public static Student createStudent(String id, String name) {
-    return new Student(id, name);
-  }
-
-  public static Student tryCreateStudent(String id, String name) {
-    try {
-      return new Student(id, name);
-    } catch (Exception e) {
-      return null;
+  public int getAverageGrade() {
+    if (this.courseList.isEmpty()) {
+      return 0;
     }
-  }
-
-  public String getName() {
-    return this.name;
-  }
-
-  public void setName(String name) {
-    if (name != null && !name.trim().isEmpty()) {
-      this.name = name;
-      return;
+    int size = this.courseList.size();
+    float totalGrade = this.courseList.get(0).getGrade();
+    int numberOfCourse = 1;
+    for (int i = 1; i < size; i++) {
+      totalGrade += this.courseList.get(i).getGrade();
+      numberOfCourse++;
     }
-    throw new IllegalArgumentException("Invalid name");
+
+    return (int) (totalGrade / numberOfCourse);
   }
 
-  public String getBirthDate() {
-    if (this.isRealAge) {
-      return this.birthDate.format(DATE_TIME_FORMATTER);
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), getCourseList());
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-    return "";
-  }
-
-  public void setBirthDate(String birthdateStr) {
-    setBirthDate(birthdateStr, true);
-  }
-
-  public boolean getCanSpeakFrench() {
-    return this.canSpeakFrench;
-  }
-
-  public void setCanSpeakFrench(boolean value) {
-    if (this.canSpeakFrench) {
-      return;
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
-    this.canSpeakFrench = value;
-  }
-
-  public int getAge() {
-    if (isRealAge) {
-      return this.age;
+    if (!super.equals(o)) {
+      return false;
     }
-    return 0;
-  }
-
-  public void setAge(int age) {
-    if (this.isRealAge) {
-      return;
-    }
-    boolean isValidAge = age >= 0 && age <= 150;
-    if (isValidAge) {
-      int currenYear = LocalDate.now().getYear();
-      int birthYear = currenYear - age;
-      String fakeBirthdate = birthYear + "-01-01";
-      setBirthDate(fakeBirthdate, false);
-    }
-  }
-
-  private void setBirthDate(String birthDateStr, boolean isRealBirthdate) {
-    try {
-      this.birthDate = LocalDate.parse(birthDateStr);
-      LocalDate currentDate = LocalDate.now();
-      this.age = Period.between(birthDate, currentDate).getYears();
-      this.isRealAge = isRealBirthdate;
-    } catch (DateTimeException ex) {
-      System.err.println(ex.getMessage());
-    }
-  }
-
-  public String getId() {
-    return this.id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
+    Student student = (Student) o;
+    return Objects.equals(getCourseList(), student.getCourseList());
   }
 
   @Override
   public String toString() {
-    return "Student{" +
-       "id='" + id + '\'' +
-       ", name='" + name + '\'' +
-       ", canSpeakFrench=" + canSpeakFrench +
-       ", age=" + age +
-       ", isRealAge=" + isRealAge +
-       ", birthDate=" + birthDate +
-       '}';
+    return "{\"Student\":"
+       + super.toString()
+       + ",                         \"courseList\":" + courseList
+       + "}";
+  }
+
+  public List<StudentCourse> getCourseList() {
+    return courseList;
+  }
+
+  public void setCourseList(List<StudentCourse> courseList) {
+    this.courseList = courseList;
   }
 }

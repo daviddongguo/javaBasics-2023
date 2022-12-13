@@ -45,29 +45,30 @@ public class Day07JobInterview {
     System.out.printf("output: k = %d, %s%n%n", kind, Arrays.toString(nums));
 
   }
+
   /**
    * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to
    * target. You may assume that each input would have exactly one solution, and you may not use the same element twice.
    * You can return the answer in any order.
    * <p>
-   * Use a hash table to solve this problem  in linear time.
-   * The idea is to insert each array element's difference(nums[i], target - nums[i]) into a map.
-   * We also check if nums[i] already exists in the map or not.
-   * if the nums[i] is seen before, return the value.
+   * Use a hash table to solve this problem  in linear time. The idea is to insert each array element's
+   * difference(target - nums[i], i) into a map. We also check if nums[i] already exists in the map or not. if the
+   * nums[i] is seen before, return the value.
    * <p>
    * The time complexity of the solution is O(n) extra space, where n is the size of the input.
+   *
    * @param nums   An array of integers
    * @param target An integer
    * @return Indices of the two numbers such that they add up to target
    */
   public static int[] isSumTwoExistedUsingHasing(int[] nums, int target) {
     HashMap<Integer, Integer> differenceMap = new HashMap<>(nums.length);
-    for (int i = 0; i < nums.length; i++) {
-      if(differenceMap.containsKey(i)){
-        return new int[]{i, differenceMap.get(i)};
+    for (int index = 0; index < nums.length; index++) {
+      int difference = target - nums[index];
+      if (differenceMap.containsKey(nums[index])) {
+        return new int[]{index, differenceMap.get(nums[index])};
       }
-      int difference = target - nums[i];
-      differenceMap.put(difference, i);
+      differenceMap.putIfAbsent(difference, index);
     }
 
     return new int[0];
@@ -76,8 +77,8 @@ public class Day07JobInterview {
   /**
    * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to
    * target. You may assume that each input would have exactly one solution, and you may not use the same element twice.
-   * You can return the answer in any order.
-   * A naive solution is to consider every pair in the given array and return if the desired sum is found.
+   * You can return the answer in any order. A naive solution is to consider every pair in the given array and return if
+   * the desired sum is found.
    *
    * @param nums   An array of integers
    * @param target An integer
