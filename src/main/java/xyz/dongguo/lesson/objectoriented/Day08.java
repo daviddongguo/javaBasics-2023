@@ -7,8 +7,14 @@ public class Day08 {
 
   public static void main(String[] args) {
 
-    System.out.println("nothing, the content has been removed.");
+    printAll("123", 123, Boolean.TRUE);
 
+  }
+
+  public static void printAll(Object... args) {
+    for (Object o : args) {
+      System.out.println(o);
+    }
   }
 
 }

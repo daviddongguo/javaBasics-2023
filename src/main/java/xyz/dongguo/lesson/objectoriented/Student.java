@@ -1,7 +1,7 @@
 package xyz.dongguo.lesson.objectoriented;
 
-import static xyz.dongguo.JsonHelper.printJson;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -9,10 +9,45 @@ import java.util.Objects;
  */
 public class Student extends Person {
 
-  private boolean canSpeakFrench = false;
+  private List<StudentCourse> courseList = new ArrayList<>(7);
 
-  private Student(String name) {
+  public Student(String name) {
     super(name);
+  }
+
+  public static void main(String[] args) {
+    Student studentAlice = new Student("Alice");
+
+    studentAlice.setCourseList(new ArrayList<>(
+       List.of(
+          new StudentCourse(studentAlice.getId(), Course.createCourseList().get(0).getId(), 90),
+          new StudentCourse(studentAlice.getId(), Course.createCourseList().get(1).getId(), 80),
+          new StudentCourse(studentAlice.getId(), Course.createCourseList().get(2).getId(), 90),
+          new StudentCourse(studentAlice.getId(), Course.createCourseList().get(3).getId(), 80)
+       )));
+
+    studentAlice.courseList.forEach(System.out::println);
+    System.out.println(studentAlice.getAverageGrade());
+  }
+
+  public int getAverageGrade() {
+    if (this.courseList.isEmpty()) {
+      return 0;
+    }
+    int size = this.courseList.size();
+    float totalGrade = this.courseList.get(0).getGrade();
+    int numberOfCourse = 1;
+    for (int i = 1; i < size; i++) {
+      totalGrade += this.courseList.get(i).getGrade();
+      numberOfCourse++;
+    }
+
+    return (int) (totalGrade / numberOfCourse);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(super.hashCode(), getCourseList());
   }
 
   @Override
@@ -27,62 +62,22 @@ public class Student extends Person {
       return false;
     }
     Student student = (Student) o;
-    return getCanSpeakFrench() == student.getCanSpeakFrench();
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(super.hashCode(), getCanSpeakFrench());
-  }
-
-  public static void main(String[] args) {
-    Student student1 = null;
-    Student student2 = null;
-    Student student3 = null;
-    try {
-      student1 = new Student("Alice");
-      student2 = new Student("Maria");
-      student3 = new Student("");
-    } catch (IllegalArgumentException ex) {
-      System.err.println(ex.getMessage());
-    }
-    assert student1 != null;
-    assert student2 != null;
-    assert student3 != null;
-
-    printJson(student1);
-    printJson(student2);
-
-    student1.setAge(100);
-    student1.setBirthDate("2001-02-28");
-    student1.setCanSpeakFrench(true);
-    student1.setCanSpeakFrench(false);
-    student1.setAge(100);
-
-    student2.setAge(50);
-    student2.setAge(155);
-    student2.setBirthDate("2001-02-29");
-
-    printJson(student1);
-    printJson(student2);
-  }
-
-  public boolean getCanSpeakFrench() {
-    return this.canSpeakFrench;
-  }
-
-  public void setCanSpeakFrench(boolean value) {
-    if (this.canSpeakFrench) {
-      return;
-    }
-    this.canSpeakFrench = value;
+    return Objects.equals(getCourseList(), student.getCourseList());
   }
 
   @Override
   public String toString() {
     return "{\"Student\":"
        + super.toString()
-       + ",                         \"canSpeakFrench\":\"" + canSpeakFrench + "\""
+       + ",                         \"courseList\":" + courseList
        + "}";
+  }
+
+  public List<StudentCourse> getCourseList() {
+    return courseList;
+  }
+
+  public void setCourseList(List<StudentCourse> courseList) {
+    this.courseList = courseList;
   }
 }
