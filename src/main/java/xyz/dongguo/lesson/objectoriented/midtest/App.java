@@ -1,14 +1,14 @@
-package xyz.dongguo.lesson.midtest;
+package xyz.dongguo.lesson.objectoriented.midtest;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import xyz.dongguo.lesson.midtest.datacollection.DataCollection;
-import xyz.dongguo.lesson.midtest.model.Author;
-import xyz.dongguo.lesson.midtest.model.Book;
-import xyz.dongguo.lesson.midtest.model.GenreEnum;
-import xyz.dongguo.lesson.midtest.model.LanguageEnum;
+import xyz.dongguo.lesson.objectoriented.midtest.datacollection.DataCollection;
+import xyz.dongguo.lesson.objectoriented.midtest.model.Author;
+import xyz.dongguo.lesson.objectoriented.midtest.model.Book;
+import xyz.dongguo.lesson.objectoriented.midtest.model.GenreEnum;
+import xyz.dongguo.lesson.objectoriented.midtest.model.LanguageEnum;
 
 /**
  * Has three methods for debugging

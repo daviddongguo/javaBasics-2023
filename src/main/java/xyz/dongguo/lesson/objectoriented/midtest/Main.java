@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson.midtest;
+package xyz.dongguo.lesson.objectoriented.midtest;
 
 /**
  * Call App class

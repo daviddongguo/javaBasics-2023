@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson.objectoriented;
+package xyz.dongguo.lesson.objectoriented.school;
 
 /**
  * @author dongg

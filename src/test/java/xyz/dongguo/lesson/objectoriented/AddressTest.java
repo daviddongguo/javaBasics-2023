@@ -10,6 +10,7 @@ import java.util.Random;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import xyz.dongguo.lesson.objectoriented.school.Address;
 
 class AddressTest {
 

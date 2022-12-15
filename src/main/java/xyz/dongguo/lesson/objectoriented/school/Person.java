@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson.objectoriented;
+package xyz.dongguo.lesson.objectoriented.school;
 
 import static xyz.dongguo.JsonHelper.generateRandomString;
 import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
