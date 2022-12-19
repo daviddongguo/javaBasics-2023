@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * <p>
- *
+ * <p>
  * Run successfully
  *
  * @author Mueataz Qasem Qasem, Dongguo
@@ -23,7 +23,7 @@ public class LadderAndSnake {
   private static final HashMap<Integer, Integer> ladderAndSnakePosition = new HashMap<>();
   private static final char[] boardRecord = new char[Setting.BROAD_SIZE + 1];
   private static final Random oneRandomToReuse = new Random();
-  private static final Scanner oneScannerNeedToClose = new Scanner(System.in);
+  private static final Scanner oneKeyBoardInputNeedToClose = new Scanner(System.in);
 
   public static void main(String[] args) {
     initLadderAndSnakePosition();
@@ -31,10 +31,10 @@ public class LadderAndSnake {
     displayBoard();
 
     List<Player> list = welcomePlayers();
-//    List<Player> list = mockWelcomePlayers();
+    //    List<Player> list = mockWelcomePlayers();
     initPlayers(list);
     play();
-    oneScannerNeedToClose.close();
+    oneKeyBoardInputNeedToClose.close();
     //TODO: more information such as "After 11 steps, ... Win"
     System.out.println("\n\nBye");
     System.exit(0);
@@ -48,6 +48,107 @@ public class LadderAndSnake {
     pauseGame("Welcome to Ladder And Snake Game.");
   }
 
+  /**
+   * Add players and decide their order
+   *
+   * @return a list of Players who will take part in the game
+   */
+  private static List<Player> welcomePlayers() {
+    // Dongguo Version
+    List<Player> playerList = partTwo();
+
+    //TODO: the second step is to "Now deciding which player will start playing"
+    List<Player> finalList = new ArrayList<>();
+    raceOrderOfStart(finalList, playerList);
+
+    return finalList;
+  }
+
+  private static void raceOrderOfStart(List<Player> finalList, List<Player> listToDecide) {
+    if (listToDecide.size() == 1) {
+      finalList.add(listToDecide.get(0));
+    }
+
+    HashMap<Integer, List<Player>> map = new HashMap<>();
+    for (Player player: listToDecide){
+      var list = map.get(player.diceValue);
+      if(list == null){
+        list = new ArrayList<>(List.of(player));
+        map.put(player.diceValue, list);
+      }else {
+        list.add(player);
+      }
+    }
+
+    for (int i = 6; i >= 0; i--) {
+      List<Player> list = map.get(i);
+      if(list == null){
+        continue;
+      }
+      if (list.size() == 1) {
+        finalList.add(list.get(0));
+      }
+      if (list.size() >= 2) {
+        for (Player currentPlayer : list) {
+          int currentDice = flipDice();
+//          System.out.printf("%s, please enter 1-6:  ", currentPlayer.name);
+//          int currentDice = oneKeyBoardInputNeedToClose.nextInt();
+          currentPlayer.diceValue = currentDice;
+          System.out.printf("%s get a dice value of %d %n", currentPlayer.name, currentDice);
+        }
+        raceOrderOfStart(finalList, list);
+      }
+    }
+
+  }
+
+  private static int flipDice() {
+    return generateRandomBetween1And6(oneRandomToReuse);
+  }
+
+  private static int generateRandomBetween1And6(Random random) {
+    int minDice = 1;
+    int maxDice = 6;
+    int realValue = minDice + random.nextInt(maxDice);
+    displayDice(realValue, maxDice);
+    return realValue;
+  }
+
+  /**
+   * Just display No other effect
+   *
+   * @param realValue a number that will be printed in the end
+   * @param width     a number that decide the width of the display
+   */
+  private static void displayDice(int realValue, int width) {
+    long pauseTime = Setting.GAME_SPEED;
+
+    for (int i = 0; i < width * realValue; i++) {
+      pauseDisplay(pauseTime / 10);
+      System.out.printf("%d..", 1 + oneRandomToReuse.nextInt(realValue));
+    }
+    pauseDisplay(pauseTime * 3);
+    System.out.printf("%s.", realValue);
+    pauseDisplay(pauseTime * 2);
+    System.out.printf("%s ", realValue);
+    pauseDisplay(pauseTime);
+    System.out.printf("%s%n", realValue);
+    //    pauseDisplay(pauseTime * 10);
+  }
+
+  /**
+   * Pause the display
+   *
+   * @param millis a time by millions
+   */
+  private static void pauseDisplay(Long millis) {
+    try {
+      Thread.sleep(millis);
+    } catch (InterruptedException ex) {
+      System.err.println(ex.getMessage());
+    }
+  }
+
   private static List<Player> mockWelcomePlayers() {
     return new LinkedList<>(
        List.of(new Player("Player 01", 2),
@@ -56,41 +157,11 @@ public class LadderAndSnake {
           new Player("Player 04", 3)));
   }
 
-  /**
-   * Add players and decide their order
-   *
-   * @return a list of Players who will take part in the game
-   */
-  private static List<Player> welcomePlayers() {
-    // this is your code
-    List<Player> playerList = new ArrayList<>(4);
-    Scanner input = new Scanner(System.in);
-    System.out.println("Enter A Number of players");
-    int numPlayers = input.nextInt();
-
-    // decide number of players (must be between 2 and 4)
-    while (numPlayers < 2 || numPlayers > 4) {
-      System.out.println("Number of players must be between 2 and 4 ");
-      numPlayers = input.nextInt();
-    }
-
-    // create an array of players that is size numPlayers
-    // and an array of integers that is size numPlayers to save the dice roll values
+  private static void qasemWelcomePlayers() { // determine the order of playing turns
+    List<Player> playerList = partTwo();
+    int numPlayers = 2;
     int[] diceRolls = new int[numPlayers];
-    for (int i = 0; i < numPlayers; i++) {
-      System.out.println("Enter the name of player " + (i + 1) + ":");
-      String playerName = input.next();
-      Player player = new Player(playerName);
-      System.out.println(playerName + ", press enter to roll the dice:");
-      input.nextLine();  // consume newline character
-      //      diceRolls[i] = Player.rollDice();  // roll the dice
-      // whatever
-      diceRolls[i] = generateRandomBetween1And6(oneRandomToReuse);  // roll the dice
-      System.out.println(playerName + " rolled a " + diceRolls[i]);
-      playerList.add(player);
-    }
-
-    // determine the order of playing turns
+    Scanner input = oneKeyBoardInputNeedToClose;
     while (true) {
       // find the player with the highest dice roll value
       int maxDiceRoll = 0;
@@ -142,7 +213,39 @@ public class LadderAndSnake {
       }
       break; // break is not jump to the while loop
     }
+  }
 
+  private static List<Player> partTwo() {
+    List<Player> playerList = new ArrayList<>();
+    //TODO: reuse one scanner in the whole project
+    Scanner input = oneKeyBoardInputNeedToClose;
+    //    Scanner input = new Scanner(System.in);
+    System.out.println("Enter A Number of players");
+    int numPlayers = input.nextInt();
+
+    // decide number of players (must be between 2 and 4)
+    //TODO: simple the logic test
+    while (numPlayers != 2
+       && numPlayers != 3
+       && numPlayers != 4) {
+      //    while (numPlayers < 2 || numPlayers > 4) {
+      System.out.println("Number of players must be between 2 and 4 ");
+      numPlayers = input.nextInt();
+    }
+
+    //TODO: two steps, the first step is to set player name
+    //    int[] diceRolls = new int[numPlayers];
+    for (int i = 0; i < numPlayers; i++) {
+      System.out.println("Enter the name of player " + (i + 1) + ":");
+      String playerName = input.next();
+      Player player = new Player(playerName);
+      System.out.println(playerName + ", press enter to roll the dice:");
+      input.nextLine();  // consume newline character
+
+      //      diceRolls[i] = flipDice();  // roll the dice
+      //      System.out.println(playerName + " rolled a " + diceRolls[i]);
+      playerList.add(player);
+    }
     return playerList;
   }
 
@@ -191,7 +294,7 @@ public class LadderAndSnake {
     int position = player.position;
     System.out.printf("%n%s(position=%d) :  go....\t", player.name, player.position);
     pauseGame("(Press Enter to flip dice)");
-    int diceValue = generateRandomBetween1And6(oneRandomToReuse);
+    int diceValue = flipDice();
     System.out.println("got a dice value of " + diceValue);
     System.out.printf("move to %d = %d + %d%n", position + diceValue, position, diceValue);
     position += diceValue;
@@ -218,54 +321,7 @@ public class LadderAndSnake {
   private static void pauseGame(String message) {
     if (Setting.AUTO_RUN == false) {
       System.out.printf(String.format("%s", message));
-      oneScannerNeedToClose.nextLine();
-    }
-  }
-
-  private static int flipDice() {
-    return generateRandomBetween1And6(oneRandomToReuse);
-  }
-
-  private static int generateRandomBetween1And6(Random random) {
-    int minDice = 1;
-    int maxDice = 6;
-    int realValue = minDice + random.nextInt(maxDice);
-    displayDice(realValue, maxDice);
-    return realValue;
-  }
-
-  /**
-   * Just display No other effect
-   *
-   * @param realValue a number that will be printed in the end
-   * @param width     a number that decide the width of the display
-   */
-  private static void displayDice(int realValue, int width) {
-    long pauseTime = Setting.GAME_SPEED;
-
-    for (int i = 0; i < width * realValue; i++) {
-      pauseDisplay(pauseTime / 10);
-      System.out.printf("%d..", 1 + oneRandomToReuse.nextInt(realValue));
-    }
-    pauseDisplay(pauseTime * 3);
-    System.out.printf("%s.", realValue);
-    pauseDisplay(pauseTime * 2);
-    System.out.printf("%s ", realValue);
-    pauseDisplay(pauseTime);
-    System.out.printf("%s%n", realValue);
-    //    pauseDisplay(pauseTime * 10);
-  }
-
-  /**
-   * Pause the display
-   *
-   * @param millis a time by millions
-   */
-  private static void pauseDisplay(Long millis) {
-    try {
-      Thread.sleep(millis);
-    } catch (InterruptedException ex) {
-      System.err.println(ex.getMessage());
+      oneKeyBoardInputNeedToClose.nextLine();
     }
   }
 
@@ -381,7 +437,8 @@ public class LadderAndSnake {
         isCurrentPlayer = player.name.equalsIgnoreCase(currentPlayer.name);
       }
       list.add(
-         String.format("%4s %c %-16s now in square: %3d", isCurrentPlayer ? "->" : "  ", player.orderOfStart.getChar(),
+         String.format("%4s %c %-16s now in square: %3d", isCurrentPlayer ? "->" : "  ",
+            player.orderOfStart.getChar(),
             player.name, player.position));
     }
 
@@ -474,7 +531,7 @@ public class LadderAndSnake {
      * Adjust the display pause time by  millis, To speed up the debugging set 0L No Pause.
      */
     private static final long GAME_SPEED = 200L;
-    private static final boolean AUTO_RUN = false;
+    private static final boolean AUTO_RUN = true;
     private static final int BROAD_SIZE = 100;
     private static final int PLAYER_START_POSITION = 70;
   }
@@ -490,6 +547,7 @@ public class LadderAndSnake {
      * store the order and icon information
      */
     PlayerCharEnum orderOfStart = PlayerCharEnum.FIRST;
+    int diceValue = 0;
 
     Player(String name) {
       this.name = name;
