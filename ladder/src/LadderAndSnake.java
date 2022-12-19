@@ -14,7 +14,7 @@ import java.util.Scanner;
  * Run successfully
  *
  * @author Mueataz Qasem Qasem, Dongguo
- * @version 1.1 {@code @date} 2022-12-19 00:08
+ * @version 1.1 {@code @date} 2022-12-19 14:03
  */
 public class LadderAndSnake {
 
