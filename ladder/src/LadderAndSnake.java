@@ -1,37 +1,37 @@
 import java.util.ArrayList;
-   import java.util.Arrays;
-   import java.util.HashMap;
-   import java.util.LinkedList;
-   import java.util.List;
-   import java.util.Map;
-   import java.util.Queue;
-   import java.util.Random;
-   import java.util.Scanner;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * <p>
- * Update the displayPlay
- * Add a line for testing
+ *
+ * Run successfully
  *
  * @author Mueataz Qasem Qasem, Dongguo
- * @version 0.9 {@code @date} 2022-12-17 21:50
+ * @version 1.1 {@code @date} 2022-12-19 00:08
  */
 public class LadderAndSnake {
 
   private static final Queue<Player> playerQueueInPlaying = new LinkedList<>();
   private static final List<Player> playerListSortedByPosition = new ArrayList<>(4);
-  private static final HashMap<Integer, Integer> ruleMap = new HashMap<>();
+  private static final HashMap<Integer, Integer> ladderAndSnakePosition = new HashMap<>();
   private static final char[] boardRecord = new char[Setting.BROAD_SIZE + 1];
   private static final Random oneRandomToReuse = new Random();
   private static final Scanner oneScannerNeedToClose = new Scanner(System.in);
 
   public static void main(String[] args) {
-    initBoard();
+    initLadderAndSnakePosition();
     refreshBoardRecord();
     displayBoard();
 
-    //    List<Player> list = welcomePlayers();
-    List<Player> list = mockWelcomePlayers();
+    List<Player> list = welcomePlayers();
+//    List<Player> list = mockWelcomePlayers();
     initPlayers(list);
     play();
     oneScannerNeedToClose.close();
@@ -62,22 +62,86 @@ public class LadderAndSnake {
    * @return a list of Players who will take part in the game
    */
   private static List<Player> welcomePlayers() {
+    // this is your code
     List<Player> playerList = new ArrayList<>(4);
-
-    //TODO: decide the number of players, 2, 3, 4? only 4 chances to press
-
-    //TODO: add players by using for loop,
-    // Add one Player with name
-    System.out.println(" Welcome To The Ladder And Snakes Game");
-    System.out.println(" Please Enter your Name:");
     Scanner input = new Scanner(System.in);
-    String playerName = input.nextLine();
-    playerList.add(new Player(playerName));
+    System.out.println("Enter A Number of players");
+    int numPlayers = input.nextInt();
 
-    //TODO: set the order of the players
-    // in the flip divce game
-    //    Player test = new Player("1");
-    //    test.setOrderOfStart(3);
+    // decide number of players (must be between 2 and 4)
+    while (numPlayers < 2 || numPlayers > 4) {
+      System.out.println("Number of players must be between 2 and 4 ");
+      numPlayers = input.nextInt();
+    }
+
+    // create an array of players that is size numPlayers
+    // and an array of integers that is size numPlayers to save the dice roll values
+    int[] diceRolls = new int[numPlayers];
+    for (int i = 0; i < numPlayers; i++) {
+      System.out.println("Enter the name of player " + (i + 1) + ":");
+      String playerName = input.next();
+      Player player = new Player(playerName);
+      System.out.println(playerName + ", press enter to roll the dice:");
+      input.nextLine();  // consume newline character
+      //      diceRolls[i] = Player.rollDice();  // roll the dice
+      // whatever
+      diceRolls[i] = generateRandomBetween1And6(oneRandomToReuse);  // roll the dice
+      System.out.println(playerName + " rolled a " + diceRolls[i]);
+      playerList.add(player);
+    }
+
+    // determine the order of playing turns
+    while (true) {
+      // find the player with the highest dice roll value
+      int maxDiceRoll = 0;
+      int maxDiceRollIndex = 0;
+      for (int i = 0; i < numPlayers; i++) {
+        if (diceRolls[i] > maxDiceRoll) {
+          // explain
+          maxDiceRoll = diceRolls[i];
+          maxDiceRollIndex = i;
+        }
+      }
+
+      // check if there are any ties in the dice roll values
+      boolean tieExists = false;
+      for (int i = 0; i < numPlayers; i++) {
+        if (i != maxDiceRollIndex && diceRolls[i] == maxDiceRoll) {
+          tieExists = true;
+          break;
+        }
+      }
+
+      // if there are no ties, set the order of start for the player with the highest dice roll
+      // and set the order of start for the remaining players based on the dice roll values
+      if (!tieExists) {
+        playerList.get(maxDiceRollIndex).setOrderOfStart(0);
+        for (int i = 1; i < numPlayers; i++) {
+          int nextPlayerIndex = (maxDiceRollIndex + i) % numPlayers;
+          playerList.get(nextPlayerIndex).setOrderOfStart(i);
+        }
+      }
+
+      // if there are ties, re-roll the dice for the players with the tied dice roll values
+      // and continue the loop until there are no more ties
+      else {
+        List<Integer> tiedPlayerIndices = new ArrayList<>();
+        for (int j = 0; j < numPlayers; j++) {
+          if (j != maxDiceRollIndex && diceRolls[j] == maxDiceRoll) {
+            tiedPlayerIndices.add(j);
+          }
+        }
+        for (int tiedPlayerIndex : tiedPlayerIndices) {
+          System.out.println(playerList.get(tiedPlayerIndex).name + ", press enter to re-roll the dice:");
+          input.nextLine();  // consume newline character
+          //          diceRolls[tiedPlayerIndex] = Player.rollDice();  // re-roll the dice
+          diceRolls[tiedPlayerIndex] = flipDice();  // re-roll the dice
+          System.out.println(playerList.get(tiedPlayerIndex).name + " rolled a " + diceRolls[tiedPlayerIndex]);
+        }
+
+      }
+      break; // break is not jump to the while loop
+    }
 
     return playerList;
   }
@@ -132,11 +196,11 @@ public class LadderAndSnake {
     System.out.printf("move to %d = %d + %d%n", position + diceValue, position, diceValue);
     position += diceValue;
     pauseGame("Please press Enter to continue");
-    while (ruleMap.containsKey(position)) {
+    while (ladderAndSnakePosition.containsKey(position)) {
       System.out.println("then...");
       System.out.println("continue move automatically");
 
-      int newPosition = ruleMap.get(position);
+      int newPosition = ladderAndSnakePosition.get(position);
       if (newPosition > position) {
         System.out.println("LADDER  " + "=|".repeat((newPosition - position) * 3));
       } else {
@@ -158,6 +222,10 @@ public class LadderAndSnake {
     }
   }
 
+  private static int flipDice() {
+    return generateRandomBetween1And6(oneRandomToReuse);
+  }
+
   private static int generateRandomBetween1And6(Random random) {
     int minDice = 1;
     int maxDice = 6;
@@ -174,6 +242,7 @@ public class LadderAndSnake {
    */
   private static void displayDice(int realValue, int width) {
     long pauseTime = Setting.GAME_SPEED;
+
     for (int i = 0; i < width * realValue; i++) {
       pauseDisplay(pauseTime / 10);
       System.out.printf("%d..", 1 + oneRandomToReuse.nextInt(realValue));
@@ -221,7 +290,7 @@ public class LadderAndSnake {
 
   private static char[] refreshBoardRecord() {
     char[] chars = new char[101];
-    char charSnaker = 'ㄹ';
+    char charSnake = 'ㄹ';
     char charLadder = 'ㅒ';
     char charSquare = 'ㆍ';
     char charFinal = 'ㅇ';
@@ -230,9 +299,8 @@ public class LadderAndSnake {
     Arrays.fill(chars, charSquare);
     chars[1] = charStart;
     chars[100] = charFinal;
-    fillSnakeAndLadder(charSnaker, charLadder, chars);
+    fillSnakeAndLadder(charSnake, charLadder, chars);
     return chars;
-    //    System.arraycopy(chars, 0, boardRecord, 0, chars.length);
   }
 
   private static List<String> boardLiveInfo() {
@@ -287,7 +355,7 @@ public class LadderAndSnake {
   }
 
   private static void fillSnakeAndLadder(char charSnaker, char charLadder, char[] boardRecord) {
-    for (Map.Entry<Integer, Integer> entry : ruleMap.entrySet()) {
+    for (Map.Entry<Integer, Integer> entry : ladderAndSnakePosition.entrySet()) {
       int position = entry.getKey();
       int positionToMove = entry.getValue();
       if (position < 100 && positionToMove > position) {
@@ -329,28 +397,28 @@ public class LadderAndSnake {
   /**
    * set all ladder and snake rules and moving backward rules when exceeding maximum
    */
-  private static void initBoard() {
-    ruleMap.put(105, 95);
-    ruleMap.put(104, 96);
-    ruleMap.put(103, 97);
-    ruleMap.put(102, 98);
-    ruleMap.put(101, 99);
-    ruleMap.put(98, 78);
-    ruleMap.put(97, 76);
-    ruleMap.put(95, 24);
-    ruleMap.put(93, 68);
-    ruleMap.put(80, 100);
-    ruleMap.put(79, 19);
-    ruleMap.put(71, 91);
-    ruleMap.put(64, 60);
-    ruleMap.put(51, 67);
-    ruleMap.put(48, 30);
-    ruleMap.put(36, 44);
-    ruleMap.put(28, 84);
-    ruleMap.put(21, 42);
-    ruleMap.put(16, 6);
-    ruleMap.put(9, 51);
-    ruleMap.put(4, 14);
+  private static void initLadderAndSnakePosition() {
+    ladderAndSnakePosition.put(105, 95);
+    ladderAndSnakePosition.put(104, 96);
+    ladderAndSnakePosition.put(103, 97);
+    ladderAndSnakePosition.put(102, 98);
+    ladderAndSnakePosition.put(101, 99);
+    ladderAndSnakePosition.put(98, 78);
+    ladderAndSnakePosition.put(97, 76);
+    ladderAndSnakePosition.put(95, 24);
+    ladderAndSnakePosition.put(93, 68);
+    ladderAndSnakePosition.put(80, 100);
+    ladderAndSnakePosition.put(79, 19);
+    ladderAndSnakePosition.put(71, 91);
+    ladderAndSnakePosition.put(64, 60);
+    ladderAndSnakePosition.put(51, 67);
+    ladderAndSnakePosition.put(48, 30);
+    ladderAndSnakePosition.put(36, 44);
+    ladderAndSnakePosition.put(28, 84);
+    ladderAndSnakePosition.put(21, 42);
+    ladderAndSnakePosition.put(16, 6);
+    ladderAndSnakePosition.put(9, 51);
+    ladderAndSnakePosition.put(4, 14);
     //  ruleMap.put(1, 38);
   }
 
@@ -406,7 +474,7 @@ public class LadderAndSnake {
      * Adjust the display pause time by  millis, To speed up the debugging set 0L No Pause.
      */
     private static final long GAME_SPEED = 200L;
-    private static final boolean AUTO_RUN = true;
+    private static final boolean AUTO_RUN = false;
     private static final int BROAD_SIZE = 100;
     private static final int PLAYER_START_POSITION = 70;
   }
