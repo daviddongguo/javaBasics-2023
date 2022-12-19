@@ -9,8 +9,6 @@ import java.util.Random;
 import java.util.Scanner;
 
 /**
- * <p>
- * <p>
  * Run successfully
  *
  * @author Mueataz Qasem Qasem, Dongguo
@@ -35,11 +33,13 @@ public class LadderAndSnake {
     initPlayers(list);
     play();
     oneKeyBoardInputNeedToClose.close();
-    //TODO: more information such as "After 11 steps, ... Win"
     System.out.println("\n\nBye");
     System.exit(0);
   }
 
+  /**
+   * Display the game board that shows the position of players and ladder, snake.
+   */
   private static void displayBoard() {
     List<String> list = boardLiveInfo();
     for (String s : list) {
@@ -107,7 +107,6 @@ public class LadderAndSnake {
     }
 
   }
-
 
   private static List<Player> mockWelcomePlayers() {
     return new LinkedList<>(
@@ -177,6 +176,7 @@ public class LadderAndSnake {
 
   /**
    * Include display effect
+   *
    * @return 1, 2, ... 6
    */
   private static int flipDice() {
@@ -187,6 +187,7 @@ public class LadderAndSnake {
 
   /**
    * No display effect
+   *
    * @return 1, 2, ... 6
    */
   private static int generateRandomBetween1And6() {
@@ -198,12 +199,11 @@ public class LadderAndSnake {
   /**
    * Just display No other effect
    *
-   * @param realValue a number that will be printed in the end
+   * @param diceValue a number that will be printed in the end
    */
-  private static void displayDice(int realValue) {
+  private static void displayDice(int diceValue) {
     long pauseTime = Setting.GAME_SPEED;
-
-    List<String> output = new ArrayList<>(List.of(
+    List<String> template = new ArrayList<>(List.of(
        "       *                                                           ",
        "    *    *                                                         ",
        "  *         *                                                      ",
@@ -214,23 +214,21 @@ public class LadderAndSnake {
        "                       *                 *         *      *  * *  "
     ));
 
-    for (int i = 0; i < output.size(); i++) {
-      String string = output.get(i);
-      char[] array = string.toCharArray();
-      for (int j = 0; j < array.length; j++) {
-        if (array[j] == '*') {
-          int rnd = 49 + oneRandomToReuse.nextInt(6);
-          char c = (char) (rnd);
-          array[j] = c;
+    for (int indexOfRow = 0; indexOfRow < template.size(); indexOfRow++) {
+      String string = template.get(indexOfRow);
+      char[] charArray = string.toCharArray();
+      for (int indexOfColumn = 0; indexOfColumn < charArray.length; indexOfColumn++) {
+        if (charArray[indexOfColumn] == '*') {
+          charArray[indexOfColumn] = (char) (49 + generateRandomBetween1And6());
         }
       }
-      String newString = String.copyValueOf(array);
-      if (i == output.size() - 1) {
-        System.out.printf("%s ", newString);
+      boolean isLastLine = indexOfRow == template.size() - 1;
+      if (isLastLine) {
+        System.out.printf("%s ", String.copyValueOf(charArray));
         pauseDisplay(pauseTime * 2);
-        System.out.printf("%s%n", realValue);
+        System.out.printf("%s%n", diceValue);
       } else {
-        System.out.println(newString);
+        System.out.println(String.copyValueOf(charArray));
       }
     }
   }
@@ -328,7 +326,7 @@ public class LadderAndSnake {
     System.out.printf("%n%s(position=%d) :  go....\t", currentPlayer.name, currentPlayer.position);
     pauseGame("(Press Enter to flip dice)");
 
-    int currentDice ;
+    int currentDice;
     if (Setting.DEVELPMENT_MODE) {
       System.out.println("\n===========Development  Mode======================");
       System.out.printf("%s, please enter 1-6 to get your dice value directly:  ", currentPlayer.name);
@@ -402,6 +400,11 @@ public class LadderAndSnake {
     return chars;
   }
 
+  /**
+   * the game board that include the position ladder and snake.
+   * and the position of players.
+   * @return  a string list
+   */
   private static List<String> boardLiveInfo() {
     List<String> list = new ArrayList<>(12);
 
