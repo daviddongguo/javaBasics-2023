@@ -30,8 +30,8 @@ public class LadderAndSnake {
     refreshBoardRecord();
     displayBoard();
 
-    List<Player> list = welcomePlayers();
-    //    List<Player> list = mockWelcomePlayers();
+    //    List<Player> list = welcomePlayers();
+    List<Player> list = mockWelcomePlayers();
     initPlayers(list);
     play();
     oneKeyBoardInputNeedToClose.close();
@@ -70,19 +70,19 @@ public class LadderAndSnake {
     }
 
     HashMap<Integer, List<Player>> map = new HashMap<>();
-    for (Player player: listToDecide){
+    for (Player player : listToDecide) {
       var list = map.get(player.diceValue);
-      if(list == null){
+      if (list == null) {
         list = new ArrayList<>(List.of(player));
         map.put(player.diceValue, list);
-      }else {
+      } else {
         list.add(player);
       }
     }
 
     for (int i = 6; i >= 0; i--) {
       List<Player> list = map.get(i);
-      if(list == null){
+      if (list == null) {
         continue;
       }
       if (list.size() == 1) {
@@ -91,8 +91,8 @@ public class LadderAndSnake {
       if (list.size() >= 2) {
         for (Player currentPlayer : list) {
           int currentDice = flipDice();
-//          System.out.printf("%s, please enter 1-6:  ", currentPlayer.name);
-//          int currentDice = oneKeyBoardInputNeedToClose.nextInt();
+          //          System.out.printf("%s, please enter 1-6:  ", currentPlayer.name);
+          //          int currentDice = oneKeyBoardInputNeedToClose.nextInt();
           currentPlayer.diceValue = currentDice;
           System.out.printf("%s get a dice value of %d %n", currentPlayer.name, currentDice);
         }
@@ -100,53 +100,6 @@ public class LadderAndSnake {
       }
     }
 
-  }
-
-  private static int flipDice() {
-    return generateRandomBetween1And6(oneRandomToReuse);
-  }
-
-  private static int generateRandomBetween1And6(Random random) {
-    int minDice = 1;
-    int maxDice = 6;
-    int realValue = minDice + random.nextInt(maxDice);
-    displayDice(realValue, maxDice);
-    return realValue;
-  }
-
-  /**
-   * Just display No other effect
-   *
-   * @param realValue a number that will be printed in the end
-   * @param width     a number that decide the width of the display
-   */
-  private static void displayDice(int realValue, int width) {
-    long pauseTime = Setting.GAME_SPEED;
-
-    for (int i = 0; i < width * realValue; i++) {
-      pauseDisplay(pauseTime / 10);
-      System.out.printf("%d..", 1 + oneRandomToReuse.nextInt(realValue));
-    }
-    pauseDisplay(pauseTime * 3);
-    System.out.printf("%s.", realValue);
-    pauseDisplay(pauseTime * 2);
-    System.out.printf("%s ", realValue);
-    pauseDisplay(pauseTime);
-    System.out.printf("%s%n", realValue);
-    //    pauseDisplay(pauseTime * 10);
-  }
-
-  /**
-   * Pause the display
-   *
-   * @param millis a time by millions
-   */
-  private static void pauseDisplay(Long millis) {
-    try {
-      Thread.sleep(millis);
-    } catch (InterruptedException ex) {
-      System.err.println(ex.getMessage());
-    }
   }
 
   private static List<Player> mockWelcomePlayers() {
@@ -212,6 +165,72 @@ public class LadderAndSnake {
 
       }
       break; // break is not jump to the while loop
+    }
+  }
+
+  private static int flipDice() {
+    return generateRandomBetween1And6(oneRandomToReuse);
+  }
+
+  private static int generateRandomBetween1And6(Random random) {
+    int minDice = 1;
+    int maxDice = 6;
+    int realValue = minDice + random.nextInt(maxDice);
+    displayDice(realValue, maxDice);
+    return realValue;
+  }
+
+  /**
+   * Just display No other effect
+   *
+   * @param realValue a number that will be printed in the end
+   * @param width     a number that decide the width of the display
+   */
+  private static void displayDice(int realValue, int width) {
+    long pauseTime = Setting.GAME_SPEED;
+
+    List<String> output = new ArrayList<>(List.of(
+       "       *                                                           ",
+       "    *    *                                                         ",
+       "  *         *                                                      ",
+       "*              *               * *                                 ",
+       "                 *           *     *          *                    ",
+       "                   *       *         *      *   *      *           ",
+       "                     *   *             *   *      *  *   * *       ",
+       "                       *                 *         *      *  * *  "
+    ));
+
+    for (int i = 0; i < output.size(); i++) {
+      String string = output.get(i);
+      char[] array = string.toCharArray();
+      for (int j = 0; j < array.length; j++) {
+        if (array[j] == '*') {
+          int rnd = 49 + oneRandomToReuse.nextInt(6);
+          char c = (char) (rnd);
+          array[j] = c;
+        }
+      }
+      String newString = String.copyValueOf(array);
+      if (i == output.size() - 1) {
+        System.out.printf("%s ", newString);
+        pauseDisplay(pauseTime * 2);
+        System.out.printf("%s%n", realValue);
+      } else {
+        System.out.println(newString);
+      }
+    }
+  }
+
+  /**
+   * Pause the display
+   *
+   * @param millis a time by millions
+   */
+  private static void pauseDisplay(Long millis) {
+    try {
+      Thread.sleep(millis);
+    } catch (InterruptedException ex) {
+      System.err.println(ex.getMessage());
     }
   }
 
