@@ -90,10 +90,16 @@ public class LadderAndSnake {
       }
       if (list.size() >= 2) {
         for (Player currentPlayer : list) {
-          int currentDice = flipDice();
-          //          System.out.printf("%s, please enter 1-6:  ", currentPlayer.name);
-          //          int currentDice = oneKeyBoardInputNeedToClose.nextInt();
-          currentPlayer.diceValue = currentDice;
+          int currentDice;
+          if (Setting.DEVELPMENT_MODE) {
+            System.out.println("\n===========Development  Mode======================");
+            System.out.printf("%s, please enter 1-6 to get your dice value directly:  ", currentPlayer.name);
+            currentDice = oneKeyBoardInputNeedToClose.nextInt();
+
+          } else {
+            currentDice = flipDice();
+            currentPlayer.diceValue = currentDice;
+          }
           System.out.printf("%s get a dice value of %d %n", currentPlayer.name, currentDice);
         }
         raceOrderOfStart(finalList, list);
@@ -101,6 +107,7 @@ public class LadderAndSnake {
     }
 
   }
+
 
   private static List<Player> mockWelcomePlayers() {
     return new LinkedList<>(
@@ -168,25 +175,32 @@ public class LadderAndSnake {
     }
   }
 
+  /**
+   * Include display effect
+   * @return 1, 2, ... 6
+   */
   private static int flipDice() {
-    return generateRandomBetween1And6(oneRandomToReuse);
+    int result = generateRandomBetween1And6();
+    displayDice(result);
+    return result;
   }
 
-  private static int generateRandomBetween1And6(Random random) {
+  /**
+   * No display effect
+   * @return 1, 2, ... 6
+   */
+  private static int generateRandomBetween1And6() {
     int minDice = 1;
     int maxDice = 6;
-    int realValue = minDice + random.nextInt(maxDice);
-    displayDice(realValue, maxDice);
-    return realValue;
+    return minDice + oneRandomToReuse.nextInt(maxDice);
   }
 
   /**
    * Just display No other effect
    *
    * @param realValue a number that will be printed in the end
-   * @param width     a number that decide the width of the display
    */
-  private static void displayDice(int realValue, int width) {
+  private static void displayDice(int realValue) {
     long pauseTime = Setting.GAME_SPEED;
 
     List<String> output = new ArrayList<>(List.of(
@@ -306,17 +320,27 @@ public class LadderAndSnake {
   /**
    * move based on a random number create by flip dice and on the rules of the game broad
    *
-   * @param player a player who is moving
+   * @param currentPlayer a player who is moving
    * @return the position where the player will go
    */
-  private static int go(Player player) {
-    int position = player.position;
-    System.out.printf("%n%s(position=%d) :  go....\t", player.name, player.position);
+  private static int go(Player currentPlayer) {
+    int position = currentPlayer.position;
+    System.out.printf("%n%s(position=%d) :  go....\t", currentPlayer.name, currentPlayer.position);
     pauseGame("(Press Enter to flip dice)");
-    int diceValue = flipDice();
-    System.out.println("got a dice value of " + diceValue);
-    System.out.printf("move to %d = %d + %d%n", position + diceValue, position, diceValue);
-    position += diceValue;
+
+    int currentDice ;
+    if (Setting.DEVELPMENT_MODE) {
+      System.out.println("\n===========Development  Mode======================");
+      System.out.printf("%s, please enter 1-6 to get your dice value directly:  ", currentPlayer.name);
+      currentDice = oneKeyBoardInputNeedToClose.nextInt();
+
+    } else {
+      currentDice = flipDice();
+    }
+
+    System.out.println("got a dice value of " + currentDice);
+    System.out.printf("move to %d = %d + %d%n", position + currentDice, position, currentDice);
+    position += currentDice;
     pauseGame("Please press Enter to continue");
     while (ladderAndSnakePosition.containsKey(position)) {
       System.out.println("then...");
@@ -330,7 +354,7 @@ public class LadderAndSnake {
       }
       position = newPosition;
       System.out.println("move to " + position);
-      displayPlayers(player);
+      displayPlayers(currentPlayer);
       pauseGame("Please press Enter to continue");
     }
 
@@ -550,7 +574,9 @@ public class LadderAndSnake {
      * Adjust the display pause time by  millis, To speed up the debugging set 0L No Pause.
      */
     private static final long GAME_SPEED = 200L;
+
     private static final boolean AUTO_RUN = true;
+    private static final boolean DEVELPMENT_MODE = true;
     private static final int BROAD_SIZE = 100;
     private static final int PLAYER_START_POSITION = 70;
   }
