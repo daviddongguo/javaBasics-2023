@@ -10,9 +10,15 @@ public class Main {
     Random oneRandomToReuse = new Random();
     Scanner oneKeyBoardInputNeedToClose = new Scanner(System.in);
     List<Player> playerList = mockPlayers();
+    IMovable randomDice = new RandomDice(oneRandomToReuse);
+    IMovable magicDic = new RandomDice(oneRandomToReuse);
+
+    BaseDiceGame miniGame = new MiniDiceGame(new ArrayList<>(), oneRandomToReuse, oneKeyBoardInputNeedToClose,
+       randomDice);
+    playerList = miniGame.play();
 
     BaseDiceGame game = new LadderAndSnakeGame(playerList, oneRandomToReuse, oneKeyBoardInputNeedToClose,
-       new RandomDice(oneRandomToReuse));
+       randomDice);
     //        BaseDiceGame game = new LadderAndSnakeGame(playerList, oneRandomToReuse, oneKeyBoardInputNeedToClose,
     //           new MagicDice(oneKeyBoardInputNeedToClose));
 
