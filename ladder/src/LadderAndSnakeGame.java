@@ -14,13 +14,13 @@ import java.util.Scanner;
  */
 public class LadderAndSnakeGame extends BaseDiceGame {
 
-  private final Queue<LadderAndSnakeGamePlayer> playerQueue = new LinkedList<>();
+  private static final Queue<LadderAndSnakeGamePlayer> playerQueue = new LinkedList<>();
   private final List<LadderAndSnakeGamePlayer> playerListSortedByPosition = new ArrayList<>(4);
   private final HashMap<Integer, Integer> ladderAndSnakePosition = new HashMap<>();
   private final char[] boardDesign = new char[Setting.BROAD_SIZE + 1];
 
-  public LadderAndSnakeGame(Random random, Scanner scanner, IMovable dice) {
-    super(random, scanner, dice);
+  public LadderAndSnakeGame(List<? extends Player> playerList, Random random, Scanner scanner, IMovable dice) {
+    super(playerList, random, scanner, dice);
   }
 
   @Override
@@ -28,18 +28,14 @@ public class LadderAndSnakeGame extends BaseDiceGame {
     initializeLadderAndSnakePosition();
     initializeBoard();
     displayBoard();
-  }
-
-  @Override
-  public void registerPlay() {
-    List<LadderAndSnakeGamePlayer> list = welcomePlayers();
+    //        List<LadderAndSnakeGamePlayer> list = welcomePlayers();
     //    List<LadderAndSnakeGamePlayer> list = mockWelcomePlayers();
-    initializePlayer(list);
+    initializePlayer(playerList);
   }
 
   @Override
-  public void play() {
-    playLadderAndSnakeGame();
+  public List<Player> play() {
+    return playLadderAndSnakeGame();
   }
 
   @Override
@@ -179,22 +175,16 @@ public class LadderAndSnakeGame extends BaseDiceGame {
     //  ruleMap.put(1, 38);
   }
 
-  private List<LadderAndSnakeGamePlayer> mockWelcomePlayers() {
-    return new LinkedList<>(
-       List.of(new LadderAndSnakeGamePlayer("Player 01", 2),
-          new LadderAndSnakeGamePlayer("Player 02", 1),
-          new LadderAndSnakeGamePlayer("Player 03", 0),
-          new LadderAndSnakeGamePlayer("Player 04", 3)));
-  }
-
   /**
    * Order the players by the orderOfStart property <p />Add the sorted players into the playerQueueInPlaying and
    * playerListSortedByPosition
    */
-  private void initializePlayer(List<LadderAndSnakeGamePlayer> list) {
-    list.sort((a, b) -> a.orderOfStart.getIndex() - b.orderOfStart.getIndex());
-    playerQueue.addAll(list);
-    playerListSortedByPosition.addAll(list);
+  private void initializePlayer(List<? extends Player> list) {
+    for (Player currentPlayer : list) {
+      LadderAndSnakeGamePlayer player = new LadderAndSnakeGamePlayer(currentPlayer.name);
+      playerListSortedByPosition.add(player);
+      playerQueue.add(player);
+    }
     displayPlayers(null);
   }
 
@@ -390,10 +380,10 @@ public class LadderAndSnakeGame extends BaseDiceGame {
     return playerList;
   }
 
-  private void playLadderAndSnakeGame() {
+  private List<Player> playLadderAndSnakeGame() {
     if (playerQueue.isEmpty()) {
       System.out.println("No player is ready.");
-      return;
+      return null;
     }
 
     LadderAndSnakeGamePlayer currentPlayer;
@@ -408,7 +398,7 @@ public class LadderAndSnakeGame extends BaseDiceGame {
       pauseGame("Please press Enter to continue");
       if (currentPlayer.position >= Setting.BROAD_SIZE) {
         System.out.printf("%s wins.", currentPlayer.name);
-        return;
+        return new ArrayList<>();
       }
 
     }
