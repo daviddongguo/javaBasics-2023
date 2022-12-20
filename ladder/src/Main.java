@@ -10,7 +10,7 @@ public class Main {
     Random oneRandomToReuse = new Random();
     Scanner oneKeyBoardInputNeedToClose = new Scanner(System.in);
     IEarnable randomDice = new RandomDice(oneRandomToReuse);
-    IEarnable magicDic = new RandomDice(oneRandomToReuse);
+    IEarnable magicDic = new MagicDice(oneKeyBoardInputNeedToClose);
     List<Player> playerList;
 
 //    playerList = mockPlayers();

@@ -25,6 +25,9 @@ public class LadderAndSnakeGame extends BaseDiceGame {
 
   @Override
   public void initialize() {
+    if (playerList.isEmpty()) {
+      close();
+    }
     initializeLadderAndSnakePosition();
     initializeBoard();
     displayBoard();

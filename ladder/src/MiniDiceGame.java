@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * @author
+ */
 public class MiniDiceGame extends BaseDiceGame {
 
   public MiniDiceGame(List<? extends Player> playerList, Random random, Scanner scanner,
@@ -36,6 +39,9 @@ public class MiniDiceGame extends BaseDiceGame {
     List<LadderAndSnakeGamePlayer> finalList = new ArrayList<>();
 
     List<LadderAndSnakeGamePlayer> playerList = partTwoDecideNumberOfPlayersAndTheirName();
+    if (playerList.isEmpty()) {
+      return new ArrayList<>();
+    }
     decideOrderOfStart(finalList, playerList);
 
     return finalList;
@@ -137,6 +143,9 @@ public class MiniDiceGame extends BaseDiceGame {
     List<LadderAndSnakeGamePlayer> playerList = new ArrayList<>();
 
     int numberOfPlayers = decideNumberOfPlayers();
+    if (numberOfPlayers <= 0) {
+      return new ArrayList<>();
+    }
     namePlayers(playerList, numberOfPlayers);
 
     return playerList;
@@ -145,11 +154,33 @@ public class MiniDiceGame extends BaseDiceGame {
   private int decideNumberOfPlayers() {
     int numPlayers = 0;
     System.out.println("Enter A Number of players(2-4): ");
-    numPlayers = scanner.nextInt();
-    while (numPlayers < 2 || numPlayers > 4) {
-      System.out.println("Number of players must be between 2 and 4 ");
+    int totalAttempts = 4;
+    for (int count = 1; count <= totalAttempts; count++) {
       numPlayers = scanner.nextInt();
+      boolean isCorrectNumber = numPlayers >= 2 && numPlayers <= 4;
+      if(isCorrectNumber){
+        return numPlayers;
+      }
+      boolean isLastTime = count == totalAttempts;
+      boolean isLastSecondTime = count == totalAttempts - 1;
+      if (isLastTime) {
+        System.out.println("Bad Attempt " + count +
+           " ! You have exhausted all your chances. The program will terminate!");
+        return -1;
+      }
+      if (isLastSecondTime) {
+        System.out.println("Bad Attempt " + count +
+           " - Invalid number of players. Please enter a number between 2 and 4 inclusively. This is your last attempt: ");
+        continue;
+      }
+      System.out.println("Bad Attempt " + count +
+         " - Invalid number of players. Please enter a number between 2 and 4 inclusively:");
     }
+    //    numPlayers = scanner.nextInt();
+    //    while (numPlayers < 2 || numPlayers > 4) {
+    //      System.out.println("Number of players must be between 2 and 4 ");
+    //      numPlayers = scanner.nextInt();
+    //    }
     return numPlayers;
   }
 
