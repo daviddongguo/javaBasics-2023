@@ -13,22 +13,18 @@ public class MiniDiceGame extends BaseDiceGame {
 
   @Override
   public void initialize() {
+    // noting need to do
   }
 
   @Override
   public List<Player> play() {
-    List<Player> list = new ArrayList<>();
-
-    for (LadderAndSnakeGamePlayer currentPlayer : welcomePlayers()) {
-      list.add(new Player(currentPlayer.name));
-    }
-
-    return list;
+    // upcasting, convert a subclass to superclass
+    return new ArrayList<>(welcomePlayers());
   }
 
   @Override
   public void close() {
-
+    // noting need to do
   }
 
   /**
@@ -37,10 +33,9 @@ public class MiniDiceGame extends BaseDiceGame {
    * @return a list of Players who will take part in the game rename partTwo to something else
    */
   private List<LadderAndSnakeGamePlayer> welcomePlayers() {
+    List<LadderAndSnakeGamePlayer> finalList = new ArrayList<>();
 
     List<LadderAndSnakeGamePlayer> playerList = partTwoDecideNumberOfPlayersAndTheirName();
-
-    List<LadderAndSnakeGamePlayer> finalList = new ArrayList<>();
     decideOrderOfStart(finalList, playerList);
 
     return finalList;
@@ -147,6 +142,18 @@ public class MiniDiceGame extends BaseDiceGame {
     return playerList;
   }
 
+  private int decideNumberOfPlayers() {
+    int numPlayers = 0;
+    Scanner input = scanner;
+    System.out.println("Enter A Number of players(2-4): ");
+    numPlayers = input.nextInt();
+    while (numPlayers < 2 || numPlayers > 4) {
+      System.out.println("Number of players must be between 2 and 4 ");
+      numPlayers = input.nextInt();
+    }
+    return numPlayers;
+  }
+
   private void namePlayers(List<LadderAndSnakeGamePlayer> playerList, int numberOfPlayers) {
     for (int i = 0; i < numberOfPlayers; i++) {
       String playerName = "";
@@ -171,18 +178,6 @@ public class MiniDiceGame extends BaseDiceGame {
       System.out.printf("Added %s%n", player.name);
       scanner.nextLine();  // consume newline character
     }
-  }
-
-  private int decideNumberOfPlayers() {
-    int numPlayers = 0;
-    Scanner input = scanner;
-    System.out.println("Enter A Number of players(2-4): ");
-    numPlayers = input.nextInt();
-    while (numPlayers < 2 || numPlayers > 4) {
-      System.out.println("Number of players must be between 2 and 4 ");
-      numPlayers = input.nextInt();
-    }
-    return numPlayers;
   }
 
   /**
