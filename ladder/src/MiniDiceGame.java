@@ -13,13 +13,13 @@ public class MiniDiceGame extends BaseDiceGame {
 
   @Override
   public void initialize() {
-
   }
 
   @Override
   public List<Player> play() {
     List<Player> list = new ArrayList<>();
-    for (LadderAndSnakeGamePlayer currentPlayer: welcomePlayers()){
+
+    for (LadderAndSnakeGamePlayer currentPlayer : welcomePlayers()) {
       list.add(new Player(currentPlayer.name));
     }
 
@@ -38,7 +38,7 @@ public class MiniDiceGame extends BaseDiceGame {
    */
   private List<LadderAndSnakeGamePlayer> welcomePlayers() {
 
-    List<LadderAndSnakeGamePlayer> playerList = partTwo();
+    List<LadderAndSnakeGamePlayer> playerList = partTwoDecideNumberOfPlayersAndTheirName();
 
     List<LadderAndSnakeGamePlayer> finalList = new ArrayList<>();
     decideOrderOfStart(finalList, playerList);
@@ -86,50 +86,8 @@ public class MiniDiceGame extends BaseDiceGame {
 
   }
 
-  /**
-   * Include display effect
-   *
-   * @return 1, 2, ... 6
-   */
-  private int flipDice() {
-    return dice.earnScore();
-  }
-
-  private List<LadderAndSnakeGamePlayer> partTwo() {
-    List<LadderAndSnakeGamePlayer> playerList = new ArrayList<>();
-    //TODO: reuse one scanner in the whole project
-    Scanner input = scanner;
-    //    Scanner input = new Scanner(System.in);
-    System.out.println("Enter A Number of players");
-    int numPlayers = input.nextInt();
-
-    // decide number of players (must be between 2 and 4)
-    //TODO: simple the logic test
-    while (numPlayers != 2
-       && numPlayers != 3
-       && numPlayers != 4) {
-      //    while (numPlayers < 2 || numPlayers > 4) {
-      System.out.println("Number of players must be between 2 and 4 ");
-      numPlayers = input.nextInt();
-    }
-
-    //TODO: two steps, the first step is to set player name
-    //    int[] diceRolls = new int[numPlayers];
-    for (int i = 0; i < numPlayers; i++) {
-      System.out.println("Enter the name of player " + (i + 1) + ":");
-      String playerName = input.next();
-      LadderAndSnakeGamePlayer player = new LadderAndSnakeGamePlayer(playerName);
-      System.out.println(playerName + ", press enter to roll the dice:");
-      input.nextLine();  // consume newline character
-
-      //      diceRolls[i] = flipDice();  // roll the dice
-      //      System.out.println(playerName + " rolled a " + diceRolls[i]);
-      playerList.add(player);
-    }
-    return playerList;
-  }
   private void qasemWelcomePlayers() { // determine the order of playing turns
-    List<LadderAndSnakeGamePlayer> playerList = partTwo();
+    List<LadderAndSnakeGamePlayer> playerList = partTwoDecideNumberOfPlayersAndTheirName();
     int numPlayers = 2;
     int[] diceRolls = new int[numPlayers];
     Scanner input = scanner;
@@ -178,5 +136,61 @@ public class MiniDiceGame extends BaseDiceGame {
       }
       break;
     }
+  }
+
+  private List<LadderAndSnakeGamePlayer> partTwoDecideNumberOfPlayersAndTheirName() {
+    List<LadderAndSnakeGamePlayer> playerList = new ArrayList<>();
+
+    int numberOfPlayers = decideNumberOfPlayers();
+    namePlayers(playerList, numberOfPlayers);
+
+    return playerList;
+  }
+
+  private void namePlayers(List<LadderAndSnakeGamePlayer> playerList, int numberOfPlayers) {
+    for (int i = 0; i < numberOfPlayers; i++) {
+      String playerName = "";
+      boolean isDuplicateName = false;
+      // F || T = T
+      // T ||   = T
+      // F || F = F
+      while (isDuplicateName || "".equals(playerName)) {
+        System.out.println("Enter the name of player " + (i + 1) + ":");
+        playerName = scanner.next();
+        for (LadderAndSnakeGamePlayer currentPlayer : playerList) {
+          if (currentPlayer.name.equalsIgnoreCase(playerName)) {
+            System.out.println("name can not be duplicated.");
+            isDuplicateName = true;
+            break;
+          }
+          isDuplicateName = false;
+        }
+      }
+      LadderAndSnakeGamePlayer player = new LadderAndSnakeGamePlayer(playerName);
+      playerList.add(player);
+      System.out.printf("Added %s%n", player.name);
+      scanner.nextLine();  // consume newline character
+    }
+  }
+
+  private int decideNumberOfPlayers() {
+    int numPlayers = 0;
+    Scanner input = scanner;
+    System.out.println("Enter A Number of players(2-4): ");
+    numPlayers = input.nextInt();
+    while (numPlayers < 2 || numPlayers > 4) {
+      System.out.println("Number of players must be between 2 and 4 ");
+      numPlayers = input.nextInt();
+    }
+    return numPlayers;
+  }
+
+  /**
+   * Include display effect
+   *
+   * @return 1, 2, ... 6
+   */
+  private int flipDice() {
+    return dice.earnScore();
   }
 }
