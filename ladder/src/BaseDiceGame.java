@@ -1,13 +1,13 @@
 import java.util.Random;
 import java.util.Scanner;
 
-public abstract class BaseGame {
+public abstract class BaseDiceGame {
 
   protected Random random;
   protected Scanner scanner;
   protected IMovable dice;
 
-  protected BaseGame(Random random, Scanner scanner, IMovable dice) {
+  protected BaseDiceGame(Random random, Scanner scanner, IMovable dice) {
     this.random = random;
     this.scanner = scanner;
     this.dice = dice;

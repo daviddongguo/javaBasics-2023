@@ -12,7 +12,7 @@ import java.util.Scanner;
  * @author Mueataz Qasem Qasem, Dongguo
  * @version 1.3 {@code @date} 2022-12-19 23:50
  */
-public class LadderAndSnakeGame extends BaseGame {
+public class LadderAndSnakeGame extends BaseDiceGame {
 
   private final Queue<LadderAndSnakeGamePlayer> playerQueue = new LinkedList<>();
   private final List<LadderAndSnakeGamePlayer> playerListSortedByPosition = new ArrayList<>(4);

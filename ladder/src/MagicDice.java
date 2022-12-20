@@ -10,7 +10,7 @@ public class MagicDice implements IMovable {
 
   @Override
   public int getMovingSteps() {
-    System.out.print("I'm Magic Dice, tell me which number do yo love(1-6): ");
+    System.out.print("I'm Magic Dice, tell me which number do you love(1-6): ");
     return requestNumberBetween1And6();
   }
 

@@ -10,7 +10,7 @@ public class Main {
 
 
 //    BaseGame game = new LadderAndSnakeGame(oneRandomToReuse, oneKeyBoardInputNeedToClose, new RandomDice(oneRandomToReuse));
-        BaseGame game = new LadderAndSnakeGame(oneRandomToReuse, oneKeyBoardInputNeedToClose,
+        BaseDiceGame game = new LadderAndSnakeGame(oneRandomToReuse, oneKeyBoardInputNeedToClose,
            new MagicDice(oneKeyBoardInputNeedToClose));
 
     game.initialize();
