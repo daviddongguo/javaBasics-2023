@@ -144,12 +144,11 @@ public class MiniDiceGame extends BaseDiceGame {
 
   private int decideNumberOfPlayers() {
     int numPlayers = 0;
-    Scanner input = scanner;
     System.out.println("Enter A Number of players(2-4): ");
-    numPlayers = input.nextInt();
+    numPlayers = scanner.nextInt();
     while (numPlayers < 2 || numPlayers > 4) {
       System.out.println("Number of players must be between 2 and 4 ");
-      numPlayers = input.nextInt();
+      numPlayers = scanner.nextInt();
     }
     return numPlayers;
   }
