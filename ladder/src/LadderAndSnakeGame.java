@@ -14,7 +14,7 @@ import java.util.Scanner;
  */
 public class LadderAndSnakeGame extends BaseDiceGame {
 
-  private static final Queue<LadderAndSnakeGamePlayer> playerQueue = new LinkedList<>();
+  private final Queue<LadderAndSnakeGamePlayer> playerQueue = new LinkedList<>();
   private final List<LadderAndSnakeGamePlayer> playerListSortedByPosition = new ArrayList<>(4);
   private final HashMap<Integer, Integer> ladderAndSnakePosition = new HashMap<>();
   private final char[] boardDesign = new char[Setting.BROAD_SIZE + 1];
@@ -43,6 +43,66 @@ public class LadderAndSnakeGame extends BaseDiceGame {
     System.exit(0);
   }
 
+  private List<Player> playLadderAndSnakeGame() {
+    if (playerQueue.isEmpty()) {
+      System.out.println("No player is ready.");
+      return new ArrayList<>();
+    }
+
+    LadderAndSnakeGamePlayer currentPlayer;
+    while (true) {
+      currentPlayer = playerQueue.poll();
+      assert currentPlayer != null;
+
+      currentPlayer.position = go(currentPlayer);
+      playerQueue.add(currentPlayer);
+
+      displayPlayers(playerQueue.peek());
+      pauseGame("Please press Enter to continue");
+      if (currentPlayer.position >= Setting.BROAD_SIZE) {
+        System.out.printf("%s wins.", currentPlayer.name);
+        return new ArrayList<>();
+      }
+    }
+  }
+
+  /**
+   * move based on a random number create by flip dice and on the rules of the game broad
+   *
+   * @param currentPlayer a player who is moving
+   * @return the position where the player will go
+   */
+  private int go(LadderAndSnakeGamePlayer currentPlayer) {
+    int position = currentPlayer.position;
+    System.out.printf("%n%s(position=%d) :  go....\t", currentPlayer.name, currentPlayer.position);
+    pauseGame("(Press Enter to flip dice)");
+
+    int currentDice;
+    currentDice = dice.earnScore();
+
+    System.out.println("got a dice value of " + currentDice);
+    System.out.printf("move to %d = %d + %d%n", position + currentDice, position, currentDice);
+    position += currentDice;
+    pauseGame("Please press Enter to continue");
+    while (ladderAndSnakePosition.containsKey(position)) {
+      System.out.println("then...");
+      System.out.println("continue move automatically");
+
+      int newPosition = ladderAndSnakePosition.get(position);
+      if (newPosition > position) {
+        System.out.println("LADDER  " + "=|".repeat((newPosition - position) * 3));
+      } else {
+        System.out.println("SNAKE    " + "~".repeat((position - newPosition) * 3));
+      }
+      position = newPosition;
+      System.out.println("move to " + position);
+      displayPlayers(currentPlayer);
+      pauseGame("Please press Enter to continue");
+    }
+
+    return position;
+  }
+
   /**
    * Display the game board that shows the position of players and ladder, snake.
    */
@@ -55,7 +115,7 @@ public class LadderAndSnakeGame extends BaseDiceGame {
   }
 
   private void pauseGame(String message) {
-    if (Setting.AUTO_RUN == false) {
+    if (!Setting.AUTO_RUN) {
       System.out.printf(String.format("%s", message));
       scanner.nextLine();
     }
@@ -84,7 +144,7 @@ public class LadderAndSnakeGame extends BaseDiceGame {
     for (int i = 0; i <= 9; i++) {
       stringToAddInList = new StringBuilder();
       if (i % 2 == 1) {
-        stringToAddInList.append("").append(9 - i).append(" ");
+        stringToAddInList.append(9 - i).append(" ");
         for (int j = 1; j <= 10; j++) {
           int indexOfMap = (9 - i) * 10 + j;
           stringToAddInList.append(boardDesign[indexOfMap]).append(" ");
@@ -96,7 +156,7 @@ public class LadderAndSnakeGame extends BaseDiceGame {
           int indexOfMap = (9 - i) * 10 - j + 11;
           stringToAddInList.append(boardDesign[indexOfMap]).append(" ");
         }
-        stringToAddInList.append("").append(9 - i).append(" ");
+        stringToAddInList.append(9 - i).append(" ");
       }
       list.add(stringToAddInList.toString());
     }
@@ -228,64 +288,4 @@ public class LadderAndSnakeGame extends BaseDiceGame {
     return list;
   }
 
-  private List<Player> playLadderAndSnakeGame() {
-    if (playerQueue.isEmpty()) {
-      System.out.println("No player is ready.");
-      return new ArrayList<>();
-    }
-
-    LadderAndSnakeGamePlayer currentPlayer;
-    while (true) {
-      currentPlayer = playerQueue.poll();
-      assert currentPlayer != null;
-
-      currentPlayer.position = go(currentPlayer);
-      playerQueue.add(currentPlayer);
-
-      displayPlayers(playerQueue.peek());
-      pauseGame("Please press Enter to continue");
-      if (currentPlayer.position >= Setting.BROAD_SIZE) {
-        System.out.printf("%s wins.", currentPlayer.name);
-        return new ArrayList<>();
-      }
-
-    }
-  }
-
-  /**
-   * move based on a random number create by flip dice and on the rules of the game broad
-   *
-   * @param currentPlayer a player who is moving
-   * @return the position where the player will go
-   */
-  private int go(LadderAndSnakeGamePlayer currentPlayer) {
-    int position = currentPlayer.position;
-    System.out.printf("%n%s(position=%d) :  go....\t", currentPlayer.name, currentPlayer.position);
-    pauseGame("(Press Enter to flip dice)");
-
-    int currentDice;
-    currentDice = dice.earnScore();
-
-    System.out.println("got a dice value of " + currentDice);
-    System.out.printf("move to %d = %d + %d%n", position + currentDice, position, currentDice);
-    position += currentDice;
-    pauseGame("Please press Enter to continue");
-    while (ladderAndSnakePosition.containsKey(position)) {
-      System.out.println("then...");
-      System.out.println("continue move automatically");
-
-      int newPosition = ladderAndSnakePosition.get(position);
-      if (newPosition > position) {
-        System.out.println("LADDER  " + "=|".repeat((newPosition - position) * 3));
-      } else {
-        System.out.println("SNAKE    " + "~".repeat((position - newPosition) * 3));
-      }
-      position = newPosition;
-      System.out.println("move to " + position);
-      displayPlayers(currentPlayer);
-      pauseGame("Please press Enter to continue");
-    }
-
-    return position;
-  }
 }
