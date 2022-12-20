@@ -28,8 +28,6 @@ public class LadderAndSnakeGame extends BaseDiceGame {
     initializeLadderAndSnakePosition();
     initializeBoard();
     displayBoard();
-    //        List<LadderAndSnakeGamePlayer> list = welcomePlayers();
-    //    List<LadderAndSnakeGamePlayer> list = mockWelcomePlayers();
     initializePlayer(playerList);
   }
 
@@ -230,160 +228,10 @@ public class LadderAndSnakeGame extends BaseDiceGame {
     return list;
   }
 
-  /**
-   * Add players and decide their order
-   *
-   * @return a list of Players who will take part in the game rename partTwo to something else
-   */
-  private List<LadderAndSnakeGamePlayer> welcomePlayers() {
-
-    List<LadderAndSnakeGamePlayer> playerList = partTwo();
-
-    List<LadderAndSnakeGamePlayer> finalList = new ArrayList<>();
-    decideOrderOfStart(finalList, playerList);
-
-    return finalList;
-  }
-
-  /**
-   * raceOrderOfStart---> decideOrderOfStart
-   */
-  private void decideOrderOfStart(List<LadderAndSnakeGamePlayer> finalList,
-     List<LadderAndSnakeGamePlayer> listToDecide) {
-    if (listToDecide.size() == 1) {
-      finalList.add(listToDecide.get(0));
-    }
-
-    HashMap<Integer, List<LadderAndSnakeGamePlayer>> map = new HashMap<>();
-    for (LadderAndSnakeGamePlayer player : listToDecide) {
-      var list = map.get(player.diceValue);
-      if (list == null) {
-        list = new ArrayList<>(List.of(player));
-        map.put(player.diceValue, list);
-      } else {
-        list.add(player);
-      }
-    }
-
-    for (int i = 6; i >= 0; i--) {
-      List<LadderAndSnakeGamePlayer> list = map.get(i);
-      if (list == null) {
-        continue;
-      }
-      if (list.size() == 1) {
-        finalList.add(list.get(0));
-      }
-      if (list.size() >= 2) {
-        for (LadderAndSnakeGamePlayer currentPlayer : list) {
-          System.out.printf("%s is throwing a dice.%n", currentPlayer.name);
-          currentPlayer.diceValue = dice.earnScore();
-          System.out.printf("%s get a dice value of %d %n", currentPlayer.name, currentPlayer.diceValue);
-        }
-        decideOrderOfStart(finalList, list);
-      }
-    }
-
-  }
-
-  private void qasemWelcomePlayers() { // determine the order of playing turns
-    List<LadderAndSnakeGamePlayer> playerList = partTwo();
-    int numPlayers = 2;
-    int[] diceRolls = new int[numPlayers];
-    Scanner input = scanner;
-    while (true) {
-      // find the player with the highest dice roll value
-      int maxDiceRoll = 0;
-      int maxDiceRollIndex = 0;
-      for (int i = 0; i < numPlayers; i++) {
-        if (diceRolls[i] > maxDiceRoll) {
-          maxDiceRoll = diceRolls[i];
-          maxDiceRollIndex = i;
-        }
-      }
-      boolean tieExists = false;
-      for (int i = 0; i < numPlayers; i++) {
-        if (i != maxDiceRollIndex && diceRolls[i] == maxDiceRoll) {
-          tieExists = true;
-          break;
-        }
-      }
-      if (!tieExists) {
-        playerList.get(maxDiceRollIndex).setOrderOfStart(0);
-        for (int i = 1; i < numPlayers; i++) {
-          int nextPlayerIndex = (maxDiceRollIndex + i) % numPlayers;
-          playerList.get(nextPlayerIndex).setOrderOfStart(i);
-        }
-      }
-
-      // if there are ties, re-roll the dice for the players with the tied dice roll values
-      // and continue the loop until there are no more ties
-      else {
-        List<Integer> tiedPlayerIndices = new ArrayList<>();
-        for (int j = 0; j < numPlayers; j++) {
-          if (j != maxDiceRollIndex && diceRolls[j] == maxDiceRoll) {
-            tiedPlayerIndices.add(j);
-          }
-        }
-        for (int tiedPlayerIndex : tiedPlayerIndices) {
-          System.out.println(playerList.get(tiedPlayerIndex).name + ", press enter to re-roll the dice:");
-          input.nextLine();  // consume newline character
-          //          diceRolls[tiedPlayerIndex] = Player.rollDice();  // re-roll the dice
-          diceRolls[tiedPlayerIndex] = flipDice();  // re-roll the dice
-          System.out.println(playerList.get(tiedPlayerIndex).name + " rolled a " + diceRolls[tiedPlayerIndex]);
-        }
-
-      }
-      break;
-    }
-  }
-
-  /**
-   * Include display effect
-   *
-   * @return 1, 2, ... 6
-   */
-  private int flipDice() {
-    return dice.earnScore();
-  }
-
-  private List<LadderAndSnakeGamePlayer> partTwo() {
-    List<LadderAndSnakeGamePlayer> playerList = new ArrayList<>();
-    //TODO: reuse one scanner in the whole project
-    Scanner input = scanner;
-    //    Scanner input = new Scanner(System.in);
-    System.out.println("Enter A Number of players");
-    int numPlayers = input.nextInt();
-
-    // decide number of players (must be between 2 and 4)
-    //TODO: simple the logic test
-    while (numPlayers != 2
-       && numPlayers != 3
-       && numPlayers != 4) {
-      //    while (numPlayers < 2 || numPlayers > 4) {
-      System.out.println("Number of players must be between 2 and 4 ");
-      numPlayers = input.nextInt();
-    }
-
-    //TODO: two steps, the first step is to set player name
-    //    int[] diceRolls = new int[numPlayers];
-    for (int i = 0; i < numPlayers; i++) {
-      System.out.println("Enter the name of player " + (i + 1) + ":");
-      String playerName = input.next();
-      LadderAndSnakeGamePlayer player = new LadderAndSnakeGamePlayer(playerName);
-      System.out.println(playerName + ", press enter to roll the dice:");
-      input.nextLine();  // consume newline character
-
-      //      diceRolls[i] = flipDice();  // roll the dice
-      //      System.out.println(playerName + " rolled a " + diceRolls[i]);
-      playerList.add(player);
-    }
-    return playerList;
-  }
-
   private List<Player> playLadderAndSnakeGame() {
     if (playerQueue.isEmpty()) {
       System.out.println("No player is ready.");
-      return null;
+      return new ArrayList<>();
     }
 
     LadderAndSnakeGamePlayer currentPlayer;

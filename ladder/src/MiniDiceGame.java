@@ -128,5 +128,55 @@ public class MiniDiceGame extends BaseDiceGame {
     }
     return playerList;
   }
+  private void qasemWelcomePlayers() { // determine the order of playing turns
+    List<LadderAndSnakeGamePlayer> playerList = partTwo();
+    int numPlayers = 2;
+    int[] diceRolls = new int[numPlayers];
+    Scanner input = scanner;
+    while (true) {
+      // find the player with the highest dice roll value
+      int maxDiceRoll = 0;
+      int maxDiceRollIndex = 0;
+      for (int i = 0; i < numPlayers; i++) {
+        if (diceRolls[i] > maxDiceRoll) {
+          maxDiceRoll = diceRolls[i];
+          maxDiceRollIndex = i;
+        }
+      }
+      boolean tieExists = false;
+      for (int i = 0; i < numPlayers; i++) {
+        if (i != maxDiceRollIndex && diceRolls[i] == maxDiceRoll) {
+          tieExists = true;
+          break;
+        }
+      }
+      if (!tieExists) {
+        playerList.get(maxDiceRollIndex).setOrderOfStart(0);
+        for (int i = 1; i < numPlayers; i++) {
+          int nextPlayerIndex = (maxDiceRollIndex + i) % numPlayers;
+          playerList.get(nextPlayerIndex).setOrderOfStart(i);
+        }
+      }
 
+      // if there are ties, re-roll the dice for the players with the tied dice roll values
+      // and continue the loop until there are no more ties
+      else {
+        List<Integer> tiedPlayerIndices = new ArrayList<>();
+        for (int j = 0; j < numPlayers; j++) {
+          if (j != maxDiceRollIndex && diceRolls[j] == maxDiceRoll) {
+            tiedPlayerIndices.add(j);
+          }
+        }
+        for (int tiedPlayerIndex : tiedPlayerIndices) {
+          System.out.println(playerList.get(tiedPlayerIndex).name + ", press enter to re-roll the dice:");
+          input.nextLine();  // consume newline character
+          //          diceRolls[tiedPlayerIndex] = Player.rollDice();  // re-roll the dice
+          diceRolls[tiedPlayerIndex] = flipDice();  // re-roll the dice
+          System.out.println(playerList.get(tiedPlayerIndex).name + " rolled a " + diceRolls[tiedPlayerIndex]);
+        }
+
+      }
+      break;
+    }
+  }
 }
