@@ -8,71 +8,70 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 
-//TODO: add the javadoc comments by the best
-
 /**
+ * Run successfully
+ *
  * @author Mueataz Qasem Qasem, Dongguo
- * @version 1.1 {@code @date} 2022-12-19 14:03
+ * @version 1.2 {@code @date} 2022-12-19 21:58
  */
 public class LadderAndSnake {
 
-  private static final Queue<Player> playerQueueInPlaying = new LinkedList<>();
+  private static final Queue<Player> playerQueue = new LinkedList<>();
   private static final List<Player> playerListSortedByPosition = new ArrayList<>(4);
   private static final HashMap<Integer, Integer> ladderAndSnakePosition = new HashMap<>();
-  private static final char[] boardRecord = new char[Setting.BROAD_SIZE + 1];
+  private static final char[] boardDesign = new char[Setting.BROAD_SIZE + 1];
   private static final Random oneRandomToReuse = new Random();
-  private static final Scanner oneKeyBoardInputNeedToClose = new Scanner(System.in);
+  private static final Scanner oneKeyboardInputNeedToClose = new Scanner(System.in);
 
   public static void main(String[] args) {
-    initLadderAndSnakePosition();
-    refreshBoardRecord();
+    initializeLadderAndSnakePosition();
+    initializeBoard();
     displayBoard();
-
-//    List<Player> list = welcomePlayers();
-        List<Player> list = mockWelcomePlayers();
-    initPlayers(list);
+    //    List<Player> list = welcomePlayers();
+    List<Player> list = mockWelcomePlayers();
+    initializePlayer(list);
     play();
-    oneKeyBoardInputNeedToClose.close();
+
+    oneKeyboardInputNeedToClose.close();
     System.out.println("\n\nBye");
     System.exit(0);
   }
-
   /**
    * Display the game board that shows the position of players and ladder, snake.
    */
   private static void displayBoard() {
-    List<String> list = boardLiveInfo();
+    List<String> list = getLadderAndSnakeBoard();
     for (String s : list) {
       System.out.println(s);
     }
     pauseGame("Welcome to Ladder And Snake Game.");
   }
-
   /**
    * Add players and decide their order
    *
    * @return a list of Players who will take part in the game
+   * rename partTwo to something else
    */
-  private static List<Player> dongguowelcomePlayers() {
-    // Dongguo Version
+  private static List<Player> welcomePlayers() {
+
     List<Player> playerList = partTwo();
 
-    //the second step is to "Now deciding which player will start playing"
+    //TODO: the second step is to "Now deciding which player will start playing"
     List<Player> finalList = new ArrayList<>();
-    // recursive means to call himself
-    raceOrderOfStart(finalList, playerList);
+    decideOrderOfStart(finalList, playerList);
 
     return finalList;
   }
-
-  private static void raceOrderOfStart(List<Player> finalList, List<Player> listToDecide) {
+  /**
+   *
+   * raceOrderOfStart---> decideOrderOfStart
+   */
+  private static void decideOrderOfStart(List<Player> finalList, List<Player> listToDecide) {
     if (listToDecide.size() == 1) {
       finalList.add(listToDecide.get(0));
     }
 
     HashMap<Integer, List<Player>> map = new HashMap<>();
-    // 6 -> player1, player 2
-    // 1 -> player3, player4
     for (Player player : listToDecide) {
       var list = map.get(player.diceValue);
       if (list == null) {
@@ -94,10 +93,10 @@ public class LadderAndSnake {
       if (list.size() >= 2) {
         for (Player currentPlayer : list) {
           int currentDice;
-          if (Setting.DEVELPMENT_MODE) {
+          if (Setting.DEVELOPMENT_MODE) {
             System.out.println("\n===========Development  Mode======================");
             System.out.printf("%s, please enter 1-6 to get your dice value directly:  ", currentPlayer.name);
-            currentDice = oneKeyBoardInputNeedToClose.nextInt();
+            currentDice = oneKeyboardInputNeedToClose.nextInt();
 
           } else {
             currentDice = flipDice();
@@ -105,7 +104,7 @@ public class LadderAndSnake {
           }
           System.out.printf("%s get a dice value of %d %n", currentPlayer.name, currentDice);
         }
-        raceOrderOfStart(finalList, list);
+        decideOrderOfStart(finalList, list);
       }
     }
 
@@ -123,23 +122,17 @@ public class LadderAndSnake {
     List<Player> playerList = partTwo();
     int numPlayers = 2;
     int[] diceRolls = new int[numPlayers];
-    Scanner input = oneKeyBoardInputNeedToClose;
+    Scanner input = oneKeyboardInputNeedToClose;
     while (true) {
       // find the player with the highest dice roll value
       int maxDiceRoll = 0;
       int maxDiceRollIndex = 0;
       for (int i = 0; i < numPlayers; i++) {
         if (diceRolls[i] > maxDiceRoll) {
-          // explain
           maxDiceRoll = diceRolls[i];
           maxDiceRollIndex = i;
         }
       }
-      // 6, 6, 2, 2
-      // 6, 6
-      // 2, 2
-
-      // check if there are any ties in the dice roll values
       boolean tieExists = false;
       for (int i = 0; i < numPlayers; i++) {
         if (i != maxDiceRollIndex && diceRolls[i] == maxDiceRoll) {
@@ -147,9 +140,6 @@ public class LadderAndSnake {
           break;
         }
       }
-
-      // if there are no ties, set the order of start for the player with the highest dice roll
-      // and set the order of start for the remaining players based on the dice roll values
       if (!tieExists) {
         playerList.get(maxDiceRollIndex).setOrderOfStart(0);
         for (int i = 1; i < numPlayers; i++) {
@@ -176,7 +166,7 @@ public class LadderAndSnake {
         }
 
       }
-      break; // break is not jump to the while loop
+      break;
     }
   }
 
@@ -214,9 +204,9 @@ public class LadderAndSnake {
        "    *    *                                                         ",
        "  *         *                                                      ",
        "*              *               * *                                 ",
-       "                 *           *     *                               ",
-       "                   *       *         *      *   *                  ",
-       "                     *   *             *   *      *  *   *         ",
+       "                 *           *     *          *                    ",
+       "                   *       *         *      *   *      *           ",
+       "                     *   *             *   *      *  *   * *       ",
        "                       *                 *         *      *  * *  "
     ));
 
@@ -225,7 +215,7 @@ public class LadderAndSnake {
       char[] charArray = string.toCharArray();
       for (int indexOfColumn = 0; indexOfColumn < charArray.length; indexOfColumn++) {
         if (charArray[indexOfColumn] == '*') {
-          charArray[indexOfColumn] = (char) (48 + generateRandomBetween1And6());
+          charArray[indexOfColumn] = (char) (49 + generateRandomBetween1And6());
         }
       }
       boolean isLastLine = indexOfRow == template.size() - 1;
@@ -255,13 +245,16 @@ public class LadderAndSnake {
   private static List<Player> partTwo() {
     List<Player> playerList = new ArrayList<>();
     //TODO: reuse one scanner in the whole project
-    Scanner input = oneKeyBoardInputNeedToClose;
+    Scanner input = oneKeyboardInputNeedToClose;
     //    Scanner input = new Scanner(System.in);
     System.out.println("Enter A Number of players");
     int numPlayers = input.nextInt();
 
     // decide number of players (must be between 2 and 4)
-    while (numPlayers != 2 && numPlayers != 3 && numPlayers != 4) {
+    //TODO: simple the logic test
+    while (numPlayers != 2
+       && numPlayers != 3
+       && numPlayers != 4) {
       //    while (numPlayers < 2 || numPlayers > 4) {
       System.out.println("Number of players must be between 2 and 4 ");
       numPlayers = input.nextInt();
@@ -287,28 +280,28 @@ public class LadderAndSnake {
    * Order the players by the orderOfStart property <p />Add the sorted players into the playerQueueInPlaying and
    * playerListSortedByPosition
    */
-  private static void initPlayers(List<Player> list) {
+  private static void initializePlayer(List<Player> list) {
     list.sort((a, b) -> a.orderOfStart.getIndex() - b.orderOfStart.getIndex());
-    playerQueueInPlaying.addAll(list);
+    playerQueue.addAll(list);
     playerListSortedByPosition.addAll(list);
     displayPlayers(null);
   }
 
   private static void play() {
-    if (playerQueueInPlaying.isEmpty()) {
+    if (playerQueue.isEmpty()) {
       System.out.println("No player is ready.");
       return;
     }
 
     Player currentPlayer;
     while (true) {
-      currentPlayer = playerQueueInPlaying.poll();
+      currentPlayer = playerQueue.poll();
       assert currentPlayer != null;
 
       currentPlayer.position = go(currentPlayer);
-      playerQueueInPlaying.add(currentPlayer);
+      playerQueue.add(currentPlayer);
 
-      displayPlayers(playerQueueInPlaying.peek());
+      displayPlayers(playerQueue.peek());
       pauseGame("Please press Enter to continue");
       if (currentPlayer.position >= Setting.BROAD_SIZE) {
         System.out.printf("%s wins.", currentPlayer.name);
@@ -330,10 +323,10 @@ public class LadderAndSnake {
     pauseGame("(Press Enter to flip dice)");
 
     int currentDice;
-    if (Setting.DEVELPMENT_MODE) {
+    if (Setting.DEVELOPMENT_MODE) {
       System.out.println("\n===========Development  Mode======================");
       System.out.printf("%s, please enter 1-6 to get your dice value directly:  ", currentPlayer.name);
-      currentDice = oneKeyBoardInputNeedToClose.nextInt();
+      currentDice = oneKeyboardInputNeedToClose.nextInt();
 
     } else {
       currentDice = flipDice();
@@ -365,7 +358,7 @@ public class LadderAndSnake {
   private static void pauseGame(String message) {
     if (Setting.AUTO_RUN == false) {
       System.out.printf(String.format("%s", message));
-      oneKeyBoardInputNeedToClose.nextLine();
+      oneKeyboardInputNeedToClose.nextLine();
     }
   }
 
@@ -373,22 +366,22 @@ public class LadderAndSnake {
    * Dongguo is working Display the player information.
    */
   private static void displayPlayers(Player currentPlayer) {
-    List<String> list = boardLiveInfo();
-    List<String> playerInfo = playersLiveInfo(currentPlayer);
+    List<String> ladderAndSnakeBoard = getLadderAndSnakeBoard();
+    List<String> playerScoreInfo = getPlayerScoreInfo(currentPlayer);
     System.out.printf("%n%n%n");
     final int scoresInfoPosition = 3;
-    final int scoresInfoHeight = playerInfo.size();
-    for (int i = 0; i < list.size(); i++) {
+    final int scoresInfoHeight = playerScoreInfo.size();
+    for (int i = 0; i < ladderAndSnakeBoard.size(); i++) {
       if (i >= scoresInfoPosition && i < scoresInfoPosition + scoresInfoHeight) {
         int j = i - scoresInfoPosition;
-        System.out.println(list.get(i) + "\t\t" + playerInfo.get(j));
+        System.out.println(ladderAndSnakeBoard.get(i) + "\t\t" + playerScoreInfo.get(j));
       } else {
-        System.out.println(list.get(i));
+        System.out.println(ladderAndSnakeBoard.get(i));
       }
     }
   }
 
-  private static char[] refreshBoardRecord() {
+  private static char[] initializeBoard() {
     char[] chars = new char[101];
     char charSnake = 'ㄹ';
     char charLadder = 'ㅒ';
@@ -404,15 +397,15 @@ public class LadderAndSnake {
   }
 
   /**
-   * the game board that include the position ladder and snake. and the position of players.
-   *
-   * @return a string list
+   * the game board that include the position ladder and snake.
+   * and the position of players.
+   * @return  a string list
    */
-  private static List<String> boardLiveInfo() {
+  private static List<String> getLadderAndSnakeBoard() {
     List<String> list = new ArrayList<>(12);
 
-    System.arraycopy(refreshBoardRecord(), 0, boardRecord, 0, Setting.BROAD_SIZE + 1);
-    fillPlayerPosition(boardRecord);
+    System.arraycopy(initializeBoard(), 0, boardDesign, 0, Setting.BROAD_SIZE + 1);
+    fillPlayerPosition(boardDesign);
 
     // Table Header
     char[] romanNumbers = {'Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ', 'Ⅵ', 'Ⅶ', 'Ⅷ', 'Ⅸ', 'Ⅹ'};
@@ -429,14 +422,14 @@ public class LadderAndSnake {
         stringToAddInList.append("").append(9 - i).append(" ");
         for (int j = 1; j <= 10; j++) {
           int indexOfMap = (9 - i) * 10 + j;
-          stringToAddInList.append(boardRecord[indexOfMap]).append(" ");
+          stringToAddInList.append(boardDesign[indexOfMap]).append(" ");
         }
         stringToAddInList.append("  ");
       } else {
         stringToAddInList.append("  ");
         for (int j = 1; j <= 10; j++) {
           int indexOfMap = (9 - i) * 10 - j + 11;
-          stringToAddInList.append(boardRecord[indexOfMap]).append(" ");
+          stringToAddInList.append(boardDesign[indexOfMap]).append(" ");
         }
         stringToAddInList.append("").append(9 - i).append(" ");
       }
@@ -477,7 +470,7 @@ public class LadderAndSnake {
    *
    * @return a list of string showing the players ordered by their position
    */
-  private static List<String> playersLiveInfo(Player currentPlayer) {
+  private static List<String> getPlayerScoreInfo(Player currentPlayer) {
     List<String> list = new ArrayList<>(5);
     playerListSortedByPosition.sort((a, b) -> b.position - a.position);
     for (Player player : playerListSortedByPosition) {
@@ -503,7 +496,7 @@ public class LadderAndSnake {
   /**
    * set all ladder and snake rules and moving backward rules when exceeding maximum
    */
-  private static void initLadderAndSnakePosition() {
+  private static void initializeLadderAndSnakePosition() {
     ladderAndSnakePosition.put(105, 95);
     ladderAndSnakePosition.put(104, 96);
     ladderAndSnakePosition.put(103, 97);
@@ -580,9 +573,8 @@ public class LadderAndSnake {
      * Adjust the display pause time by  millis, To speed up the debugging set 0L No Pause.
      */
     private static final long GAME_SPEED = 200L;
-
-    private static final boolean AUTO_RUN = false;
-    private static final boolean DEVELPMENT_MODE = false;
+    private static final boolean AUTO_RUN = true;
+    private static final boolean DEVELOPMENT_MODE = true;
     private static final int BROAD_SIZE = 100;
     private static final int PLAYER_START_POSITION = 70;
   }
@@ -617,4 +609,5 @@ public class LadderAndSnake {
       this.orderOfStart = PlayerCharEnum.getByIndex(order);
     }
   }
+
 }
