@@ -94,7 +94,7 @@ public class LadderAndSnake {
       if (list.size() >= 2) {
         for (Player currentPlayer : list) {
           int currentDice;
-          if (Setting.DEVELPMENT_MODE) {
+          if (Setting.DEVELOPMENT_MODE) {
             System.out.println("\n===========Development  Mode======================");
             System.out.printf("%s, please enter 1-6 to get your dice value directly:  ", currentPlayer.name);
             currentDice = oneKeyBoardInputNeedToClose.nextInt();
@@ -330,7 +330,7 @@ public class LadderAndSnake {
     pauseGame("(Press Enter to flip dice)");
 
     int currentDice;
-    if (Setting.DEVELPMENT_MODE) {
+    if (Setting.DEVELOPMENT_MODE) {
       System.out.println("\n===========Development  Mode======================");
       System.out.printf("%s, please enter 1-6 to get your dice value directly:  ", currentPlayer.name);
       currentDice = oneKeyBoardInputNeedToClose.nextInt();
@@ -582,7 +582,7 @@ public class LadderAndSnake {
     private static final long GAME_SPEED = 200L;
 
     private static final boolean AUTO_RUN = false;
-    private static final boolean DEVELPMENT_MODE = false;
+    private static final boolean DEVELOPMENT_MODE = false;
     private static final int BROAD_SIZE = 100;
     private static final int PLAYER_START_POSITION = 70;
   }
