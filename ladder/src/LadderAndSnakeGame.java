@@ -19,7 +19,7 @@ public class LadderAndSnakeGame extends BaseDiceGame {
   private final HashMap<Integer, Integer> ladderAndSnakePosition = new HashMap<>();
   private final char[] boardDesign = new char[Setting.BROAD_SIZE + 1];
 
-  public LadderAndSnakeGame(List<? extends Player> playerList, Random random, Scanner scanner, IMovable dice) {
+  public LadderAndSnakeGame(List<? extends Player> playerList, Random random, Scanner scanner, IEarnable dice) {
     super(playerList, random, scanner, dice);
   }
 
@@ -276,7 +276,7 @@ public class LadderAndSnakeGame extends BaseDiceGame {
       if (list.size() >= 2) {
         for (LadderAndSnakeGamePlayer currentPlayer : list) {
           System.out.printf("%s is throwing a dice.%n", currentPlayer.name);
-          currentPlayer.diceValue = dice.getMovingSteps();
+          currentPlayer.diceValue = dice.earnScore();
           System.out.printf("%s get a dice value of %d %n", currentPlayer.name, currentPlayer.diceValue);
         }
         decideOrderOfStart(finalList, list);
@@ -343,7 +343,7 @@ public class LadderAndSnakeGame extends BaseDiceGame {
    * @return 1, 2, ... 6
    */
   private int flipDice() {
-    return dice.getMovingSteps();
+    return dice.earnScore();
   }
 
   private List<LadderAndSnakeGamePlayer> partTwo() {
@@ -416,7 +416,7 @@ public class LadderAndSnakeGame extends BaseDiceGame {
     pauseGame("(Press Enter to flip dice)");
 
     int currentDice;
-    currentDice = dice.getMovingSteps();
+    currentDice = dice.earnScore();
 
     System.out.println("got a dice value of " + currentDice);
     System.out.printf("move to %d = %d + %d%n", position + currentDice, position, currentDice);

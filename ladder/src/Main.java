@@ -10,8 +10,8 @@ public class Main {
     Random oneRandomToReuse = new Random();
     Scanner oneKeyBoardInputNeedToClose = new Scanner(System.in);
     List<Player> playerList = mockPlayers();
-    IMovable randomDice = new RandomDice(oneRandomToReuse);
-    IMovable magicDic = new RandomDice(oneRandomToReuse);
+    IEarnable randomDice = new RandomDice(oneRandomToReuse);
+    IEarnable magicDic = new RandomDice(oneRandomToReuse);
 
     BaseDiceGame miniGame = new MiniDiceGame(new ArrayList<>(), oneRandomToReuse, oneKeyBoardInputNeedToClose,
        randomDice);

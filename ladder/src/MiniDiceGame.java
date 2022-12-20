@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class MiniDiceGame extends BaseDiceGame {
 
   public MiniDiceGame(List<? extends Player> playerList, Random random, Scanner scanner,
-     IMovable dice) {
+     IEarnable dice) {
     super(playerList, random, scanner, dice);
   }
 
@@ -77,7 +77,7 @@ public class MiniDiceGame extends BaseDiceGame {
       if (list.size() >= 2) {
         for (LadderAndSnakeGamePlayer currentPlayer : list) {
           System.out.printf("%s is throwing a dice.%n", currentPlayer.name);
-          currentPlayer.diceValue = dice.getMovingSteps();
+          currentPlayer.diceValue = dice.earnScore();
           System.out.printf("%s get a dice value of %d %n", currentPlayer.name, currentPlayer.diceValue);
         }
         decideOrderOfStart(finalList, list);
@@ -92,7 +92,7 @@ public class MiniDiceGame extends BaseDiceGame {
    * @return 1, 2, ... 6
    */
   private int flipDice() {
-    return dice.getMovingSteps();
+    return dice.earnScore();
   }
 
   private List<LadderAndSnakeGamePlayer> partTwo() {
