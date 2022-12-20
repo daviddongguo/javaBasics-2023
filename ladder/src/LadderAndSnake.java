@@ -8,9 +8,9 @@ import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 
+//TODO: add the javadoc comments by the best
+
 /**
- * Run successfully
- *
  * @author Mueataz Qasem Qasem, Dongguo
  * @version 1.1 {@code @date} 2022-12-19 14:03
  */
@@ -28,8 +28,8 @@ public class LadderAndSnake {
     refreshBoardRecord();
     displayBoard();
 
-    //    List<Player> list = welcomePlayers();
-    List<Player> list = mockWelcomePlayers();
+//    List<Player> list = welcomePlayers();
+        List<Player> list = mockWelcomePlayers();
     initPlayers(list);
     play();
     oneKeyBoardInputNeedToClose.close();
@@ -53,12 +53,13 @@ public class LadderAndSnake {
    *
    * @return a list of Players who will take part in the game
    */
-  private static List<Player> welcomePlayers() {
+  private static List<Player> dongguowelcomePlayers() {
     // Dongguo Version
     List<Player> playerList = partTwo();
 
-    //TODO: the second step is to "Now deciding which player will start playing"
+    //the second step is to "Now deciding which player will start playing"
     List<Player> finalList = new ArrayList<>();
+    // recursive means to call himself
     raceOrderOfStart(finalList, playerList);
 
     return finalList;
@@ -70,6 +71,8 @@ public class LadderAndSnake {
     }
 
     HashMap<Integer, List<Player>> map = new HashMap<>();
+    // 6 -> player1, player 2
+    // 1 -> player3, player4
     for (Player player : listToDecide) {
       var list = map.get(player.diceValue);
       if (list == null) {
@@ -132,6 +135,9 @@ public class LadderAndSnake {
           maxDiceRollIndex = i;
         }
       }
+      // 6, 6, 2, 2
+      // 6, 6
+      // 2, 2
 
       // check if there are any ties in the dice roll values
       boolean tieExists = false;
@@ -208,9 +214,9 @@ public class LadderAndSnake {
        "    *    *                                                         ",
        "  *         *                                                      ",
        "*              *               * *                                 ",
-       "                 *           *     *          *                    ",
-       "                   *       *         *      *   *      *           ",
-       "                     *   *             *   *      *  *   * *       ",
+       "                 *           *     *                               ",
+       "                   *       *         *      *   *                  ",
+       "                     *   *             *   *      *  *   *         ",
        "                       *                 *         *      *  * *  "
     ));
 
@@ -219,7 +225,7 @@ public class LadderAndSnake {
       char[] charArray = string.toCharArray();
       for (int indexOfColumn = 0; indexOfColumn < charArray.length; indexOfColumn++) {
         if (charArray[indexOfColumn] == '*') {
-          charArray[indexOfColumn] = (char) (49 + generateRandomBetween1And6());
+          charArray[indexOfColumn] = (char) (48 + generateRandomBetween1And6());
         }
       }
       boolean isLastLine = indexOfRow == template.size() - 1;
@@ -255,10 +261,7 @@ public class LadderAndSnake {
     int numPlayers = input.nextInt();
 
     // decide number of players (must be between 2 and 4)
-    //TODO: simple the logic test
-    while (numPlayers != 2
-       && numPlayers != 3
-       && numPlayers != 4) {
+    while (numPlayers != 2 && numPlayers != 3 && numPlayers != 4) {
       //    while (numPlayers < 2 || numPlayers > 4) {
       System.out.println("Number of players must be between 2 and 4 ");
       numPlayers = input.nextInt();
@@ -401,9 +404,9 @@ public class LadderAndSnake {
   }
 
   /**
-   * the game board that include the position ladder and snake.
-   * and the position of players.
-   * @return  a string list
+   * the game board that include the position ladder and snake. and the position of players.
+   *
+   * @return a string list
    */
   private static List<String> boardLiveInfo() {
     List<String> list = new ArrayList<>(12);
@@ -578,8 +581,8 @@ public class LadderAndSnake {
      */
     private static final long GAME_SPEED = 200L;
 
-    private static final boolean AUTO_RUN = true;
-    private static final boolean DEVELPMENT_MODE = true;
+    private static final boolean AUTO_RUN = false;
+    private static final boolean DEVELPMENT_MODE = false;
     private static final int BROAD_SIZE = 100;
     private static final int PLAYER_START_POSITION = 70;
   }
@@ -614,5 +617,4 @@ public class LadderAndSnake {
       this.orderOfStart = PlayerCharEnum.getByIndex(order);
     }
   }
-
 }
