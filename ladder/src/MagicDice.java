@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class MagicDice implements IMovable {
+public class MagicDice implements IEarnable {
 
   Scanner scanner;
 
@@ -8,8 +8,7 @@ public class MagicDice implements IMovable {
     this.scanner = scanner;
   }
 
-  @Override
-  public int getMovingSteps() {
+  public int earnScore() {
     System.out.print("I'm Magic Dice, tell me which number do you love(1-6): ");
     return requestNumberBetween1And6();
   }

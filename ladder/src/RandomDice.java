@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RandomDice implements IMovable {
+public class RandomDice implements IEarnable{
 
   Random random;
 
@@ -11,7 +11,7 @@ public class RandomDice implements IMovable {
   }
 
   @Override
-  public int getMovingSteps() {
+  public int earnScore() {
     int minDice = 1;
     int maxDice = 6;
     int result = minDice + random.nextInt(maxDice);
