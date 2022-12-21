@@ -13,7 +13,7 @@ public class RandomDice implements IEarnable {
   @Override
   public int earnScore() {
     int minDice = 1;
-    int maxDice = 6;
+    int maxDice = Setting.MAX_VALUE_OF_DICE;
     int result = minDice + random.nextInt(maxDice);
     displayDice(result);
     return result;
@@ -42,7 +42,7 @@ public class RandomDice implements IEarnable {
       char[] charArray = string.toCharArray();
       for (int indexOfColumn = 0; indexOfColumn < charArray.length; indexOfColumn++) {
         if (charArray[indexOfColumn] == '*') {
-          charArray[indexOfColumn] = (char) (49 + generateRandomBetween1And6());
+          charArray[indexOfColumn] = (char) (49 + generateRandomUsingDice());
         }
       }
       boolean isLastLine = indexOfRow == template.size() - 1;
@@ -67,9 +67,9 @@ public class RandomDice implements IEarnable {
    *
    * @return 1, 2, ... 6
    */
-  private int generateRandomBetween1And6() {
+  private int generateRandomUsingDice() {
     int minDice = 1;
-    int maxDice = 6;
+    int maxDice = Setting.MAX_VALUE_OF_DICE;
     return minDice + random.nextInt(maxDice);
   }
 
