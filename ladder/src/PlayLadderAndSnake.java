@@ -13,6 +13,7 @@ public class PlayLadderAndSnake extends BaseDiceGame {
      IEarnable dice) {
     super(playerList, random, scanner, dice);
   }
+
   public void main() {
     welcomePlayers();
   }
@@ -39,12 +40,17 @@ public class PlayLadderAndSnake extends BaseDiceGame {
    * @return a list of Players who will take part in the game rename partTwo to something else
    */
   private List<LadderAndSnakeGamePlayer> welcomePlayers() {
+    System.out.println("\n\t\tWelcome to Ladder And  Snake Game");
+    System.out.println("\t\tAl-Quaiti, Mueataz Qasem Qasem");
+    System.out.println("\t\tWU, Dongguo\n");
     List<LadderAndSnakeGamePlayer> playerList = partTwoDecideNumberOfPlayersAndTheirName();
 
     if (playerList.isEmpty()) {
       return new ArrayList<>();
     }
     List<LadderAndSnakeGamePlayer> finalList = new ArrayList<>();
+    System.out.printf("%n\t\tGame is played by %d players%n", playerList.size());
+    System.out.println("Now deciding which player will start playing;");
     decideOrderOfStart(finalList, playerList);
 
     return finalList;
@@ -79,6 +85,12 @@ public class PlayLadderAndSnake extends BaseDiceGame {
         finalList.add(list.get(0));
       }
       if (list.size() >= 2) {
+        System.out.print("\nA tie was achieved between ");
+        for (LadderAndSnakeGamePlayer currentPlayer : list) {
+          System.out.print(currentPlayer.name + " ");
+        }
+        System.out.print("Attempting to break the tie\n");
+
         for (LadderAndSnakeGamePlayer currentPlayer : list) {
           System.out.printf("%s is throwing a dice.%n", currentPlayer.name);
           currentPlayer.diceValue = dice.earnScore();
@@ -162,7 +174,7 @@ public class PlayLadderAndSnake extends BaseDiceGame {
     for (int count = 1; count <= totalAttempts; count++) {
       numPlayers = scanner.nextInt();
       boolean isCorrectNumber = numPlayers >= 2 && numPlayers <= 4;
-      if(isCorrectNumber){
+      if (isCorrectNumber) {
         return numPlayers;
       }
       boolean isLastTime = count == totalAttempts;
