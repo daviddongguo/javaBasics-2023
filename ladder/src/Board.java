@@ -1,10 +1,10 @@
 import java.util.HashMap;
 
-public class LadderAndSnakeBoard {
+public class Board {
 
   int[] ladderAndSnakePositionArray;
 
-  public LadderAndSnakeBoard() {
+  public Board() {
     this.ladderAndSnakePositionArray = createLadderAndSnakePositionArray();
   }
 

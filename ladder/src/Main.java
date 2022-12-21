@@ -11,16 +11,16 @@ public class Main {
     Scanner oneKeyBoardInputNeedToClose = new Scanner(System.in);
     IEarnable randomDice = new RandomDice(oneRandomToReuse);
     IEarnable magicDic = new MagicDice(oneKeyBoardInputNeedToClose);
-    LadderAndSnakeBoard board = new LadderAndSnakeBoard();
+    Board board = new Board();
     List<Player> playerList;
 
     BaseDiceGame miniGame = new PlayLadderAndSnake(new ArrayList<>(), oneRandomToReuse, oneKeyBoardInputNeedToClose,
        magicDic);
     playerList = miniGame.play();
 
-    //    playerList = mockPlayers();
+//        playerList = mockPlayers();
     BaseDiceGame game = new LadderAndSnake(playerList, oneRandomToReuse, oneKeyBoardInputNeedToClose,
-       randomDice, board);
+       randomDice, board, playerList.size());
 
     game.initialize();
     game.play();

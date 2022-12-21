@@ -14,16 +14,19 @@ import java.util.Scanner;
  */
 public class LadderAndSnake extends BaseDiceGame {
 
-  private final LadderAndSnakeBoard board;
+  private final Board board;
   private final Queue<LadderAndSnakeGamePlayer> playerQueue = new LinkedList<>();
   private final List<LadderAndSnakeGamePlayer> playerListSortedByPosition = new ArrayList<>(4);
   private final HashMap<Integer, Integer> mapForLocateLadderAndSnake = new HashMap<>();
   private final char[] boardDesign = new char[Setting.BROAD_SIZE + 1];
 
-  public LadderAndSnake(List<? extends Player> playerList, Random random, Scanner scanner, IEarnable dice,
-     LadderAndSnakeBoard board) {
+  private final int numberOfPlayers;
+
+  public LadderAndSnake(List<? extends Player> playerList, Random random, Scanner scanner, IEarnable dice, Board board,
+     int numberOfplayers) {
     super(playerList, random, scanner, dice);
     this.board = board;
+    this.numberOfPlayers = numberOfplayers;
   }
 
   private int flipDice() {
@@ -64,7 +67,7 @@ public class LadderAndSnake extends BaseDiceGame {
       currentPlayer = playerQueue.poll();
       assert currentPlayer != null;
 
-      currentPlayer.position = go(currentPlayer);
+      currentPlayer.position = move(currentPlayer);
       playerQueue.add(currentPlayer);
 
       displayPlayers(playerQueue.peek());
@@ -72,7 +75,11 @@ public class LadderAndSnake extends BaseDiceGame {
       if (currentPlayer.position == Setting.BROAD_SIZE) {
         System.out.printf("%s wins.", currentPlayer.name);
         return new ArrayList<>();
+      }else{
+        System.out.println("Game is not over; flipping again");
       }
+
+
     }
   }
 
@@ -82,7 +89,7 @@ public class LadderAndSnake extends BaseDiceGame {
    * @param currentPlayer a player who is moving
    * @return the position where the player will go
    */
-  private int go(LadderAndSnakeGamePlayer currentPlayer) {
+  private int move(LadderAndSnakeGamePlayer currentPlayer) {
     int position = currentPlayer.position;
     System.out.printf("%n%s(position=%d) :  go....\t", currentPlayer.name, currentPlayer.position);
     pauseGame("(Press Enter to flip dice)");
