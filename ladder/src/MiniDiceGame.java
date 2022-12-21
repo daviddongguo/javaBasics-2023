@@ -36,12 +36,12 @@ public class MiniDiceGame extends BaseDiceGame {
    * @return a list of Players who will take part in the game rename partTwo to something else
    */
   private List<LadderAndSnakeGamePlayer> welcomePlayers() {
-    List<LadderAndSnakeGamePlayer> finalList = new ArrayList<>();
-
     List<LadderAndSnakeGamePlayer> playerList = partTwoDecideNumberOfPlayersAndTheirName();
+
     if (playerList.isEmpty()) {
       return new ArrayList<>();
     }
+    List<LadderAndSnakeGamePlayer> finalList = new ArrayList<>();
     decideOrderOfStart(finalList, playerList);
 
     return finalList;
@@ -56,7 +56,7 @@ public class MiniDiceGame extends BaseDiceGame {
       finalList.add(listToDecide.get(0));
     }
 
-    HashMap<Integer, List<LadderAndSnakeGamePlayer>> map = new HashMap<>();
+    HashMap<Integer, List<LadderAndSnakeGamePlayer>> map = new HashMap<>(20);
     for (LadderAndSnakeGamePlayer player : listToDecide) {
       var list = map.get(player.diceValue);
       if (list == null) {
@@ -67,7 +67,7 @@ public class MiniDiceGame extends BaseDiceGame {
       }
     }
 
-    for (int i = 6; i >= 0; i--) {
+    for (int i = Setting.MAX_VALUE_OF_DICE; i >= 0; i--) {
       List<LadderAndSnakeGamePlayer> list = map.get(i);
       if (list == null) {
         continue;
@@ -140,12 +140,13 @@ public class MiniDiceGame extends BaseDiceGame {
   }
 
   private List<LadderAndSnakeGamePlayer> partTwoDecideNumberOfPlayersAndTheirName() {
-    List<LadderAndSnakeGamePlayer> playerList = new ArrayList<>();
 
     int numberOfPlayers = decideNumberOfPlayers();
     if (numberOfPlayers <= 0) {
       return new ArrayList<>();
     }
+
+    List<LadderAndSnakeGamePlayer> playerList = new ArrayList<>();
     namePlayers(playerList, numberOfPlayers);
 
     return playerList;
