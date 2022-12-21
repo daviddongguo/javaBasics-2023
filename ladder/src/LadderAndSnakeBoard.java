@@ -8,6 +8,9 @@ public class LadderAndSnakeBoard {
     this.ladderAndSnakePositionArray = createLadderAndSnakePositionArray();
   }
 
+
+
+
   public int[] createLadderAndSnakePositionArray() {
     int[] array = new int[Setting.BROAD_SIZE + Setting.MAX_VALUE_OF_DICE];
 

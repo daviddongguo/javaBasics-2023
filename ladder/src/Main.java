@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Main {
 
+
   public static void main(String[] args) {
 
     Random oneRandomToReuse = new Random();
@@ -19,7 +20,7 @@ public class Main {
     playerList = miniGame.play();
 
     //    playerList = mockPlayers();
-    BaseDiceGame game = new LadderAndSnakeGame(playerList, oneRandomToReuse, oneKeyBoardInputNeedToClose,
+    BaseDiceGame game = new LadderAndSnake(playerList, oneRandomToReuse, oneKeyBoardInputNeedToClose,
        randomDice, board);
 
     game.initialize();
