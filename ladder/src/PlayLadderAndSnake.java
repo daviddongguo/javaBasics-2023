@@ -7,11 +7,14 @@ import java.util.Scanner;
 /**
  * @author
  */
-public class MiniDiceGame extends BaseDiceGame {
+public class PlayLadderAndSnake extends BaseDiceGame {
 
-  public MiniDiceGame(List<? extends Player> playerList, Random random, Scanner scanner,
+  public PlayLadderAndSnake(List<? extends Player> playerList, Random random, Scanner scanner,
      IEarnable dice) {
     super(playerList, random, scanner, dice);
+  }
+  public void main() {
+    welcomePlayers();
   }
 
   @Override
