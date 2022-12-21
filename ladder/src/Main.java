@@ -5,22 +5,23 @@ import java.util.Scanner;
 
 public class Main {
 
+
   public static void main(String[] args) {
 
     Random oneRandomToReuse = new Random();
     Scanner oneKeyBoardInputNeedToClose = new Scanner(System.in);
-    List<Player> playerList = mockPlayers();
-    IMovable randomDice = new RandomDice(oneRandomToReuse);
-    IMovable magicDic = new RandomDice(oneRandomToReuse);
+    IEarnable randomDice = new RandomDice(oneRandomToReuse);
+    IEarnable magicDic = new MagicDice(oneKeyBoardInputNeedToClose);
+    LadderAndSnakeBoard board = new LadderAndSnakeBoard();
+    List<Player> playerList;
 
     BaseDiceGame miniGame = new MiniDiceGame(new ArrayList<>(), oneRandomToReuse, oneKeyBoardInputNeedToClose,
-       randomDice);
+       magicDic);
     playerList = miniGame.play();
 
-    BaseDiceGame game = new LadderAndSnakeGame(playerList, oneRandomToReuse, oneKeyBoardInputNeedToClose,
-       randomDice);
-    //        BaseDiceGame game = new LadderAndSnakeGame(playerList, oneRandomToReuse, oneKeyBoardInputNeedToClose,
-    //           new MagicDice(oneKeyBoardInputNeedToClose));
+    //    playerList = mockPlayers();
+    BaseDiceGame game = new LadderAndSnake(playerList, oneRandomToReuse, oneKeyBoardInputNeedToClose,
+       randomDice, board);
 
     game.initialize();
     game.play();

@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RandomDice implements IMovable {
+public class RandomDice implements IEarnable {
 
   Random random;
 
@@ -11,9 +11,9 @@ public class RandomDice implements IMovable {
   }
 
   @Override
-  public int getMovingSteps() {
+  public int earnScore() {
     int minDice = 1;
-    int maxDice = 6;
+    int maxDice = Setting.MAX_VALUE_OF_DICE;
     int result = minDice + random.nextInt(maxDice);
     displayDice(result);
     return result;
@@ -27,14 +27,14 @@ public class RandomDice implements IMovable {
   private void displayDice(int diceValue) {
     long pauseTime = Setting.GAME_SPEED;
     List<String> template = new ArrayList<>(List.of(
-       "       *                                                           ",
-       "    *    *                                                         ",
+       "                                                                   ",
+       "    *  * *                                                         ",
        "  *         *                                                      ",
        "*              *               * *                                 ",
-       "                 *           *     *          *                    ",
-       "                   *       *         *      *   *      *           ",
-       "                     *   *             *   *      *  *   * *       ",
-       "                       *                 *         *      *  * *  "
+       "                 *           *     *                               ",
+       "                   *       *         *      *   *                  ",
+       "                     *   *             *   *      *    *           ",
+       "                       *                 *         *      *  * * * *"
     ));
 
     for (int indexOfRow = 0; indexOfRow < template.size(); indexOfRow++) {
@@ -42,14 +42,20 @@ public class RandomDice implements IMovable {
       char[] charArray = string.toCharArray();
       for (int indexOfColumn = 0; indexOfColumn < charArray.length; indexOfColumn++) {
         if (charArray[indexOfColumn] == '*') {
-          charArray[indexOfColumn] = (char) (49 + generateRandomBetween1And6());
+          charArray[indexOfColumn] = (char) (49 + generateRandomUsingDice());
         }
       }
       boolean isLastLine = indexOfRow == template.size() - 1;
       if (isLastLine) {
-        System.out.printf("%s ", String.copyValueOf(charArray));
+        String lastLine = String.copyValueOf(charArray);
+        System.out.printf("%s ", lastLine.substring(0, 64));
         pauseDisplay(pauseTime * 2);
+        System.out.printf("%s ", lastLine.charAt(65));
+        pauseDisplay(pauseTime * 3);
+        System.out.printf("%s ", lastLine.charAt(67));
+        pauseDisplay(pauseTime * 3);
         System.out.printf("%s%n", diceValue);
+        pauseDisplay(pauseTime * 3);
       } else {
         System.out.println(String.copyValueOf(charArray));
       }
@@ -61,9 +67,9 @@ public class RandomDice implements IMovable {
    *
    * @return 1, 2, ... 6
    */
-  private int generateRandomBetween1And6() {
+  private int generateRandomUsingDice() {
     int minDice = 1;
-    int maxDice = 6;
+    int maxDice = Setting.MAX_VALUE_OF_DICE;
     return minDice + random.nextInt(maxDice);
   }
 

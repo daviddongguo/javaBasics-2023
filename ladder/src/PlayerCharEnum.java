@@ -23,6 +23,11 @@ public enum PlayerCharEnum {
       this.icon = icon;
     }
 
+  /**
+   * for example  0 -> FIRST
+   * @param index
+   * @return
+   */
     public static PlayerCharEnum getByIndex(int index) {
       for (PlayerCharEnum player : PlayerCharEnum.values()) {
         if (player.getIndex() == index) {

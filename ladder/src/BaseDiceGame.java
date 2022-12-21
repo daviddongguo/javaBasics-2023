@@ -10,9 +10,9 @@ public abstract class BaseDiceGame {
   protected final List<? extends Player> playerList;
   protected Random random;
   protected Scanner scanner;
-  protected IMovable dice;
+  protected IEarnable dice;
 
-  public BaseDiceGame(List<? extends Player> playerList, Random random, Scanner scanner, IMovable dice) {
+  public BaseDiceGame(List<? extends Player> playerList, Random random, Scanner scanner, IEarnable dice) {
     this.playerList = playerList;
     this.random = random;
     this.scanner = scanner;
