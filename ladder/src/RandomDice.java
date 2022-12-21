@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class RandomDice implements IEarnable{
+public class RandomDice implements IEarnable {
 
   Random random;
 
@@ -27,14 +27,14 @@ public class RandomDice implements IEarnable{
   private void displayDice(int diceValue) {
     long pauseTime = Setting.GAME_SPEED;
     List<String> template = new ArrayList<>(List.of(
-       "       *                                                           ",
-       "    *    *                                                         ",
+       "                                                                   ",
+       "    *  * *                                                         ",
        "  *         *                                                      ",
        "*              *               * *                                 ",
-       "                 *           *     *          *                    ",
-       "                   *       *         *      *   *      *           ",
-       "                     *   *             *   *      *  *   * *       ",
-       "                       *                 *         *      *  * *  "
+       "                 *           *     *                               ",
+       "                   *       *         *      *   *                  ",
+       "                     *   *             *   *      *    *           ",
+       "                       *                 *         *      *  * * * *"
     ));
 
     for (int indexOfRow = 0; indexOfRow < template.size(); indexOfRow++) {
@@ -47,9 +47,15 @@ public class RandomDice implements IEarnable{
       }
       boolean isLastLine = indexOfRow == template.size() - 1;
       if (isLastLine) {
-        System.out.printf("%s ", String.copyValueOf(charArray));
+        String lastLine = String.copyValueOf(charArray);
+        System.out.printf("%s ", lastLine.substring(0, 64));
         pauseDisplay(pauseTime * 2);
+        System.out.printf("%s ", lastLine.charAt(65));
+        pauseDisplay(pauseTime * 3);
+        System.out.printf("%s ", lastLine.charAt(67));
+        pauseDisplay(pauseTime * 3);
         System.out.printf("%s%n", diceValue);
+        pauseDisplay(pauseTime * 3);
       } else {
         System.out.println(String.copyValueOf(charArray));
       }
