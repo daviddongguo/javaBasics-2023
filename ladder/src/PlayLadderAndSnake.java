@@ -7,11 +7,15 @@ import java.util.Scanner;
 /**
  * @author
  */
-public class MiniDiceGame extends BaseDiceGame {
+public class PlayLadderAndSnake extends BaseDiceGame {
 
-  public MiniDiceGame(List<? extends Player> playerList, Random random, Scanner scanner,
+  public PlayLadderAndSnake(List<? extends Player> playerList, Random random, Scanner scanner,
      IEarnable dice) {
     super(playerList, random, scanner, dice);
+  }
+
+  public void main() {
+    welcomePlayers();
   }
 
   @Override
@@ -36,12 +40,17 @@ public class MiniDiceGame extends BaseDiceGame {
    * @return a list of Players who will take part in the game rename partTwo to something else
    */
   private List<LadderAndSnakeGamePlayer> welcomePlayers() {
+    System.out.println("\n\t\tWelcome to Ladder And  Snake Game");
+    System.out.println("\t\tAl-Quaiti, Mueataz Qasem Qasem");
+    System.out.println("\t\tWU, Dongguo\n");
     List<LadderAndSnakeGamePlayer> playerList = partTwoDecideNumberOfPlayersAndTheirName();
 
     if (playerList.isEmpty()) {
       return new ArrayList<>();
     }
     List<LadderAndSnakeGamePlayer> finalList = new ArrayList<>();
+    System.out.printf("%n\t\tGame is played by %d players%n", playerList.size());
+    System.out.println("Now deciding which player will start playing;");
     decideOrderOfStart(finalList, playerList);
 
     return finalList;
@@ -76,8 +85,16 @@ public class MiniDiceGame extends BaseDiceGame {
         finalList.add(list.get(0));
       }
       if (list.size() >= 2) {
+        if(i != 0 ){
+          System.out.print("\nA tie was achieved between ");
+        }
         for (LadderAndSnakeGamePlayer currentPlayer : list) {
-          System.out.printf("%s is throwing a dice.%n", currentPlayer.name);
+          System.out.print(currentPlayer.name + " ");
+        }
+        System.out.print("Attempting to break the tie\n");
+
+        for (LadderAndSnakeGamePlayer currentPlayer : list) {
+          System.out.printf("%n%s is throwing a dice.%n", currentPlayer.name);
           currentPlayer.diceValue = dice.earnScore();
           System.out.printf("%s get a dice value of %d %n", currentPlayer.name, currentPlayer.diceValue);
         }
