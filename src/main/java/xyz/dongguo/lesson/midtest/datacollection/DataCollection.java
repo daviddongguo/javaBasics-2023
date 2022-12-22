@@ -10,7 +10,7 @@ import xyz.dongguo.lesson.midtest.model.Book;
  */
 public class DataCollection {
 
-  public static final List<Book> BOOK_ARRAY_LIST = new ArrayList<>();
+  public static final List<Book> bookArrayList = new ArrayList<>();
 
   private DataCollection() {
   }
@@ -23,7 +23,7 @@ public class DataCollection {
     if (findByName(bookToAdd) != null) {
       return;
     }
-    BOOK_ARRAY_LIST.add(bookToAdd);
+    bookArrayList.add(bookToAdd);
   }
 
   /**
@@ -37,7 +37,7 @@ public class DataCollection {
 
 
   private static Book findByName(Book bookToQuery) {
-    for (Book currentBook : BOOK_ARRAY_LIST) {
+    for (Book currentBook : bookArrayList) {
       if (currentBook.equals(bookToQuery)) {
         return currentBook;
       }
@@ -53,7 +53,7 @@ public class DataCollection {
 
   public static List<Book> findByAuthor(Author authorToQuery) {
     ArrayList<Book> booksToFind = new ArrayList<>(7);
-    for (Book currentBook : BOOK_ARRAY_LIST) {
+    for (Book currentBook : bookArrayList) {
       for (Author currentAuthor : currentBook.getAuthorList()) {
         if (currentAuthor.equals(authorToQuery)) {
           booksToFind.add(currentBook);

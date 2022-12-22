@@ -42,7 +42,7 @@ public class App {
     ));
 
     DataCollection.addAll(bookList);
-    printBookArrayList(DataCollection.BOOK_ARRAY_LIST);
+    printBookArrayList(DataCollection.bookArrayList);
   }
 
   public static void findDemo() {
@@ -53,7 +53,7 @@ public class App {
   public static void preventAddingTwoBooksWithSameNameDemo() {
     Book newBook = new Book(LE_PETTIT_PRINCE);
     DataCollection.add(newBook);
-    printBookArrayList(DataCollection.BOOK_ARRAY_LIST);
+    printBookArrayList(DataCollection.bookArrayList);
   }
 
   private static void printBookArrayList(List<Book> bookList){
