@@ -53,6 +53,7 @@ public class Main {
        "            *   *                      ",
        "              *                        "
     ));
+    System.out.printf("%n%n");
     list.forEach(System.out::println);
   }
 }
