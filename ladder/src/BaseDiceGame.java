@@ -5,7 +5,8 @@ import java.util.Scanner;
 public abstract class BaseDiceGame {
 
   /**
-   * Means "a list of some type (which I don't actually know) which is a subtype of Player (or possibly Player itself)"
+   * Means "a list of some type (which I don't actually know)
+   * which is a subtype of Player (or possibly Player itself)"
    */
   protected final List<? extends Player> playerList;
   protected Random random;

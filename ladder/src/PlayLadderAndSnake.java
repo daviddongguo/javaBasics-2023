@@ -85,14 +85,16 @@ public class PlayLadderAndSnake extends BaseDiceGame {
         finalList.add(list.get(0));
       }
       if (list.size() >= 2) {
-        System.out.print("\nA tie was achieved between ");
+        if(i != 0 ){
+          System.out.print("\nA tie was achieved between ");
+        }
         for (LadderAndSnakeGamePlayer currentPlayer : list) {
           System.out.print(currentPlayer.name + " ");
         }
         System.out.print("Attempting to break the tie\n");
 
         for (LadderAndSnakeGamePlayer currentPlayer : list) {
-          System.out.printf("%s is throwing a dice.%n", currentPlayer.name);
+          System.out.printf("%n%s is throwing a dice.%n", currentPlayer.name);
           currentPlayer.diceValue = dice.earnScore();
           System.out.printf("%s get a dice value of %d %n", currentPlayer.name, currentPlayer.diceValue);
         }
@@ -174,7 +176,7 @@ public class PlayLadderAndSnake extends BaseDiceGame {
     for (int count = 1; count <= totalAttempts; count++) {
       numPlayers = scanner.nextInt();
       boolean isCorrectNumber = numPlayers >= 2 && numPlayers <= 4;
-      if (isCorrectNumber) {
+      if(isCorrectNumber){
         return numPlayers;
       }
       boolean isLastTime = count == totalAttempts;
