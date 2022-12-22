@@ -8,7 +8,7 @@ import java.util.Objects;
 /**
  * @author dongguo
  */
-public class Book {
+public class Book implements Comparable<Book>{
   public static final SimpleDateFormat ONLY_YEAR_DATE_FORMATTER = new SimpleDateFormat("yyyy");
 
   private final String name;
@@ -103,5 +103,10 @@ public class Book {
 
   public void setGenre(GenreEnum genre) {
     this.genre = genre;
+  }
+
+  @Override
+  public int compareTo(Book o) {
+    return this.name.compareTo(o.name);
   }
 }
