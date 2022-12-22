@@ -1,6 +1,7 @@
 package xyz.dongguo.lesson.basic;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 /**
  * @author dongguo
@@ -18,7 +19,7 @@ public class Day07JobInterview {
     int[] numbers = {1, 2, 3, 4, 5, 6, 7};
     int target = 8;
     System.out.printf("Input: nums = %s, target=%d%n", Arrays.toString(numbers), target);
-    int[] output = twoSum(numbers, 6);
+    int[] output = sumTwoByBruteForce(numbers, 6);
     System.out.printf(stringFormatter, Arrays.toString(output));
 
     System.out.println("problem 02 Exist Sum");
@@ -44,46 +45,71 @@ public class Day07JobInterview {
     System.out.printf("output: k = %d, %s%n%n", kind, Arrays.toString(nums));
 
   }
+  /**
+   * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to
+   * target. You may assume that each input would have exactly one solution, and you may not use the same element twice.
+   * You can return the answer in any order.
+   * <p>
+   * Use a hash table to solve this problem  in linear time.
+   * The idea is to insert each array element's difference(nums[i], target - nums[i]) into a map.
+   * We also check if nums[i] already exists in the map or not.
+   * if the nums[i] is seen before, return the value.
+   * <p>
+   * The time complexity of the solution is O(n) extra space, where n is the size of the input.
+   * @param nums   An array of integers
+   * @param target An integer
+   * @return Indices of the two numbers such that they add up to target
+   */
+  public static int[] isSumTwoExistedUsingHasing(int[] nums, int target) {
+    HashMap<Integer, Integer> differenceMap = new HashMap<>(nums.length);
+    for (int i = 0; i < nums.length; i++) {
+      if(differenceMap.containsKey(i)){
+        return new int[]{i, differenceMap.get(i)};
+      }
+      int difference = target - nums[i];
+      differenceMap.put(difference, i);
+    }
+
+    return new int[0];
+  }
 
   /**
    * Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to
    * target. You may assume that each input would have exactly one solution, and you may not use the same element twice.
    * You can return the answer in any order.
+   * A naive solution is to consider every pair in the given array and return if the desired sum is found.
    *
    * @param nums   An array of integers
    * @param target An integer
    * @return Indices of the two numbers such that they add up to target
    */
-  public static int[] twoSum(int[] nums, int target) {
-    int[] results = {-1, -1};
+  public static int[] sumTwoByBruteForce(int[] nums, int target) {
     // nested loop without the duplicated element
     for (int i = 0; i < nums.length - 1; i++) {
       for (int j = i + 1; j < nums.length; j++) {
         if (nums[i] + nums[j] == target) {
-          results[0] = i;
-          results[1] = j;
-          return results;
+          return new int[]{i, j};
         }
       }
     }
 
-    return results;
+    return new int[0];
   }
 
   /**
-   * Given an array of integers nums and an integer target, return true if there exist two numbers in the array whose
+   * Given an array of integers nums and an integer target, return true if there exist any numbers in the array whose
    * sum is exactly sum, otherwise false.
    *
    * @param array An array of integer.
    * @param sum   An integer number.
    * @return true if there exist two numbers in the array whose sum is exactly sum, otherwise false.
    */
-  private static boolean isSumExisted(int[] array, int sum) {
+  public static boolean isSumExisted(int[] array, int sum) {
     return isSumExisted(array, 0, sum);
   }
 
   /**
-   * Given an array of integers nums and an integer target, return true if there exist two numbers in the array whose
+   * Given an array of integers nums and an integer target, return true if there exist any numbers in the array whose
    * sum is exactly sum, otherwise false.
    *
    * @param array An array of integer.
@@ -91,7 +117,7 @@ public class Day07JobInterview {
    * @param sum   An integer number.
    * @return true if there exist two numbers in the array whose sum is exactly sum, otherwise false.
    */
-  private static boolean isSumExisted(int[] array, int from, int sum) {
+  public static boolean isSumExisted(int[] array, int from, int sum) {
     if (from >= array.length) {
       return false;
     }
