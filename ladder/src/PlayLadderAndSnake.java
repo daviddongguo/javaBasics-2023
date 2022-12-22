@@ -176,7 +176,7 @@ public class PlayLadderAndSnake extends BaseDiceGame {
     for (int count = 1; count <= totalAttempts; count++) {
       numPlayers = scanner.nextInt();
       boolean isCorrectNumber = numPlayers >= 2 && numPlayers <= 4;
-      if (isCorrectNumber) {
+      if(isCorrectNumber){
         return numPlayers;
       }
       boolean isLastTime = count == totalAttempts;
