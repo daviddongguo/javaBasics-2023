@@ -3,6 +3,7 @@ package xyz.dongguo.lesson.objectoriented;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
+import xyz.dongguo.lesson.objectoriented.school.Student;
 
 class StudentTest {
 

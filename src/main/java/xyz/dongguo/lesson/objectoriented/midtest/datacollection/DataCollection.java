@@ -1,9 +1,9 @@
-package xyz.dongguo.lesson.midtest.datacollection;
+package xyz.dongguo.lesson.objectoriented.midtest.datacollection;
 
 import java.util.ArrayList;
 import java.util.List;
-import xyz.dongguo.lesson.midtest.model.Author;
-import xyz.dongguo.lesson.midtest.model.Book;
+import xyz.dongguo.lesson.objectoriented.midtest.model.Author;
+import xyz.dongguo.lesson.objectoriented.midtest.model.Book;
 
 /**
  * @author dongg

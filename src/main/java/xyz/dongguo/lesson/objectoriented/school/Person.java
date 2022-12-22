@@ -1,11 +1,8 @@
-package xyz.dongguo.lesson.objectoriented;
+package xyz.dongguo.lesson.objectoriented.school;
 
-
-
-import static xyz.dongguo.Json.generateRandomString;
-import static xyz.dongguo.Json.isNotNullAndNotEmpty;
-import static xyz.dongguo.Json.printAllJson;
-import static xyz.dongguo.Json.printPrettyJson;
+import static xyz.dongguo.JsonHelper.generateRandomString;
+import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
+import static xyz.dongguo.JsonHelper.printJson;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -17,17 +14,16 @@ import java.util.Objects;
 import java.util.Random;
 
 /**
- * The Person class represents a person.
+ * The Person class representing a person.
  *
  * @author dongguo
  * @version 1.2
  */
-public class Person implements Jsonable {
+public class Person {
 
   public static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
   /**
-   * The start of the string matches any uppercase letter,
-   * no more than 20 characters
+   * The start of the string matches any uppercase letter, no more than 20 characters
    */
   public static final String ONE_WORD_NAME_REGEX = "^[a-z]{1,19}$";
   public static final int LENGTH_ID = 50;
@@ -40,7 +36,7 @@ public class Person implements Jsonable {
   private PhoneNumber phoneNumber;
   private LocalDate birthDate;
 
-  public Person(String name, PhoneNumber phoneNumber, Address address, SexEnum gender) throws IllegalArgumentException{
+  public Person(String name, PhoneNumber phoneNumber, Address address, SexEnum gender) throws IllegalArgumentException {
     this(name, phoneNumber, address);
     this.setGender(gender);
   }
@@ -59,28 +55,70 @@ public class Person implements Jsonable {
    * for debugging
    */
   public static void main(String[] args) {
-    List<Person> roster = Person.createPeopleList();
-    Person personAlice = roster.get(0);
-    Person kidBob = roster.get(1);
-    Person kidTom = roster.get(2);
+    List<Person> peopleList = Person.createPeopleList();
+    Person personAlice = peopleList.get(0);
+    Person kidBob = peopleList.get(1);
+    Person kidTom = peopleList.get(2);
 
-    personAlice.setAge(-5);
-    personAlice.setBirthDate("1980-07-21");
-    kidBob.setAge(22);
-    kidTom.setAge(1);
-    kidTom.setBirthDate("2001-02-29");
+    List<PhoneNumber> phoneNumberList = PhoneNumber.createPhoneList();
+    PhoneNumber phoneNumber1 = phoneNumberList.get(0);
+    PhoneNumber phoneNumber2 = phoneNumberList.get(1);
+    PhoneNumber phoneNumber3 = phoneNumberList.get(2);
+
+    personAlice.setPhone(phoneNumber1);
+    kidBob.setPhone(phoneNumber2);
+    kidTom.setPhone(phoneNumber3);
+
+    List<Address> addressList = Address.createAddressList();
+    personAlice.setAddress(addressList.get(0));
+    kidBob.setAddress(addressList.get(1));
+    kidTom.setAddress(addressList.get(2));
 
     personAlice.addKid(kidBob);
     personAlice.addKid(kidTom);
 
-    printAllJson(personAlice);
-    printPrettyJson(personAlice);
-    System.out.printf("%s birthdate is %s, age is %d%n", personAlice.getName(), personAlice.getBirthDate(),
-       personAlice.getAge());
-    System.out.printf("%s %s order than %s%n", kidBob.getName(), kidBob.isOrderThan(kidTom) ? "is" : "is not",
-       kidTom.getName());
-    System.out.printf("%s %s order than %s%n", kidTom.getName(), kidTom.isOrderThan(kidBob) ? "is" : "is not",
-       kidBob.getName());
+    // Add item to a list
+    printJson(personAlice);
+    List<Person> list = new ArrayList<>(7);
+    Person personToTest = new Person("PersonToTest");
+    list.add(personAlice);
+    list.add(kidBob);
+    list.add(kidTom);
+    list.add(personToTest);
+    System.out.printf("The list has %d people.%n", list.size());
+
+    // Delete item from list
+    Person personToRemove = null;
+    for (Person currentPerson : list) {
+      if (currentPerson.getName().equals(personToTest.getName())) {
+        System.out.printf("Found %s%n", currentPerson.getName());
+        personToRemove = currentPerson;
+      }
+    }
+    list.remove(personToRemove);
+    System.out.printf("The list has %d people.%n", list.size());
+
+    // Find people  who live in the same city
+    String city = "Sainte-Anne-de-Bellevue";
+    for (Person p : list) {
+      if (p.getAddress().getCity().equals(city)) {
+        System.out.printf("Found %s who lives in  %s%n", p.getName(), city);
+      }
+    }
+
+    // Update Bob who move to Quebec City
+    Person personBob = null;
+    Address newAddress = new Address("123", "Queen Street", "Quebec City");
+    for (Person currentPerson : list) {
+      if ("Bob".equals(currentPerson.getName())) {
+        System.out.printf("%s who lives in  %s now%n", currentPerson.getName(), currentPerson.getAddress());
+        personBob = currentPerson;
+        break;
+      }
+    }
+    assert personBob != null;
+    personBob.setAddress(newAddress);
+    System.out.printf("%s who lives in  %s now%n", personBob.getName(), personBob.getAddress());
 
   }
 
@@ -106,14 +144,38 @@ public class Person implements Jsonable {
     return peopleList;
   }
 
+  public void addKid(Person kid) {
+    kids.add(kid);
+  }
 
+  public String getName() {
+    return this.name;
+  }
+
+  /**
+   * Firstly check the name, if it is valid, change name
+   *
+   * @param name A String represent person name
+   */
+  private void setName(String name) throws IllegalArgumentException {
+    if (!isValidName(name)) {
+      throw new IllegalArgumentException("Name can not be empty");
+    }
+    this.name = name;
+  }
+
+  /**
+   * Validates a name. Return false if the name is empty or does not match the ONE_WORD_NAME_REGEX
+   *
+   * @param name a string representing name to validate.
+   * @return true if the name is valid, otherwise false
+   */
+  private boolean isValidName(String name) {
+    return isNotNullAndNotEmpty(name);
+  }
 
   public String getId() {
     return id;
-  }
-
-  public void addKid(Person kid) {
-    kids.add(kid);
   }
 
   public String getBirthDate() {
@@ -143,34 +205,6 @@ public class Person implements Jsonable {
       return false;
     }
     return this.birthDate.isBefore(person.birthDate);
-  }
-
-  public String getName() {
-    return this.name;
-  }
-
-  /**
-   * Firstly check the name, if it is valid, change name
-   *
-   * @param name A String represent person name
-   */
-  private void setName(String name) throws IllegalArgumentException {
-    if (!isValidName(name)) {
-      throw new IllegalArgumentException("Name can not be empty");
-    }
-    this.name = name;
-  }
-
-  /**
-   * Validates a name.
-   * Return false if the name is empty
-   * or does not match the ONE_WORD_NAME_REGEX
-   *
-   * @param name a string representing name to validate.
-   * @return true if the name is valid, otherwise false
-   */
-  private boolean isValidName(String name) {
-    return isNotNullAndNotEmpty(name) ;
   }
 
   public Address getAddress() {
@@ -222,7 +256,6 @@ public class Person implements Jsonable {
     return true;
   }
 
-  @Override
   public String toJsonString() {
     String kidsStr = "";
     if (!this.kids.isEmpty()) {
@@ -268,8 +301,8 @@ public class Person implements Jsonable {
     }
 
     StringBuilder stringBuilder = new StringBuilder("[ ");
-    for (Jsonable item : list) {
-      stringBuilder.append(item.toJsonString()).append(" ,");
+    for (Person currentPerson : list) {
+      stringBuilder.append(currentPerson.toJsonString()).append(" ,");
     }
     stringBuilder.append(" ]");
     return stringBuilder.toString();
@@ -301,5 +334,18 @@ public class Person implements Jsonable {
       return false;
     }
     return id.equals(((Person) personToEqual).id);
+  }
+
+  @Override
+  public String toString() {
+    return "{\"Person\":{"
+       + "                        \"id\":\"" + id + "\""
+       + ",                         \"kids\":" + kids
+       + ",                         \"address\":" + address
+       + ",                         \"name\":\"" + name + "\""
+       + ",                         \"gender\":\"" + gender + "\""
+       + ",                         \"phoneNumber\":" + phoneNumber
+       + ",                         \"birthDate\":" + birthDate
+       + "}}";
   }
 }

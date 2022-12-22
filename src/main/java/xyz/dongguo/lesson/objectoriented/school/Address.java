@@ -1,18 +1,18 @@
-package xyz.dongguo.lesson.objectoriented;
+package xyz.dongguo.lesson.objectoriented.school;
 
-import static xyz.dongguo.Json.isNotNullAndNotEmpty;
+import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import xyz.dongguo.Json;
+import xyz.dongguo.JsonHelper;
 
 /**
  * @author dongguo
  * @version 1.2
  */
-public class Address implements Jsonable {
+public class Address {
 
   private String streetNumber;
   private String streetName;
@@ -36,11 +36,13 @@ public class Address implements Jsonable {
        .stream()
        .filter(address -> address.streetName.equals(sainteAnne))
        .collect(Collectors.toList());
-    newList.forEach(Json::printPrettyJson);
-    long count = addressList
-       .stream()
-       .filter(address -> address.streetName.equals(sainteAnne))
-       .count();
+    newList.forEach(JsonHelper::printJson);
+    long count = 0;
+    for (Address currentAddress : addressList) {
+      if (sainteAnne.equals(currentAddress.getStreetName())) {
+        count++;
+      }
+    }
     System.out.printf("There are %d addresses whose street name is  %s", count, sainteAnne);
   }
 
@@ -99,9 +101,8 @@ public class Address implements Jsonable {
   }
 
   /**
-   * @return A Json string
+   * @return A JsonHelper string
    */
-  @Override
   public String toJsonString() {
     return String.format("{\"address\" :  \"%s %s, %s\"}", streetNumber, streetName, city);
   }

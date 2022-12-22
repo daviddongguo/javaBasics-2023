@@ -10,6 +10,7 @@ import java.util.List;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import xyz.dongguo.lesson.objectoriented.school.PhoneNumber;
 
 class PhoneNumberTest {
 

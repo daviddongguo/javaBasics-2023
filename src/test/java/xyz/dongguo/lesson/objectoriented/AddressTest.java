@@ -3,13 +3,14 @@ package xyz.dongguo.lesson.objectoriented;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static xyz.dongguo.Json.generateRandomString;
+import static xyz.dongguo.JsonHelper.generateRandomString;
 
 import java.util.List;
 import java.util.Random;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import xyz.dongguo.lesson.objectoriented.school.Address;
 
 class AddressTest {
 

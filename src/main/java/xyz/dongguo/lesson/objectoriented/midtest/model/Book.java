@@ -1,4 +1,4 @@
-package xyz.dongguo.lesson.midtest.model;
+package xyz.dongguo.lesson.objectoriented.midtest.model;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
