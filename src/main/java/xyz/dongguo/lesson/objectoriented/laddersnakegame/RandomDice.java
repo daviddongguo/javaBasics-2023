@@ -32,8 +32,8 @@ public class RandomDice implements IEarnable {
        "                                                                   ",
        "    *  * *                                                         ",
        "  *         *                                                      ",
-       "*              *               * *                                 ",
-       "                 *           *     *                               ",
+       "*              *                                                   ",
+       "                 *           *  *  *                               ",
        "                   *       *         *      *   *                  ",
        "                     *   *             *   *      *    *           ",
        "                       *                 *         *      *  * * * *"
@@ -44,7 +44,7 @@ public class RandomDice implements IEarnable {
       char[] charArray = string.toCharArray();
       for (int indexOfColumn = 0; indexOfColumn < charArray.length; indexOfColumn++) {
         if (charArray[indexOfColumn] == '*') {
-          charArray[indexOfColumn] = (char) (49 + generateRandomUsingDice());
+          charArray[indexOfColumn] = (char) (48 + generateRandomUsingDice());
         }
       }
       boolean isLastLine = indexOfRow == template.size() - 1;

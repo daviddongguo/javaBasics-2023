@@ -10,59 +10,39 @@ import java.util.Scanner;
 public class Main {
 
   public static void main(String[] args) {
-    //    printHeart();
 
     Random oneRandomToReuse = new Random();
-    InputStream keyBoardInput = System.in;
     IEarnable randomDice = new RandomDice(oneRandomToReuse);
-    Scanner oneKeyBoardInputNeedToClose = new Scanner(keyBoardInput);
-    IEarnable magicDic = new MagicDice(oneKeyBoardInputNeedToClose);
-    Board board = new Board();
-    List<Player> playerList;
 
+    InputStream keyBoardInput = System.in;
+    Scanner oneKeyBoardInputNeedToClose = new Scanner(keyBoardInput);
+
+    IEarnable magicDic = new MagicDice(oneKeyBoardInputNeedToClose);
+
+    List<Player> playerList;
+    BaseDiceGame miniGame;
+    BaseDiceGame game;
+    Board board = new Board();
     if (Setting.AUTO_RUN) {
       InputStream mockInput = new ByteArrayInputStream("4 \nOlivia \nLily \nAva \nSophia".getBytes());
-      BaseDiceGame miniGame = new MiniDiceGame(new ArrayList<>(), mockInput,
+      miniGame = new MiniDiceGame(new ArrayList<>(), mockInput,
          randomDice);
       playerList = miniGame.play();
-
+      game = new LadderAndSnakeBoardGame(playerList, keyBoardInput,
+         randomDice, board);
     } else {
-      BaseDiceGame miniGame = new MiniDiceGame(new ArrayList<>(), keyBoardInput,
+      miniGame = new MiniDiceGame(new ArrayList<>(), keyBoardInput,
          magicDic);
       playerList = miniGame.play();
-
+      game = new LadderAndSnakeBoardGame(playerList, keyBoardInput,
+         randomDice, board);
     }
-
-    BaseDiceGame game = new LadderAndSnakeBoardGame(playerList, keyBoardInput,
-       randomDice, board);
 
     game.initialize();
     game.play();
-    printHeart();
+    Utility.printHeart();
+    oneKeyBoardInputNeedToClose.close();
     game.close();
   }
 
-  private static void printHeart() {
-    List<String> list = new ArrayList<>(List.of(
-       "                                         ",
-       "       *  *       *  *                   ",
-       "    *       *   *      *                 ",
-       "   *          *        *                ",
-       "    *                 *                ",
-       "      *             *                  ",
-       "         *        *                    ",
-       "            *   *                      ",
-       "              *                        "
-    ));
-    System.out.printf("%n%n");
-    list.forEach(System.out::println);
-  }
-
-  private static List<Player> mockPlayers() {
-    return new ArrayList<>(
-       List.of(new Player("Player 01"),
-          new Player("Player 02"),
-          new Player("Player 03"),
-          new Player("Player 04")));
-  }
 }
