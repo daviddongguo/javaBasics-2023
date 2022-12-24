@@ -1,5 +1,9 @@
 package xyz.dongguo.lesson.objectoriented.school;
 
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.printAll;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.printJson;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.printJsonOnSingleLine;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -24,25 +28,24 @@ public class Teacher extends Person {
     Course courseJava2 = new Course("Java objector oriented 2");
     teacherAlice.addCourse(new Course("Java basic 1"));
     teacherAlice.addCourse(courseJava2);
-    printList(teacherAlice.courseList);
+    printJson(teacherAlice.courseList);
 
     System.out.println("-----Find Java Related Courses------");
-    printList(teacherAlice.findCoursesByName("java"));
+    printJson(teacherAlice.findCoursesByName("java"));
 
     System.out.println("-----Update Course List------");
     courseJava2.setName("java basic 2");
     teacherAlice.updateCourse(courseJava2);
-    printList(teacherAlice.courseList);
+    printJson(teacherAlice.courseList);
 
     System.out.println("-----Remove Course From Course List------");
     teacherAlice.removeCourse(courseJava2);
-    printList(teacherAlice.courseList);
-  }
+    printJson(teacherAlice.courseList);
 
-  private static void printList(List<Course> list) {
-    for (Course item : list) {
-      System.out.println(item.getName());
-    }
+    System.out.println("-----Using Print Json On Single Line------");
+    printJsonOnSingleLine(teacherAlice);
+    System.out.println("-----Using Print All------");
+    printAll( teacherAlice, courses);
   }
 
   public void addCourse(Course course) {
@@ -105,11 +108,6 @@ public class Teacher extends Person {
     }
     Teacher teacher = (Teacher) o;
     return Objects.equals(getCourseList(), teacher.getCourseList());
-  }
-
-  @Override
-  public String toString() {
-    return "{\"Teacher\":" + super.toString() + ",                         \"courses\":" + courseList + "}";
   }
 
   public List<Course> getCourseList() {
