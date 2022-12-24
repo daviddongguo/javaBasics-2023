@@ -181,14 +181,6 @@ class PersonTest {
   }
 
   @Test
-  void toJsonString() {
-    String jsonString = person.toJsonString();
-    assertNotNull(jsonString);
-    assertFalse(jsonString.isEmpty());
-    assertEquals("{", jsonString.substring(0, 1));
-  }
-
-  @Test
   void getAge() {
     assertEquals(-1, person.getAge());
   }
@@ -207,12 +199,6 @@ class PersonTest {
     Person kid1 = roster.get(1);
     assertEquals(person, duplicatedPerson);
     assertNotEquals(person, kid1);
-  }
-
-  @Test
-  void testHashCode() {
-    int hasCode = person.hashCode();
-    assertTrue(true);
   }
 
 }

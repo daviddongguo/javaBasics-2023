@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.List;
-import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import xyz.dongguo.lesson.objectoriented.school.PhoneNumber;
@@ -57,24 +56,6 @@ class PhoneNumberTest {
     assertEquals(PhoneNumber.class, phoneNumber.getClass());
     assertNotNull(phoneNumber.getNumber());
     assertEquals(phoneNumberStr, phoneNumber.getNumber());
-  }
-
-  @Test
-  void toJsonString() {
-
-    String json = phoneNumber.toJsonString();
-    JSONObject obj = new JSONObject(json);
-    String result = String.valueOf(obj.get("PHONENUMBER"));
-    assertEquals(phoneNumberStr.substring(phoneNumberLength - 4),
-       result.substring(result.length() - 4 ));
-  }
-
-  @Test
-  void testToString() {
-    String result = phoneNumber.toString();
-    assertNotNull(result);
-    assertEquals(phoneNumberStr.substring(phoneNumberLength - 4),
-       result.substring(result.length() - 5, result.length() -1));
   }
 
   @Test
