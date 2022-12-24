@@ -1,3 +1,5 @@
+package laddersnakegame;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -324,8 +326,9 @@ public class LadderAndSnake extends BaseDiceGame {
    * playerListSortedByPosition
    */
   private void initializePlayer(List<? extends Player> list) {
+    int order = 0;
     for (Player currentPlayer : list) {
-      LadderAndSnakeGamePlayer player = new LadderAndSnakeGamePlayer(currentPlayer.name);
+      LadderAndSnakeGamePlayer player = new LadderAndSnakeGamePlayer(currentPlayer.name, order++);
       playerListSortedByPosition.add(player);
       playerQueue.add(player);
     }

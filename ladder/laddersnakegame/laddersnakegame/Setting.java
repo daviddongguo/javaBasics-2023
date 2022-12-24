@@ -1,3 +1,5 @@
+package laddersnakegame;
+
 public class Setting {
   public static final long GAME_SPEED = 200L;
   public static final boolean AUTO_RUN = true;

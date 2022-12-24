@@ -1,3 +1,5 @@
+package laddersnakegame;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -146,7 +148,7 @@ public class PlayLadderAndSnake extends BaseDiceGame {
         for (int tiedPlayerIndex : tiedPlayerIndices) {
           System.out.println(playerList.get(tiedPlayerIndex).name + ", press enter to re-roll the dice:");
           input.nextLine();  // consume newline character
-          //          diceRolls[tiedPlayerIndex] = Player.rollDice();  // re-roll the dice
+          //          diceRolls[tiedPlayerIndex] = laddersnakegame.Player.rollDice();  // re-roll the dice
           diceRolls[tiedPlayerIndex] = flipDice();  // re-roll the dice
           System.out.println(playerList.get(tiedPlayerIndex).name + " rolled a " + diceRolls[tiedPlayerIndex]);
         }

@@ -1,3 +1,5 @@
+package laddersnakegame;
+
 public class Player {
 
   String name;
