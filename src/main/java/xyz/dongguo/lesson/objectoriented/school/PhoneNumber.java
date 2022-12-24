@@ -1,7 +1,8 @@
 package xyz.dongguo.lesson.objectoriented.school;
 
-import static xyz.dongguo.JsonHelper.JSON_PATTERN_FORMATTER;
-import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.JSON_PATTERN_FORMATTER;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.isNotNullAndNotEmpty;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.printJson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,12 +31,17 @@ public class PhoneNumber {
     String startWith514 = "514";
     for (PhoneNumber phoneNumber : list) {
       if (phoneNumber.getNumber().startsWith(startWith514)) {
-        System.out.println(phoneNumber);
+        printJson(phoneNumber);
       }
     }
 
-    PhoneNumber phone = PhoneNumber.fromJson(list.get(0).toString());
-    System.out.println(phone);
+    PhoneNumber phoneNumber = PhoneNumber.fromJson(list.get(0).toString());
+    printJson(phoneNumber);
+  }
+
+  @Override
+  public String toString() {
+    return toJsonString();
   }
 
   /**
@@ -86,14 +92,6 @@ public class PhoneNumber {
     return false;
   }
 
-  /**
-   * @return A json string like this  {"phoneNumber" : +1 (513) 813-1234}
-   */
-  @Override
-  public String toString() {
-    return toJsonString();
-  }
-
   public String toJsonString() {
     return String.format(JSON_PATTERN_FORMATTER, "phoneNumber", "\"" + getFormattedNumber() + "\"");
   }
@@ -110,6 +108,11 @@ public class PhoneNumber {
   }
 
   @Override
+  public int hashCode() {
+    return Objects.hash(number);
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
@@ -119,10 +122,5 @@ public class PhoneNumber {
     }
     PhoneNumber that = (PhoneNumber) o;
     return number.equals(that.number);
-  }
-
-  @Override
-  public int hashCode() {
-    return Objects.hash(number);
   }
 }

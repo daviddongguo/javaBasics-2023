@@ -26,7 +26,7 @@ public class Student extends Person {
           new StudentCourse(studentAlice.getId(), Course.createCourseList().get(3).getId(), 80)
        )));
 
-    studentAlice.courseList.forEach(System.out::println);
+    studentAlice.courseList.forEach(JsonHelper::printJson);
     System.out.println(studentAlice.getAverageGrade());
   }
 
@@ -65,19 +65,19 @@ public class Student extends Person {
     return Objects.equals(getCourseList(), student.getCourseList());
   }
 
-  @Override
-  public String toString() {
-    return "{\"Student\":"
-       + super.toString()
-       + ",                         \"courseList\":" + courseList
-       + "}";
-  }
-
   public List<StudentCourse> getCourseList() {
     return courseList;
   }
 
   public void setCourseList(List<StudentCourse> courseList) {
     this.courseList = courseList;
+  }
+
+  @Override
+  public String toString() {
+    return "{\"Student\":"
+       + super.toString()
+       + ",                         \"courseList\":" + courseList
+       + "}";
   }
 }

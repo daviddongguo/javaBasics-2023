@@ -1,8 +1,8 @@
 package xyz.dongguo.lesson.objectoriented.school;
 
-import static xyz.dongguo.JsonHelper.generateRandomString;
-import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
-import static xyz.dongguo.JsonHelper.printJson;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.generateRandomString;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.isNotNullAndNotEmpty;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.printJson;
 
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -25,7 +25,6 @@ public class Person {
   /**
    * The start of the string matches any uppercase letter, no more than 20 characters
    */
-  public static final String ONE_WORD_NAME_REGEX = "^[a-z]{1,19}$";
   public static final int LENGTH_ID = 50;
 
   private final String id = generateRandomString(new Random(), LENGTH_ID);
@@ -256,24 +255,7 @@ public class Person {
     return true;
   }
 
-  public String toJsonString() {
-    String kidsStr = "";
-    if (!this.kids.isEmpty()) {
-      kidsStr = String.format("\"kids\" :  %s", toJsonStringFromList(this.kids));
-    }
-    String addressStr = "";
-    if (address != null) {
-      addressStr = subJsonBody(address.toJsonString()) + " , ";
-    }
-    String phoneStr = "";
-    if (phoneNumber != null) {
-      phoneStr = subJsonBody(phoneNumber.toJsonString()) + " ,";
-    }
-    String jsonBody =
-       String.format("\"name\" :  \"%s\" ,", name) + String.format("\"age\" :  %d ,", getAge()) + String.format("%s",
-          addressStr) + String.format("%s", phoneStr) + String.format("%s", kidsStr);
-    return String.format("{%s}", jsonBody);
-  }
+
 
   public int getAge() {
     if (this.birthDate == null) {
@@ -295,30 +277,7 @@ public class Person {
     System.err.printf("age(%d) must be larger than 0 and small than 150%n", age);
   }
 
-  private String toJsonStringFromList(List<Person> list) {
-    if (list.isEmpty()) {
-      return "";
-    }
 
-    StringBuilder stringBuilder = new StringBuilder("[ ");
-    for (Person currentPerson : list) {
-      stringBuilder.append(currentPerson.toJsonString()).append(" ,");
-    }
-    stringBuilder.append(" ]");
-    return stringBuilder.toString();
-  }
-
-  private String subJsonBody(String jsonStr) {
-    if (jsonStr == null) {
-      return "";
-    }
-    int size = jsonStr.length();
-    int miniSizeOfJson = 2;
-    if (size <= miniSizeOfJson) {
-      return "";
-    }
-    return jsonStr.substring(1, size - 1);
-  }
 
   @Override
   public int hashCode() {
@@ -336,16 +295,4 @@ public class Person {
     return id.equals(((Person) personToEqual).id);
   }
 
-  @Override
-  public String toString() {
-    return "{\"Person\":{"
-       + "                        \"id\":\"" + id + "\""
-       + ",                         \"kids\":" + kids
-       + ",                         \"address\":" + address
-       + ",                         \"name\":\"" + name + "\""
-       + ",                         \"gender\":\"" + gender + "\""
-       + ",                         \"phoneNumber\":" + phoneNumber
-       + ",                         \"birthDate\":" + birthDate
-       + "}}";
-  }
 }

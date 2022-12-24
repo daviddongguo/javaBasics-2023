@@ -1,12 +1,11 @@
 package xyz.dongguo.lesson.objectoriented.school;
 
-import static xyz.dongguo.JsonHelper.isNotNullAndNotEmpty;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.isNotNullAndNotEmpty;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import xyz.dongguo.JsonHelper;
 
 /**
  * @author dongguo
@@ -125,15 +124,4 @@ public class Address {
        address.city);
   }
 
-  /**
-   * @return A default string Created by IDE generator
-   */
-  @Override
-  public String toString() {
-    return "Address{" +
-       "number='" + streetNumber + '\'' +
-       ", street='" + streetName + '\'' +
-       ", city='" + city + '\'' +
-       '}';
-  }
 }
