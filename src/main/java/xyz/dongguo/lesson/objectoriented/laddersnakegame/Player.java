@@ -1,4 +1,4 @@
-package laddersnakegame;
+package xyz.dongguo.lesson.objectoriented.laddersnakegame;
 
 public class Player {
 

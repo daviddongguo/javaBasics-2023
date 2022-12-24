@@ -1,4 +1,4 @@
-package laddersnakegame;
+package xyz.dongguo.lesson.objectoriented.laddersnakegame;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -187,7 +187,7 @@ public class LadderAndSnake extends BaseDiceGame {
     fillPlayerPosition(boardDesign);
 
     // Table Header
-    char[] romanNumbers = {'Ⅰ', 'Ⅱ', 'Ⅲ', 'Ⅳ', 'Ⅴ', 'Ⅵ', 'Ⅶ', 'Ⅷ', 'Ⅸ', 'Ⅹ'};
+    char[] romanNumbers = {'1', '2', '3', '4', '5', '6', '7', '8', '9', '0'};
     StringBuilder stringToAddInList = new StringBuilder(" ");
     for (int i = romanNumbers.length - 1; i >= 0; i--) {
       stringToAddInList.append(String.format(" %s", romanNumbers[i]));
@@ -233,11 +233,11 @@ public class LadderAndSnake extends BaseDiceGame {
 
   private char[] initializeBoard() {
     char[] chars = new char[101];
-    char charSnake = 'ㄹ';
-    char charLadder = 'ㅒ';
-    char charSquare = 'ㆍ';
-    char charFinal = 'ㅇ';
-    char charStart = 'ㅿ';
+    char charSnake = 'S';
+    char charLadder = 'T';
+    char charSquare = '*';
+    char charFinal = 'F';
+    char charStart = '1';
 
     Arrays.fill(chars, charSquare);
     chars[1] = charStart;

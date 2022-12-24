@@ -1,4 +1,4 @@
-package laddersnakegame;
+package xyz.dongguo.lesson.objectoriented.laddersnakegame;
 
 import java.util.ArrayList;
 import java.util.HashMap;

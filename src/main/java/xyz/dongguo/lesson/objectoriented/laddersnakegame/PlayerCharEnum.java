@@ -1,22 +1,22 @@
-package laddersnakegame;
+package xyz.dongguo.lesson.objectoriented.laddersnakegame;
 
 public enum PlayerCharEnum {
       /**
-     * 0, ◐
+     * 0,
      */
-    FIRST(0, '◐'),
+    FIRST(0, 'A'),
     /**
-     * 1, ◑
+     * 1,
      */
-    SECOND(1, '◓'),
+    SECOND(1, 'B'),
     /**
-     * 2, ◑
+     * 2,
      */
-    THIRD(2, '◑'),
+    THIRD(2, 'C'),
     /**
-     * 3, ◒
+     * 3,
      */
-    FORTH(3, '◒');
+    FORTH(3, 'D');
     private final int index;
     private final char icon;
 
