@@ -2,16 +2,13 @@ package xyz.dongguo.lesson.objectoriented.laddersnakegame;
 
 import java.util.HashMap;
 
-public class Board {
+public class LadderAndSnakeBoard implements IMovable {
 
   int[] ladderAndSnakePositionArray;
 
-  public Board() {
+  public LadderAndSnakeBoard() {
     this.ladderAndSnakePositionArray = createLadderAndSnakePositionArray();
   }
-
-
-
 
   public int[] createLadderAndSnakePositionArray() {
     int[] array = new int[Setting.BROAD_SIZE + Setting.MAX_VALUE_OF_DICE];
@@ -34,11 +31,6 @@ public class Board {
 
   private HashMap<Integer, Integer> getLadderAndSnake() {
     HashMap<Integer, Integer> map = new HashMap<>(20);
-//    map.put(105, 95);
-//    map.put(104, 96);
-//    map.put(103, 97);
-//    map.put(102, 98);
-//    map.put(101, 99);
     map.put(98, 78);
     map.put(97, 76);
     map.put(95, 24);
@@ -55,7 +47,11 @@ public class Board {
     map.put(16, 6);
     map.put(9, 51);
     map.put(4, 14);
-    //  ruleMap.put(1, 38);
     return map;
+  }
+
+  @Override
+  public int move(int position) {
+    return ladderAndSnakePositionArray[position];
   }
 }

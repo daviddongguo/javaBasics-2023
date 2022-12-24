@@ -22,7 +22,7 @@ public class Main {
     List<Player> playerList;
     BaseDiceGame miniGame;
     BaseDiceGame game;
-    Board board = new Board();
+    IMovable board = new LadderAndSnakeBoard();
     if (Setting.AUTO_RUN) {
       InputStream mockInput = new ByteArrayInputStream("4 \nOlivia \nLily \nAva \nSophia".getBytes());
       miniGame = new MiniDiceGame(new ArrayList<>(), mockInput,
@@ -43,6 +43,7 @@ public class Main {
     Utility.printHeart();
     oneKeyBoardInputNeedToClose.close();
     game.close();
+    System.exit(0);
   }
 
 }

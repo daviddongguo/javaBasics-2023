@@ -8,7 +8,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.Scanner;
 
 /**
  * @author Mueataz Qasem Qasem, Dongguo
@@ -16,13 +15,13 @@ import java.util.Scanner;
  */
 public class LadderAndSnakeBoardGame extends BaseDiceGame {
 
-  private final Board board;
+  private final IMovable board;
   private final Queue<LadderAndSnakeGamePlayer> playerQueue = new LinkedList<>();
   private final List<LadderAndSnakeGamePlayer> playerListSortedByPosition = new ArrayList<>(4);
   private final HashMap<Integer, Integer> mapForLocateLadderAndSnake = new HashMap<>();
   private final char[] boardDesign = new char[Setting.BROAD_SIZE + 1];
 
-  public LadderAndSnakeBoardGame(List<? extends Player> playerList, InputStream in, IEarnable dice, Board board
+  public LadderAndSnakeBoardGame(List<? extends Player> playerList, InputStream in, IEarnable dice, IMovable board
   ) {
     super(playerList, in, dice);
     this.board = board;
@@ -51,7 +50,6 @@ public class LadderAndSnakeBoardGame extends BaseDiceGame {
   @Override
   public void close() {
     System.out.println("\n\nBye");
-    System.exit(0);
   }
 
   private List<Player> playLadderAndSnakeGame() {
@@ -101,7 +99,7 @@ public class LadderAndSnakeBoardGame extends BaseDiceGame {
   }
 
   private int upOrDownByUsingArray(int originalPosition, LadderAndSnakeGamePlayer currentPlayer) {
-    int newPosition = board.ladderAndSnakePositionArray[originalPosition];
+    int newPosition = board.move(originalPosition);
     if (newPosition == originalPosition) {
       return newPosition;
     }
@@ -119,29 +117,10 @@ public class LadderAndSnakeBoardGame extends BaseDiceGame {
       pauseGame("Please press Enter to continue");
       originalPosition = newPosition;
       // continue to check if up or down
-      newPosition = board.ladderAndSnakePositionArray[newPosition];
+      newPosition = board.move(newPosition);
     }
 
     return newPosition;
-  }
-
-  private int upOrDownByUsingMap(int position, LadderAndSnakeGamePlayer currentPlayer) {
-    while (mapForLocateLadderAndSnake.containsKey(position)) {
-      System.out.println("then...");
-      System.out.println("continue move automatically");
-
-      int newPosition = mapForLocateLadderAndSnake.get(position);
-      if (newPosition > position) {
-        System.out.println("LADDER  " + "=|".repeat((newPosition - position) * 3));
-      } else {
-        System.out.println("SNAKE    " + "~".repeat((position - newPosition) * 3));
-      }
-      position = newPosition;
-      System.out.println("move to " + position);
-      displayPlayers(currentPlayer);
-      pauseGame("Please press Enter to continue");
-    }
-    return 0;
   }
 
   private void pauseGame(String message) {
@@ -152,7 +131,7 @@ public class LadderAndSnakeBoardGame extends BaseDiceGame {
   }
 
   /**
-   * Dongguo is working Display the player information.
+   * Display the position of players.
    */
   private void displayPlayers(LadderAndSnakeGamePlayer currentPlayer) {
     List<String> ladderAndSnakeBoard = getLadderAndSnakeBoard();
