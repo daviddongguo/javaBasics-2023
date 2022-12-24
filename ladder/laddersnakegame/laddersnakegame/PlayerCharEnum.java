@@ -1,3 +1,5 @@
+package laddersnakegame;
+
 public enum PlayerCharEnum {
       /**
      * 0, ◐

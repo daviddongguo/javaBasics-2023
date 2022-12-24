@@ -1,3 +1,5 @@
+package laddersnakegame;
+
 import java.util.Scanner;
 
 public class MagicDice implements IEarnable {
