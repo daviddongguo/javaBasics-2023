@@ -1,5 +1,6 @@
 package xyz.dongguo.lesson.objectoriented.laddersnakegame;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,14 +8,13 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Queue;
-import java.util.Random;
 import java.util.Scanner;
 
 /**
  * @author Mueataz Qasem Qasem, Dongguo
  * @version 1.3 {@code @date} 2022-12-19 23:50
  */
-public class LadderAndSnake extends BaseDiceGame {
+public class LadderAndSnakeBoardGame extends BaseDiceGame {
 
   private final Board board;
   private final Queue<LadderAndSnakeGamePlayer> playerQueue = new LinkedList<>();
@@ -22,13 +22,10 @@ public class LadderAndSnake extends BaseDiceGame {
   private final HashMap<Integer, Integer> mapForLocateLadderAndSnake = new HashMap<>();
   private final char[] boardDesign = new char[Setting.BROAD_SIZE + 1];
 
-  private final int numberOfPlayers;
-
-  public LadderAndSnake(List<? extends Player> playerList, Random random, Scanner scanner, IEarnable dice, Board board,
-     int numberOfplayers) {
-    super(playerList, random, scanner, dice);
+  public LadderAndSnakeBoardGame(List<? extends Player> playerList, InputStream in, IEarnable dice, Board board
+  ) {
+    super(playerList, in, dice);
     this.board = board;
-    this.numberOfPlayers = numberOfplayers;
   }
 
   private int flipDice() {
@@ -53,7 +50,6 @@ public class LadderAndSnake extends BaseDiceGame {
 
   @Override
   public void close() {
-    scanner.close();
     System.out.println("\n\nBye");
     System.exit(0);
   }
@@ -77,10 +73,9 @@ public class LadderAndSnake extends BaseDiceGame {
       if (currentPlayer.position == Setting.BROAD_SIZE) {
         System.out.printf("%s wins.", currentPlayer.name);
         return new ArrayList<>();
-      }else{
+      } else {
         System.out.println("Game is not over; flipping again");
       }
-
 
     }
   }
