@@ -86,7 +86,7 @@ public class PhoneNumber {
   }
 
   public boolean isValidPhoneNumber(String phoneNumber) {
-    if (isNullOrEmpty(phoneNumber)) {
+    if (!isNullOrEmpty(phoneNumber)) {
       return phoneNumber.matches("^\\d{10}$");
     }
     return false;

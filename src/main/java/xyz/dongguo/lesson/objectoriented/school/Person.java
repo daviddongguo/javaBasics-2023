@@ -170,7 +170,7 @@ public class Person {
    * @return true if the name is valid, otherwise false
    */
   private boolean isValidName(String name) {
-    return isNullOrEmpty(name);
+    return !isNullOrEmpty(name);
   }
 
   public String getId() {

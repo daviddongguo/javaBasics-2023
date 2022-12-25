@@ -18,10 +18,11 @@ public class Address {
   private String city;
 
   public Address(String streetNumber, String streetName, String city) {
-    setStreetNumber(streetNumber);
-    setStreetName(streetName);
-    setCity(city);
+    this.streetNumber = streetNumber;
+    this.streetName = streetName;
+    this.city = city;
   }
+
 
   /**
    * arrayList demo
@@ -76,18 +77,13 @@ public class Address {
    * @param input a string
    */
   private void validateInput(String input) {
-    if (!isNullOrEmpty(input)) {
+    if (isNullOrEmpty(input)) {
       throw new IllegalArgumentException("Invalid input.");
     }
   }
 
   public String getStreetName() {
     return streetName;
-  }
-
-  public void setStreetName(String streetName) {
-    validateInput(streetName);
-    this.streetName = streetName;
   }
 
   public String getCity() {
