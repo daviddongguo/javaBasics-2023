@@ -1,8 +1,11 @@
 package xyz.dongguo.lesson.objectoriented.school;
 
 import com.google.gson.Gson;
+import java.io.PrintStream;
 import java.util.Collection;
 import java.util.Random;
+import org.jetbrains.annotations.Nullable;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -16,8 +19,8 @@ public class JsonHelper {
   private JsonHelper() {
   }
 
-  public static boolean isNotNullAndNotEmpty(String str) {
-    return str != null && !str.isEmpty();
+  public static boolean isNullOrEmpty(@Nullable String str) {
+    return str == null || str.trim().isEmpty();
   }
 
   public static String generateRandomString(Random random, int length) {
@@ -29,6 +32,26 @@ public class JsonHelper {
     return string.toString();
   }
 
+  public static void printJsonOnSingleLine(Object object, PrintStream out) {
+    out.println(toJsonStringOnSingleLine(object));
+  }
+
+  public static String toJsonStringOnSingleLine(Object object) {
+    return (new Gson()).toJson(object);
+  }
+
+  public static void printAll(PrintStream out, Object... args) {
+    out.println(allToJsonString(args));
+  }
+
+  public static String allToJsonString(Object... args) {
+    StringBuilder str = new StringBuilder();
+    for (Object o : args) {
+      str.append(toPrettyJsonString(o)).append("\n");
+    }
+    return str.toString();
+  }
+
   /**
    * Pretty print jason of an object.
    * <p> Using org.jso JSONObject to pretty-print the data.
@@ -37,26 +60,36 @@ public class JsonHelper {
    *
    * @param object any object, including array, list, and so on.
    */
-  public static void printJson(Object object) {
+  public static void printJson(Object object, PrintStream out) {
+    out.print(toPrettyJsonString(object));
+  }
+
+  public static String toPrettyJsonString(Object object) {
+    StringBuilder str = new StringBuilder();
     if (object instanceof Collection) {
-      ((Collection<?>) object).forEach(JsonHelper::printJson);
-      return;
+      ((Collection<?>) object).forEach(o -> str.append(toPrettyJsonString(o)).append(String.format("%n")));
+      return str.toString();
     }
 
     String jsonString = (new Gson()).toJson(object);
     JSONObject jsonObject = new JSONObject(jsonString);
-    System.out.println(jsonObject.toString(2));
+    str.append(jsonObject.toString(2));
+    return str.toString();
   }
 
-  public static void printJsonOnSingleLine(Object object) {
-    String json = (new Gson()).toJson(object);
-    System.out.println(json);
+  public static JSONArray JSONObjectToArray(String string) {
+    JSONObject jsonArrayObject = new JSONObject(string);
+    JSONArray keyStrings = listNumberArray(jsonArrayObject.length());
+    return jsonArrayObject.toJSONArray(keyStrings);
   }
 
-  public static void printAll(Object... args) {
-    for (Object o : args) {
-      printJson(o);
+  private static JSONArray listNumberArray(int max) {
+    JSONArray res = new JSONArray();
+    for (int i = 0; i < max; i++) {
+      //The value of the labels must be a String in order to make it work
+      res.put(String.valueOf(i));
     }
+    return res;
   }
 
 }
