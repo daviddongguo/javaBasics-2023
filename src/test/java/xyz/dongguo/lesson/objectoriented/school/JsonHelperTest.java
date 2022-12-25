@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.google.gson.Gson;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -46,8 +47,13 @@ class JsonHelperTest {
     JSONArray array = new JSONArray(string);
     JSONObject child01 = (JSONObject) array.get(1);
     var name = child01.get("name");
-
     assertEquals(CHILD_02_NAME, name);
+
+    MockClass[] mockArray = (new Gson()).fromJson(string, MockClass[].class);
+    var name2 = mockArray[1].name;
+    assertEquals(CHILD_02_NAME, name2);
+
+
     System.out.println(jsonString);
   }
 
