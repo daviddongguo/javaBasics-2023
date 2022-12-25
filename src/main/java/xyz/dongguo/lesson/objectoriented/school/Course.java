@@ -1,6 +1,6 @@
 package xyz.dongguo.lesson.objectoriented.school;
 
-import static xyz.dongguo.JsonHelper.generateRandomString;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.generateRandomString;
 import static xyz.dongguo.lesson.objectoriented.school.Person.LENGTH_ID;
 
 import java.util.ArrayList;
