@@ -1,7 +1,7 @@
 package xyz.dongguo.lesson.objectoriented.school;
 
 import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.JSON_PATTERN_FORMATTER;
-import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.isNotNullAndNotEmpty;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.isNullOrEmpty;
 import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.printJson;
 
 import java.util.ArrayList;
@@ -31,12 +31,12 @@ public class PhoneNumber {
     String startWith514 = "514";
     for (PhoneNumber phoneNumber : list) {
       if (phoneNumber.getNumber().startsWith(startWith514)) {
-        printJson(phoneNumber);
+        printJson(phoneNumber, System.out);
       }
     }
 
     PhoneNumber phoneNumber = PhoneNumber.fromJson(list.get(0).toString());
-    printJson(phoneNumber);
+    printJson(phoneNumber, System.out);
   }
 
   @Override
@@ -86,7 +86,7 @@ public class PhoneNumber {
   }
 
   public boolean isValidPhoneNumber(String phoneNumber) {
-    if (isNotNullAndNotEmpty(phoneNumber)) {
+    if (isNullOrEmpty(phoneNumber)) {
       return phoneNumber.matches("^\\d{10}$");
     }
     return false;

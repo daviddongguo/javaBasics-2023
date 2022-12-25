@@ -1,7 +1,7 @@
 package xyz.dongguo.lesson.objectoriented.school;
 
 import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.generateRandomString;
-import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.isNotNullAndNotEmpty;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.isNullOrEmpty;
 import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.printJson;
 
 import java.time.DateTimeException;
@@ -77,7 +77,7 @@ public class Person {
     personAlice.addKid(kidTom);
 
     // Add item to a list
-    printJson(personAlice);
+    printJson(personAlice, System.out);
     List<Person> list = new ArrayList<>(7);
     Person personToTest = new Person("PersonToTest");
     list.add(personAlice);
@@ -170,7 +170,7 @@ public class Person {
    * @return true if the name is valid, otherwise false
    */
   private boolean isValidName(String name) {
-    return isNotNullAndNotEmpty(name);
+    return isNullOrEmpty(name);
   }
 
   public String getId() {

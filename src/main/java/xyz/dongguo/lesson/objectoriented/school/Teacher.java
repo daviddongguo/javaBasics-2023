@@ -28,24 +28,24 @@ public class Teacher extends Person {
     Course courseJava2 = new Course("Java objector oriented 2");
     teacherAlice.addCourse(new Course("Java basic 1"));
     teacherAlice.addCourse(courseJava2);
-    printJson(teacherAlice.courseList);
+    printJson(teacherAlice.courseList, System.out);
 
     System.out.println("-----Find Java Related Courses------");
-    printJson(teacherAlice.findCoursesByName("java"));
+    printJson(teacherAlice.findCoursesByName("java"), System.out);
 
     System.out.println("-----Update Course List------");
     courseJava2.setName("java basic 2");
     teacherAlice.updateCourse(courseJava2);
-    printJson(teacherAlice.courseList);
+    printJson(teacherAlice.courseList, System.out);
 
     System.out.println("-----Remove Course From Course List------");
     teacherAlice.removeCourse(courseJava2);
-    printJson(teacherAlice.courseList);
+    printJson(teacherAlice.courseList, System.out);
 
     System.out.println("-----Using Print Json On Single Line------");
-    printJsonOnSingleLine(teacherAlice);
+    printJsonOnSingleLine(teacherAlice, System.out);
     System.out.println("-----Using Print All------");
-    printAll( teacherAlice, courses);
+    printAll(System.out, teacherAlice, courses);
   }
 
   public void addCourse(Course course) {

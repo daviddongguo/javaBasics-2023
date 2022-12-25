@@ -26,7 +26,7 @@ public class Student extends Person {
           new StudentCourse(studentAlice.getId(), Course.createCourseList().get(3).getId(), 80)
        )));
 
-    studentAlice.courseList.forEach(JsonHelper::printJson);
+    studentAlice.courseList.forEach(object -> JsonHelper.printJson(object, System.out));
     System.out.println(studentAlice.getAverageGrade());
   }
 

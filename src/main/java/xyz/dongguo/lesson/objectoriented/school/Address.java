@@ -1,6 +1,6 @@
 package xyz.dongguo.lesson.objectoriented.school;
 
-import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.isNotNullAndNotEmpty;
+import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.isNullOrEmpty;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public class Address {
        .stream()
        .filter(address -> address.streetName.equals(sainteAnne))
        .collect(Collectors.toList());
-    newList.forEach(JsonHelper::printJson);
+    newList.forEach(object -> JsonHelper.printJson(object, System.out));
     long count = 0;
     for (Address currentAddress : addressList) {
       if (sainteAnne.equals(currentAddress.getStreetName())) {
@@ -76,7 +76,7 @@ public class Address {
    * @param input a string
    */
   private void validateInput(String input) {
-    if (!isNotNullAndNotEmpty(input)) {
+    if (!isNullOrEmpty(input)) {
       throw new IllegalArgumentException("Invalid input.");
     }
   }
