@@ -3,30 +3,32 @@ package xyz.dongguo.lesson.objectoriented.school;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static xyz.dongguo.lesson.objectoriented.school.JsonHelper.generateRandomString;
 
+import com.github.javafaker.Faker;
 import java.util.List;
 import java.util.Random;
 import org.json.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import xyz.dongguo.lesson.objectoriented.school.Address;
 
 class AddressTest {
+
+  private final Faker faker = new Faker(new Random(24));
 
   private Address address;
   private String streetNumber;
   private String city;
   private String streetName;
-  private String randomStr;
+  private String randomStreetName;
 
   @BeforeEach
   void setupEach() {
-    streetNumber = "123";
-    streetName = "Hymus Blvd";
-    city = "Montreal";
+    var fakerAddress = faker.address();
+    streetNumber = fakerAddress.streetAddressNumber();
+    streetName = fakerAddress.streetName();
+    city = fakerAddress.city();
     address = new Address(streetNumber, streetName, city);
-    randomStr = generateRandomString(new Random(), 15);
+    randomStreetName = (new Faker(new Random(24))).address().streetName();
   }
 
   @Test
@@ -48,8 +50,8 @@ class AddressTest {
 
   @Test
   void setStreetNumber() {
-    address.setStreetNumber(randomStr);
-    assertEquals(randomStr, address.getStreetNumber());
+    address.setStreetNumber(randomStreetName);
+    assertEquals(randomStreetName, address.getStreetNumber());
   }
 
   @Test
@@ -59,7 +61,7 @@ class AddressTest {
 
   @Test
   void setStreetName() {
-    address.setStreetNumber(randomStr);
+    address.setStreetNumber(randomStreetName);
     assertEquals(streetName, address.getStreetName());
   }
 
@@ -70,8 +72,8 @@ class AddressTest {
 
   @Test
   void setCity() {
-    address.setCity(randomStr);
-    assertEquals(randomStr, address.getCity());
+    address.setCity(randomStreetName);
+    assertEquals(randomStreetName, address.getCity());
   }
 
   @Test
