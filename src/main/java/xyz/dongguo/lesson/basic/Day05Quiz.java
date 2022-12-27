@@ -18,14 +18,10 @@ public class Day05Quiz {
   private final Scanner scanner;
   private final ThreadLocalRandom random;
 
-  public Day05Quiz(PrintStream out, InputStream in) {
+  public Day05Quiz(InputStream in, PrintStream out) {
     this.out = out;
     this.scanner = new Scanner(in);
     this.random = ThreadLocalRandom.current();
-  }
-
-  public Random getRandom() {
-    return this.random;
   }
 
   public void printInput() {
