@@ -8,29 +8,27 @@ import java.util.concurrent.ThreadLocalRandom;
  * Demo class
  *
  * @author Dongguo
+ * @version 2.0
  * @date 2022/12/02
  */
 public class Day01DisplayOnly {
 
+  private static final String SUM_OF_SERIES = "%n\t\t\t0.01 + 0.02 + ... + 1.00 = ";
+  private static final String FLOAT_NUMBER_FORMATTER = "%20.14f";
   private final PrintStream out;
   private final ThreadLocalRandom random;
-  private static final String FLOAT_NUMBER_FORMATTER = "%20.14f";
-  private static final String SUM_OF_SERIES = "%n\t\t\t0.01 + 0.02 + ... + 1.00 = ";
 
   public Day01DisplayOnly(PrintStream out) {
     this.out = out;
     this.random = ThreadLocalRandom.current();
   }
 
-  public Random getRandom() {
-    return this.random;
+  public ThreadLocalRandom getRandom() {
+    return random;
   }
 
   public void printTable() {
-    printTable(60);
-  }
-
-  public void printTable(int width) {
+    int width = 60;
     printWholeRow("_", width);
     out.printf("%n");
     printRowCenter("Name", "VIP", "Balance");
@@ -70,34 +68,8 @@ public class Day01DisplayOnly {
     );
   }
 
-  public void printRandomHiFive() {
-    int randomNumber = random.nextInt(99);
-    String message = "";
-    final int divisorFive = 5;
-    final int divisorEven = 2;
-    if (randomNumber % divisorFive == 0) {
-      message = "HiFive";
-    } else if (randomNumber % divisorEven == 0) {
-      message = "HiEven";
-    }
-    out.printf("%d is %s%n", randomNumber, message);
-  }
-
-  public void displayRandomBound() {
-    final int timeOfTest = 500;
-    for (int i = 0; i < timeOfTest; i++) {
-      int n = random.nextInt(101);
-      out.printf("%4d ", n);
-      if (i % 20 == 0) {
-        out.printf("%n");
-      }
-      if (n == 0) {
-        out.printf("%n");
-      }
-      if (n == 100) {
-        out.printf("%n");
-      }
-    }
+  public int getRandomBetweenMinAndMax(int min, int max, Random random){
+    return min + random.nextInt(max - min + 1);
   }
 
   public void printSumOfNumberSeries() {
@@ -182,14 +154,14 @@ public class Day01DisplayOnly {
 
     while (currentTuition < times * initialTuition) {
       yearsOfDoubleInitial++;
-      currentTuition = initialTuition * calculateCompoundInterest(increaseRate, yearsOfDoubleInitial);
+      currentTuition = initialTuition * (1 + calculateCompoundInterest(increaseRate, yearsOfDoubleInitial));
     }
     out.printf("%n\t\t\tAfter %d years, the tuition will double.", yearsOfDoubleInitial);
     out.printf("%n\t\t\tThe Tuition will be %.4f%n", currentTuition);
   }
 
   public double calculateCompoundInterest(double interest, int numberOfPeriods) {
-    return Math.pow((1 + interest), numberOfPeriods);
+    return Math.pow((1 + interest), numberOfPeriods) - 1;
   }
 
 }
